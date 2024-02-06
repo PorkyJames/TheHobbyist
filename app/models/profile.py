@@ -11,3 +11,11 @@ class Profile(db.Model):
     bio = db.Column(db.Text(50))
     mbti = db.Column(db.String(4))
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            "user_id": self.user_id,
+            "name": self.name,
+            "mbti": self.mbti,
+            "bio": self.bio
+        }
