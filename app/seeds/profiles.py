@@ -15,7 +15,7 @@ def seed_profiles():
     demo_profile = Profile(
         user_id=demo_user.id,
         name='Demo Profile',
-        mbti='ENTJ',
+        mbti='ENFP',
         bio='Hi, my name is Demo! I love to rock climb and snowboard.'
     )
 
@@ -23,7 +23,7 @@ def seed_profiles():
     marnie_profile = Profile(
         user_id=marnie_user.id,
         name='Marnie Profile',
-        mbti='INFP',
+        mbti='INTJ',
         bio='Marnie here! I am passionate about photography and exploring the great outdoors.'
     )
 

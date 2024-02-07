@@ -1,9 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from .db import db, environment, SCHEMA
 
 class Review(db.Model):
     __tablename__ = 'reviews'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     review_text = db.Column(db.Text)

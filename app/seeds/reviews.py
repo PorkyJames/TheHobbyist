@@ -25,6 +25,7 @@ def seed_reviews():
         )
         db.session.add(rock_climbing_review)
     
+    # Marine leaves review for photography hobby
     if marnie_user and photography_hobby:
         photography_review = Review(
             user_id=marnie_user.id, 
@@ -34,6 +35,7 @@ def seed_reviews():
         )
         db.session.add(photography_review)
     
+    # Bobbie leaves review for snowboarding hobby
     if bobbie_user and snowboarding_hobby:
         snowboarding_review = Review(
             user_id=bobbie_user.id, 

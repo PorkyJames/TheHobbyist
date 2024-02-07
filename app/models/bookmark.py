@@ -1,9 +1,11 @@
 from flask_sqlalchemy import SQLAlchemy
-
-db = SQLAlchemy()
+from .db import db, environment, SCHEMA
 
 class Bookmark(db.Model):
     __tablename__ = 'bookmarks'
+
+    if environment == "production":
+        __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
     # created_at = db.Column(db.DateTime)
