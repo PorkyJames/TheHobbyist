@@ -7,15 +7,12 @@ from ..models.hobby import Hobby
 
 from ..forms.profile_form import ProfileForm
 
-profile_routes = Blueprint("profiles", __name__)
+profile_routes = Blueprint("/profiles", __name__)
 
 #! Create Route
 @profile_routes.route("/profiles", methods = ["POST"])
 @login_required
 def create_profile():
-
-    # CSRF Token authentication
-    form['csrf_token'].data = request.cookies['csrf_token']
 
     # Parse the JSON data from the request
     data = request.get_json()
@@ -23,6 +20,9 @@ def create_profile():
     # Create an instance of the ProfileForm, populating it with data from the request
     form = ProfileForm(data=data)
     
+    # CSRF Token authentication
+    form['csrf_token'].data = request.cookies['csrf_token']
+
     # Validate the form
     if form.validate_on_submit():
         # Create the profile with the validated data
