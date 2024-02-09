@@ -14,19 +14,26 @@ def create_review():
     pass
 
 #! Read Route
-# Logged in User should be able to see all of their reviews in one place
+# Logged in User should be able to see their own reviews in different hobbies
 @review_routes.routes("/reviews")
-@login_required
-def all_reviews():
+def view_all_reviews():
     pass
 
-# Logged in user can view each review via a modal and edit it
+# Logged in user can view each review for a hobby
 @review_routes.routes("/reviews/<int:reviewId>")
-@login_required
-def update_reviews():
+def view_each_review():
     pass
 
 #! Update Route
-
+# Logged in User can update their reviews via a modal
+@review_routes.routes("/reviews/<int:reviewId>", methods = ["PUT"])
+@login_required
+def update_review():
+    pass
 
 #! Delete Route
+# Logged in User can delete their own reviews via a Modal
+@review_routes.routes("/reviews/<int:reviewId>", methods = ["DELETE"])
+@login_required
+def delete_review():
+    pass
