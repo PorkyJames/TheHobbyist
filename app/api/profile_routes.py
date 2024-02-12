@@ -142,8 +142,9 @@ def delete_user_profile(profileId):
             db.session.delete(user)
             db.session.commit()
             logout_user() 
-            return redirect("/")
+            # redirect('/')
+            return jsonify({'message': "Profile and User has been Deleted Successfully"}), 200
         else:
             return jsonify({'message': "User not found"}), 400
 
-    return jsonify({"message": "Profile has been deleted successfully"}), 200
+    # return jsonify({"message": "Profile has been deleted successfully"}), 200
