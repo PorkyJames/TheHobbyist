@@ -30,13 +30,13 @@ function LoginFormPage() {
       const errorMessages = Object.values(serverResponse.errors);
       setErrors(errorMessages);
     } else {
-      navigate("/");
+      navigate("/main");
     }
   };
 
-  const handleSignUp = () => {
+const handleSignUp = () => {
     navigate("/signup"); 
-  };
+};
 
   return (
     <>
