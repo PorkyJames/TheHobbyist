@@ -31,8 +31,8 @@ function SignupFormPage() {
 
     const serverResponse = await dispatch(
       thunkSignup({
-        first_name,
-        last_name,
+        firstName,
+        lastName,
         email,
         username,
         password,
