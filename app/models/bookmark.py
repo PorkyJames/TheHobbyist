@@ -8,14 +8,14 @@ class Bookmark(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    is_active = db.Column(db.Boolean, default=True, nullable=False)
+    # is_active = db.Column(db.Boolean, default=True, nullable=False)
     # created_at = db.Column(db.DateTime)
 
     # Relationships
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     hobby_id = db.Column(db.Integer, db.ForeignKey('hobbies.id'), nullable=False)
 
-    hobby = db.relationship('Hobby', backref='bookmarks')
+    hobby = db.relationship('Hobby', back_populates='bookmarks')
 
     def to_dict(self, include_hobby=False):
         data = {

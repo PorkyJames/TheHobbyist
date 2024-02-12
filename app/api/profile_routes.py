@@ -34,27 +34,32 @@ def create_profile():
         )
         # Add the new profile created to our database
         db.session.add(new_profile)
+        db.session.commit()
 
-    # ! Now that we've created the profile and added to our Database,
-    # ! we need to let the User select their first hobby. 
-
-    # Associate hobbies with the user
-    selected_hobbies_ids = data['hobbies'] 
-
-    for hobby_id in selected_hobbies_ids:
-        # Fetch the hobby by ID and set its user_id
-        hobby = Hobby.query.get(hobby_id)
-        if hobby:
-            hobby.user_id = current_user.id
-            db.session.add(hobby)
-
-    db.session.commit()
+        return jsonify(new_profile.to_dict()), 201
     
-    return jsonify(new_profile.to_dict()), 201
+    return jsonify(form.errors), 400
+
+    # # ! Now that we've created the profile and added to our Database,
+    # # ! we need to let the User select their first hobby. 
+
+    # # Associate hobbies with the user
+    # selected_hobbies_ids = data['hobbies'] 
+
+    # for hobby_id in selected_hobbies_ids:
+    #     # Fetch the hobby by ID and set its user_id
+    #     hobby = Hobby.query.get(hobby_id)
+    #     if hobby:
+    #         hobby.user_id = current_user.id
+    #         db.session.add(hobby)
+
+    # db.session.commit()
+    
+    # return jsonify(new_profile.to_dict()), 201
 
 #! Read Routes
 
-# User can see the detail of each Board in its own page
+# User can see the detail of each profile in its own page
 @profile_routes.route("/profiles/<int:profileId>")
 def each_profile_details(profileId):
     # Query to get each Profile based on ID
@@ -63,20 +68,23 @@ def each_profile_details(profileId):
     # Edge Cases for Errors
     # If the profile doesn't exist, then we can't find it
     if not each_profile:
-        abort(404, {"message": "Profile not Found"})
+        abort(404, {"error": "Profile not Found"})
+
+    if not each_profile:
+        return jsonify({'error': "Profile not Found"}), 404
 
     return jsonify(each_profile.to_dict()), 200
 
-# User can see the details of their own Board in its own page
-@profile_routes.route("/profiles/<int:profileId>")
-@login_required
-def user_profile_details(profileId):
-    # Query to get the current user's profile Id
-    user_profile = Profile.query.filter(Profile.user_id == current_user.id).all()
+# # User can see the details of their own Board in its own page
+# @profile_routes.route("/profiles/<int:profileId>")
+# @login_required
+# def user_profile_details(profileId):
+#     # Query to get the current user's profile Id
+#     user_profile = Profile.query.filter(Profile.user_id == current_user.id).all()
 
-    if user_profile:
-        profile_data = user_profile.to_dict()
-        return jsonify(profile_data), 200
+#     if user_profile:
+#         profile_data = user_profile.to_dict()
+#         return jsonify(profile_data), 200
 
 #! Update Routes
 # Logged in User can update their profile in the profile menu / button
@@ -91,6 +99,9 @@ def update_user_profile(profileId):
 
     # Instantiate a new form instance with data from the request
     form = ProfileForm()
+
+    # CSRF Token authentication
+    form['csrf_token'].data = request.cookies['csrf_token']
     
     if form.validate_on_submit():
         # Update profile fields with data from the form
@@ -113,12 +124,15 @@ def delete_user_profile(profileId):
     # Query to get the user's profile by ID and ensure it belongs to the current user
     user_profile = Profile.query.filter_by(id=profileId, user_id=current_user.id).first()
 
-    # Error Messages to check if the board belongs to the user
+    # Error Messages to check if profile exists
     if not user_profile:
         return jsonify({"message": "Profile does not exist"}), 400
     
-    # Error if the Profile doesn't belong to the User
     if user_profile.user_id != current_user.id:
+        return jsonify({'message': "Profile does not belong to User"}), 401
+    
+    # Error if the Profile doesn't belong to the User
+    if user_profile.user_id == current_user.id:
         db.session.delete(user_profile)
         db.session.commit()
 

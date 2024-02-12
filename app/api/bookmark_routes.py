@@ -45,7 +45,6 @@ def create_bookmark():
 #! Read Route
 # Logged in User should be able to see all of their bookmarks in one list
 @bookmark_routes.route('/bookmarks')
-@login_required
 def all_bookmarks():
     # Query to look for user's bookmarks
     bookmarks = Bookmark.query.filter_by(user_id=current_user.id).all()
@@ -58,8 +57,7 @@ def all_bookmarks():
 
 # Logged in User should be able to see each individual bookmark with the details
 # I want them to be able to click and modal appears that shows the bookmark in details
-@bookmark_routes.route('/bookmarks/<int:bookmarkId')
-@login_required
+@bookmark_routes.route('/bookmarks/<int:bookmarkId>')
 def each_bookmark(bookmarkId):
     # Query the database for the bookmark with the given id
     bookmark = Bookmark.query.filter_by(id=bookmarkId, user_id=current_user.id).first()
@@ -74,44 +72,43 @@ def each_bookmark(bookmarkId):
     # Return response jsonified
     return jsonify(bookmark_details)
 
-#! Update Route
-# Logged in User should be able to update the bookmark that they've created
-@bookmark_routes.route('/bookmarks/<int:bookmarkId>', methods = ['PUT'])
-@login_required
-def update_bookmark(bookmarkId):
-    # Query for bookmark and check if it belongs to user
-    bookmark = Bookmark.query.filter_by(id=bookmarkId, user_id=current_user.id).first()
+# #! Update Route
+# # Logged in User should be able to update the bookmark that they've created
+# @bookmark_routes.route('/bookmarks/<int:bookmarkId>', methods = ['PUT'])
+# @login_required
+# def update_bookmark(bookmarkId):
+#     # Query for bookmark and check if it belongs to user
+#     bookmark = Bookmark.query.filter_by(id=bookmarkId, user_id=current_user.id).first()
 
-    # Edge case for if bookmark cannot be found
-    if not bookmark:
-        abort(404, description="Bookmark not found or access denied")
+#     # Edge case for if bookmark cannot be found
+#     if not bookmark:
+#         abort(404, description="Bookmark not found or access denied")
 
-    # Toggling for bookmarks
-    bookmark.is_active = not bookmark.is_active
+#     # Toggling bookmark: If it's already bookmarked, unbookmark it by deleting
+#     if bookmark:
+#         db.session.delete(bookmark)
+#         db.session.commit()
+#         return jsonify({'message': 'Bookmark removed successfully'}), 200
+#     else:
+#         new_bookmark = Bookmark(user_id=current_user.id, hobby_id=bookmarkId)
+#         db.session.add(new_bookmark)
+#         db.session.commit()
+#         return jsonify({'message': 'Bookmark added successfully'}), 200
 
-    # Save changes to db
-    db.session.commit()
-
-    # Return jsonified response
-    return jsonify({
-        'message': 'Bookmark updated successfully',
-        'bookmark': {
-            'id': bookmark.id,
-            'is_active': bookmark.is_active
-        }
-    }), 200
+# Don't really need an update route since Creating and Deleting bookmarks is technically 
+# toggling on and off.
 
 #! Delete Route
 @bookmark_routes.route('/bookmarks/<int:bookmarkId>')
 @login_required
 def delete_bookmark(bookmarkId):
     # Query to get the bookmark
-    user_bookmark = Bookmark.query.get(bookmarkId)
+    user_bookmark = Bookmark.query.filter_by(id=bookmarkId, user_id=current_user.id).first()
 
     if user_bookmark:
         db.session.delete(user_bookmark)
         db.session.commit()
 
-        return {"message":"Bookmark Deleted"}
+        return jsonify({"message": "Bookmark Deleted"}), 200
     
-    return {"errors": "Bookmark not found"}, 404
+    abort(404, description="Bookmark not found")

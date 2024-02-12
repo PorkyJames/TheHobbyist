@@ -3,6 +3,7 @@ from flask_login import current_user, login_required
 
 from ..models.db import db
 from ..models.hobby import Hobby
+from ..models.bookmark import Bookmark
 
 from ..forms.hobby_form import HobbyForm
 
@@ -111,9 +112,8 @@ def delete_user_hobby(hobbyId):
     if not hobby:
         abort(404, {"message": "Hobby could not be found"})
 
-    if hobby.user_id == current_user.id:
-        db.session.delete(hobby)
-        db.session.commit()
+    db.session.delete(hobby)
+    db.session.commit()
 
     # Return successful deletion message
     return jsonify({"message": "Hobby has been Deleted successfully" }), 200

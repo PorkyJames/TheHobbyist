@@ -10,7 +10,7 @@ review_routes = Blueprint("/reviews", __name__)
 
 #! Create Route
 # Logged in User should be able to create a new review on a hobby
-@review_routes.routes("/reviews", methods=["POST"])
+@review_routes.route("/reviews", methods=["POST"])
 @login_required
 def create_review():
 
@@ -40,8 +40,7 @@ def create_review():
 
 #! Read Route
 # Logged in User should be able to see all of their own reviews in one spot.
-@review_routes.routes("/reviews")
-@login_required
+@review_routes.route("/reviews")
 def view_all_reviews():
 
     # Query the database for all reviews made by current user
@@ -54,8 +53,7 @@ def view_all_reviews():
     return jsonify(reviews_list)
 
 # Logged in user can view each review for a hobby
-@review_routes.routes("/reviews/<int:reviewId>")
-@login_required
+@review_routes.route("/reviews/<int:reviewId>")
 def view_each_review(reviewId):
 
     # Find the review by ID
@@ -70,7 +68,7 @@ def view_each_review(reviewId):
 
 #! Update Route
 # Logged in User can update their reviews via a modal
-@review_routes.routes("/reviews/<int:reviewId>", methods = ["PUT"])
+@review_routes.route("/reviews/<int:reviewId>", methods = ["PUT"])
 @login_required
 def update_review(reviewId):
     # Query for review based on user Id
@@ -82,6 +80,9 @@ def update_review(reviewId):
 
     # New form instance based on the request form
     form = ReviewForm(request.form)
+
+    # CSRF Token authentication
+    form['csrf_token'].data = request.cookies['csrf_token']
 
     # Update the review with data from the form
     if form.validate_on_submit():
@@ -99,11 +100,11 @@ def update_review(reviewId):
 
 #! Delete Route
 # Logged in User can delete their own reviews via a Modal
-@review_routes.routes("/reviews/<int:reviewId>", methods = ["DELETE"])
+@review_routes.route("/reviews/<int:reviewId>", methods = ["DELETE"])
 @login_required
 def delete_review(reviewId):
     # Query for the review based on id
-    review = Review.query.filter_by(id=reviewId)
+    review = Review.query.filter_by(id=reviewId, user_id=current_user.id).first()
 
     # If review doesn't belong to owner / not found
     if not review:
@@ -112,4 +113,4 @@ def delete_review(reviewId):
     db.session.delete(review)
     db.session.commit()
 
-    return jsonify("message": "Review Delete Successfully"), 200
+    return jsonify({"message": "Review Delete Successfully"}), 200
