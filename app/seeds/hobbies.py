@@ -5,7 +5,7 @@ from sqlalchemy import text
 
 def seed_hobbies():
     # Fetch users by username
-    demo_user = User.query.filter_by(username='Demo').first()
+    demo_user = User.query.filter_by(username='DemoUser').first()
     marnie_user = User.query.filter_by(username='marnie').first()
     bobbie_user = User.query.filter_by(username='bobbie').first()
 

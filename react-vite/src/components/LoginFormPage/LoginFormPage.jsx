@@ -10,7 +10,7 @@ function LoginFormPage() {
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState([]);
 
   if (sessionUser) return <Navigate to="/" replace={true} />;
 
@@ -24,42 +24,75 @@ function LoginFormPage() {
       })
     );
 
-    if (serverResponse) {
-      setErrors(serverResponse);
+    if (serverResponse && serverResponse.errors) {
+      // Assuming the errors from the server are in the form of an object
+      // with keys as the field names and values as the error messages
+      const errorMessages = Object.values(serverResponse.errors);
+      setErrors(errorMessages);
     } else {
-      navigate("/");
+      navigate("/main");
     }
   };
 
+const handleSignUp = () => {
+    navigate("/signup"); 
+};
+
   return (
     <>
-      <h1>Log In</h1>
-      {errors.length > 0 &&
-        errors.map((message) => <p key={message}>{message}</p>)}
-      <form onSubmit={handleSubmit}>
-        <label>
-          Email
-          <input
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
-      </form>
-    </>
+
+			<div className="login-form-container">
+				<div className="login-card">
+
+					<h1 className="login-title">
+						The Hobbyist
+					</h1>
+
+					<form onSubmit={handleSubmit}>
+						<div className="error-messages">
+							<ul>
+								{errors.map((error, idx) => (
+									<li key={idx}>{error}</li>
+								))}
+							</ul>
+						</div>
+
+						<div className="input-group">
+							<label>
+							Email
+							<input
+								type="text"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+								required
+							/>
+							</label>
+						</div>
+					
+						<div className="input-group">
+							<label>
+							Password
+							<input
+								type="password"
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+								required
+							/>
+							</label>
+						</div>
+						
+						<div className="button-group">
+							<button type="submit">Log In</button>
+						</div>
+
+            <div className="sign-up-button">
+              <button type="signup" onClick={handleSignUp}>Sign Up</button>
+            </div>
+
+					</form>
+				</div>
+			</div>
+		</>
   );
 }
 

@@ -16,8 +16,8 @@ class Hobby(db.Model):
     # updated_at = db.Column(db.DateTime)
 
     # Relationships
-    bookmarks = db.relationship('Bookmark', backref='hobby')
-    reviews = db.relationship('Review', backref='hobby')
+    reviews = db.relationship('Review', back_populates='hobby', cascade='all, delete-orphan')
+    bookmarks = db.relationship('Bookmark', back_populates='hobby', cascade='all, delete-orphan')
 
     def to_dict(self):
         return {

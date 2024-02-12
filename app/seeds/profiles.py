@@ -7,7 +7,7 @@ from sqlalchemy import text
 
 def seed_profiles():
     # Fetch each demo user by filter
-    demo_user = User.query.filter_by(username='Demo').first()
+    demo_user = User.query.filter_by(username='DemoUser').first()
     marnie_user = User.query.filter_by(username='marnie').first()
     bobbie_user = User.query.filter_by(username='bobbie').first()
 
