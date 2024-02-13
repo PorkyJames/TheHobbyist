@@ -67,9 +67,9 @@ def each_profile_details(profileId):
     each_profile = Profile.query.get(profileId)
 
     # Edge Cases for Errors
-    # If the profile doesn't exist, then we can't find it
-    if not each_profile:
-        abort(404, {"error": "Profile not Found"})
+    # # If the profile doesn't exist, then we can't find it
+    # if not each_profile:
+    #     abort(404, {"error": "Profile not Found"})
 
     if not each_profile:
         return jsonify({'error': "Profile not Found"}), 404
