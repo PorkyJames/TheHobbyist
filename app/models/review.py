@@ -9,7 +9,7 @@ class Review(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     review_text = db.Column(db.Text)
-    star_rating = db.Column(db.Integer)
+    star_rating = db.Column(db.Integer, nullable=False)
     # created_at = db.Column(db.DateTime)
     # updated_at = db.Column(db.DateTime)
 

@@ -15,6 +15,10 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
+    # Relationship between User and Profile. If profile is delete, user gets deleted
+    profile = db.relationship('Profile', backref='user', lazy=True, cascade="delete, delete-orphan")
+
+
     @property
     def password(self):
         return self.hashed_password

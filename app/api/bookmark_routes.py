@@ -99,7 +99,7 @@ def each_bookmark(bookmarkId):
 # toggling on and off.
 
 #! Delete Route
-@bookmark_routes.route('/bookmarks/<int:bookmarkId>')
+@bookmark_routes.route('/bookmarks/<int:bookmarkId>', methods=["DELETE"])
 @login_required
 def delete_bookmark(bookmarkId):
     # Query to get the bookmark

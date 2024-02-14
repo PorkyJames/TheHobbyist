@@ -1,9 +1,10 @@
-from flask import Blueprint, jsonify, abort, request
-from flask_login import current_user, login_required
+from flask import Blueprint, jsonify, abort, request, redirect
+from flask_login import current_user, login_required, logout_user
 
 from ..models.db import db
 from ..models.profile import Profile
 from ..models.hobby import Hobby
+from ..models.user import User
 
 from ..forms.profile_form import ProfileForm
 
@@ -66,9 +67,9 @@ def each_profile_details(profileId):
     each_profile = Profile.query.get(profileId)
 
     # Edge Cases for Errors
-    # If the profile doesn't exist, then we can't find it
-    if not each_profile:
-        abort(404, {"error": "Profile not Found"})
+    # # If the profile doesn't exist, then we can't find it
+    # if not each_profile:
+    #     abort(404, {"error": "Profile not Found"})
 
     if not each_profile:
         return jsonify({'error': "Profile not Found"}), 404
@@ -131,9 +132,19 @@ def delete_user_profile(profileId):
     if user_profile.user_id != current_user.id:
         return jsonify({'message': "Profile does not belong to User"}), 401
     
-    # Error if the Profile doesn't belong to the User
+    # Delete the Profile and User
     if user_profile.user_id == current_user.id:
         db.session.delete(user_profile)
-        db.session.commit()
+        
+        # Query for the user
+        user = User.query.get(current_user.id)
+        if user:
+            db.session.delete(user)
+            db.session.commit()
+            logout_user() 
+            # redirect('/')
+            return jsonify({'message': "Profile and User has been Deleted Successfully"}), 200
+        else:
+            return jsonify({'message': "User not found"}), 400
 
-    return jsonify({"message": "Profile has been deleted successfully"}), 200
+    # return jsonify({"message": "Profile has been deleted successfully"}), 200

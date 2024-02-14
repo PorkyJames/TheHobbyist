@@ -5,10 +5,19 @@ import {
   combineReducers,
 } from "redux";
 import thunk from "redux-thunk";
+
 import sessionReducer from "./session";
+import profileReducer from "./profile";
+import hobbyReducer from "./hobby";
+import bookmarkReducer from "./bookmark"
+import reviewReducer from "./review";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
+  profile: profileReducer,
+  hobby: hobbyReducer,
+  bookmark: bookmarkReducer,
+  review: reviewReducer
 });
 
 let enhancer;

@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, abort, request
 from flask_login import current_user, login_required
+from werkzeug.datastructures import MultiDict
 
 from ..models.db import db
 from ..models.review import Review
@@ -78,14 +79,20 @@ def update_review(reviewId):
     if not review:
         abort(404, description="Review not found or access denied")
 
-    # New form instance based on the request form
-    form = ReviewForm(request.form)
+    # Get the JSON data from the request
+    json_data = request.get_json()
+
+    # Create a MultiDict from the JSON data
+    formdata = MultiDict(json_data)
+
+    # New form instance populated with the JSON data
+    form = ReviewForm(formdata=formdata)
 
     # CSRF Token authentication
     form['csrf_token'].data = request.cookies['csrf_token']
 
     # Update the review with data from the form
-    if form.validate_on_submit():
+    if form.validate():
         review.review_text = form.review_text.data
         review.star_rating = form.star_rating.data
 

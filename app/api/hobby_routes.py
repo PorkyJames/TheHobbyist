@@ -22,6 +22,7 @@ def create_hobby():
     # Validate the form
     if form.validate_on_submit():
         new_hobby = Hobby(
+            user_id = current_user.id,
             name = form.name.data,
             description = form.description.data,
             location = form.location.data
@@ -30,6 +31,8 @@ def create_hobby():
         # Add the new profile created to our database and commit
         db.session.add(new_hobby)
         db.session.commit()
+    else: 
+        return jsonify(form.errors), 400
 
     return jsonify(new_hobby.to_dict()), 201
 
