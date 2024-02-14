@@ -15,20 +15,19 @@ function SignupFormPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [errors, setErrors] = useState({});
+  const [errors, setErrors] = useState([]);
 
   if (sessionUser) return <Navigate to="/" replace={true} />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     if (password !== confirmPassword) {
-      return setErrors({
-        confirmPassword:
-          "Confirm Password field must be the same as the Password field",
-      });
+      // Set errors as an array
+      setErrors(["Confirm Password field must be the same as the Password field"]);
+      return;
     }
-
+  
     const serverResponse = await dispatch(
       thunkSignup({
         firstName,
@@ -38,9 +37,11 @@ function SignupFormPage() {
         password,
       })
     );
-
-    if (serverResponse) {
-      setErrors(serverResponse);
+  
+    // Assuming serverResponse.errors is an object, convert the values to an array
+    if (serverResponse && serverResponse.errors) {
+      const errorMessages = Object.values(serverResponse.errors);
+      setErrors(errorMessages);
     } else {
       navigate("/main");
     }
@@ -52,7 +53,21 @@ function SignupFormPage() {
         <div className="signup-card">
           <h1 className="signup-title">Sign Up</h1>
           {errors.server && <p className="error-message">{errors.server}</p>}
+
           <form className="signup-form" onSubmit={handleSubmit}>
+
+          <div className="error-messages">
+            {Array.isArray(errors) ? (
+              <ul>
+                {errors.map((error, idx) => (
+                  <li key={idx}>{error}</li>
+                ))}
+              </ul>
+            ) : (
+              errors && <p className="error-message">{errors}</p> // If errors is not an array, display it directly
+            )}
+          </div>
+
 
           <label>
               First Name

@@ -1,6 +1,6 @@
 const LOAD = "bookmark/LOAD";
 const CREATE = "bookmark/CREATE";
-const UPDATE = "bookmark/UPDATE";
+// const UPDATE = "bookmark/UPDATE";
 const DELETE = "bookmark/DELETE";
 
 //! Action Creators 
@@ -14,10 +14,10 @@ const create = (bookmark) => ({
     payload: bookmark
 })
 
-const update = (bookmark) => ({
-    type: UPDATE,
-    payload: bookmark
-})
+// const update = (bookmark) => ({
+//     type: UPDATE,
+//     payload: bookmark
+// })
 
 const remove = (bookmark) => ({
     type: DELETE,
@@ -44,7 +44,7 @@ export const createBookmark = (payload) => async (dispatch) => {
         body: JSON.stringify(payload)
     }
 
-    const res = await fetch(`/api/bookmark`)
+    const res = await fetch(`/api/bookmark`, requestMethod)
 
     if (res.ok) {
         const newBookmark = await res.json()
@@ -76,7 +76,7 @@ export const deleteBookmark = (bookmarkId) => async (dispatch) => {
         method: "Delete",
     }
 
-    const res = await fetch(`/api/bookmark/${bookmarkId}`)
+    const res = await fetch(`/api/bookmark/${bookmarkId}`, requestMethod)
 
     if (res.ok) {
         const deletedBookmark = await res.json();
@@ -90,3 +90,26 @@ const initialState = {
     Bookmark: {},
 }
 
+const bookmarkReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case LOAD:
+            return {
+                ...state,
+                bookmarks: action.payload, 
+            };
+        case CREATE:
+            return {
+                ...state,
+                bookmarks: [...state.bookmarks, action.payload], 
+            };
+        case DELETE:
+            return {
+                ...state,
+                bookmarks: state.bookmarks.filter(bookmark => bookmark.id !== action.payload.id),
+            };
+        default:
+            return state;
+    }
+}
+
+export default bookmarkReducer;

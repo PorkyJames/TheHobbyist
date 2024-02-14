@@ -38,7 +38,7 @@ const handleSignUp = () => {
     navigate("/signup"); 
 };
 
-  return (
+return (
     <>
 
 			<div className="login-form-container">
@@ -85,15 +85,15 @@ const handleSignUp = () => {
 							<button type="submit">Log In</button>
 						</div>
 
-            <div className="sign-up-button">
-              <button type="signup" onClick={handleSignUp}>Sign Up</button>
-            </div>
+						<div className="sign-up-button">
+							<button type="signup" onClick={handleSignUp}>Sign Up</button>
+						</div>
 
 					</form>
 				</div>
 			</div>
 		</>
-  );
+);
 }
 
 export default LoginFormPage;

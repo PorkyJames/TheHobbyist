@@ -47,7 +47,7 @@ export const createProfile = (payload) => async (dispatch) => {
         body: JSON.stringify(payload)
     }
 
-    const res = await fetch(`/api/profile`)
+    const res = await fetch(`/api/profile`, requestMethod)
 
     if (res.ok) {
         const newProfile = await res.json();
@@ -67,7 +67,7 @@ export const updateProfile = (profileId, payload) => async (dispatch) => {
         body: JSON.stringify(payload)
     }
 
-    const res = await fetch(`/api/profile/${profileId}`)
+    const res = await fetch(`/api/profile/${profileId}`, requestMethod)
 
     if (res.ok) {
         const updatedProfile = await res.json();
@@ -79,10 +79,10 @@ export const updateProfile = (profileId, payload) => async (dispatch) => {
 
 export const deleteProfile = (profileId) => async (dispatch) => {
     const requestMethod= {
-        method: "Delete",
+        method: "DELETE",
     }
 
-    const res = await fetch(`/api/profile/${profileId}`)
+    const res = await fetch(`/api/profile/${profileId}`, requestMethod)
     
     if (res.ok) {
         const deletedProfile = await res.json();
@@ -129,3 +129,5 @@ const profileReducer = (state = initialState, action) => {
             return state;
     }
 }
+
+export default profileReducer;

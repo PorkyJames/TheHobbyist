@@ -47,7 +47,7 @@ export const createHobby = (payload) => async (dispatch) => {
         body: JSON.stringify(payload)
     }
 
-    const res = await fetch(`/api/hobby`)
+    const res = await fetch(`/api/hobby`, requestMethod)
 
     if (res.ok) {
         const newHobby = await res.json();
@@ -66,7 +66,7 @@ export const updateHobby = (hobbyId, payload) => async (dispatch) => {
         body: JSON.stringify(payload)
     }
 
-    const res = await fetch(`/api/hobby/${hobbyId}`)
+    const res = await fetch(`/api/hobby/${hobbyId}`, requestMethod)
 
     if (res.ok) {
         const updatedHobby = await res.json();
@@ -81,7 +81,7 @@ export const deleteHobby = (hobbyId) => async (dispatch) => {
         method: "DELETE",
     }
 
-    const res = await fetch (`/api/hobby/${hobbyId}`)
+    const res = await fetch (`/api/hobby/${hobbyId}`, requestMethod)
 
     if (res.ok) {
         const deletedHobby = await res.json();
