@@ -64,6 +64,14 @@ def get_each_hobby(hobbyId):
 
     return jsonify(hobby_details), 200
 
+# Get each User's List of Hobbies that they've created
+@hobby_routes.route("/hobbies/current")
+@login_required
+def get_user_hobbies(user_id):
+    user_id = current_user.id
+    hobbies = Hobby.query.filter_by(user_id=user_id).all()
+    return jsonify([hobby.to_dict() for hobby in hobbies])
+
 #! Update Route
 # Logged in User can Update the hobby that they've created
 @hobby_routes.route("/hobbies/<int:hobbyId>", methods=["PUT"])

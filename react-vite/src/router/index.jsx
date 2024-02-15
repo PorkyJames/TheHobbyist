@@ -4,6 +4,7 @@ import LoginFormPage from '../components/LoginFormPage';
 import SignupFormPage from '../components/SignupFormPage';
 import MainPage from '../components/MainPage';
 import CreateHobbyForm from '../components/CreateHobbyForm/CreateHobbyForm';
+import ManageHobbies from '../components/ManageHobbies/ManageHobbies';
 
 import Layout from './Layout';
 
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: "hobby-form",
         element: <CreateHobbyForm />,
+      },
+      {
+        path: "/hobbies/current",
+        element: <ManageHobbies />,
       },
     ],
   },

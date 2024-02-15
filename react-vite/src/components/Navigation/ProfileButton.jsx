@@ -55,7 +55,7 @@ function ProfileButton() {
   };
 
   const manageHobbies = () => {
-    navigate('/manage-hobbies');
+    navigate('/hobbies/current');
     setShowMenu(false);
   };
 
