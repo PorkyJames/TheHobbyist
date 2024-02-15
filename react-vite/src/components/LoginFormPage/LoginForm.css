@@ -102,4 +102,8 @@
     font-size: 14px;
 }
 
-
+.demo-login {
+    justify-content: center;
+    text-align: center;
+    margin-top: 15px;
+}

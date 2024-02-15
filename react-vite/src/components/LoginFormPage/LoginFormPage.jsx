@@ -5,37 +5,47 @@ import { Navigate, useNavigate } from "react-router-dom";
 import "./LoginForm.css";
 
 function LoginFormPage() {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const sessionUser = useSelector((state) => state.session.user);
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	const sessionUser = useSelector((state) => state.session.user);
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Navigate to="/" replace={true} />;
+	if (sessionUser) return <Navigate to="/" replace={true} />;
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		const serverResponse = await dispatch(
+			thunkLogin({
+				email,
+				password,
+			})
+		);
 
-    const serverResponse = await dispatch(
-      thunkLogin({
-        email,
-        password,
-      })
-    );
+	if (serverResponse && serverResponse.errors) {
+		const errorMessages = Object.values(serverResponse.errors);
+		setErrors(errorMessages);
+	} else {
+		navigate("/main");
+	}
+};
 
-    if (serverResponse && serverResponse.errors) {
-      // Assuming the errors from the server are in the form of an object
-      // with keys as the field names and values as the error messages
-      const errorMessages = Object.values(serverResponse.errors);
-      setErrors(errorMessages);
-    } else {
-      navigate("/main");
-    }
-  };
+	const handleDemoLogin = () => {
+		const demoCredentials = {
+			email: "demo@aa.io",
+			password: "password",
+		};
+	
+	dispatch(thunkLogin(demoCredentials)).then(() => {
+		navigate("/main");
+	}).catch((error) => {
+		console.error("Demo login failed", error);
+	});
+};
 
 const handleSignUp = () => {
-    navigate("/signup"); 
+    navigate("/signup");
 };
 
 return (
@@ -87,6 +97,10 @@ return (
 
 						<div className="sign-up-button">
 							<button type="signup" onClick={handleSignUp}>Sign Up</button>
+						</div>
+
+						<div className="demo-login">
+							<button type="demo" onClick={handleDemoLogin}>Demo-Login</button>
 						</div>
 
 					</form>
