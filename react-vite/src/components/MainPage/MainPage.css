@@ -1,0 +1,58 @@
+.main-page-container {
+    text-align: center;
+    margin-top: 50px;
+}
+
+.main-title {
+    margin-bottom: 50px;
+    font-size: 50px;
+}
+
+.search-bar {
+    padding: 10px 20px;
+    font-size: 16px;
+    width: 50%;
+    border: 1px solid #dfe1e5; 
+    border-radius: 24px; 
+    margin-bottom: 20px; 
+    outline: none; 
+    box-shadow: none; 
+}
+
+.search-button {
+    padding: 10px 20px;
+    background-color: #f8f9fa; 
+    border: 1px solid #f8f9fa;
+    border-radius: 4px;
+    color: #3c4043; 
+    margin-left: 10px; 
+    cursor: pointer; 
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s; 
+}
+
+.search-button:hover {
+    border-color: #c6c6c6;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.random-button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #f8f9fa;
+    border: 1px solid #f8f9fa;
+    border-radius: 4px;
+    color: #3c4043;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.random-button:hover {
+    border-color: #c6c6c6;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.inspirational-quote {
+    font-style: italic;
+    margin-top: 40px;
+}
