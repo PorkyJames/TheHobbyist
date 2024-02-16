@@ -1,60 +1,11 @@
-// const LOAD = "hobbies/LOAD";
+//! Load User Hobbies
+
 const LOAD_USER_HOBBIES = "hobbies/LOAD_USER_HOBBIES";
-const LOAD_ALL_HOBBIES = "hobbies/LOAD_ALL_HOBBIES";
-const LOAD_EACH_HOBBY = "hobbies/LOAD_EACH_HOBBY";
-const CREATE = "hobbies/CREATE";
-const UPDATE = "hobbies/UPDATE";
-const DELETE = "hobbies/DELETE";
-
-//! Action Creators
-
-// const load = (hobby) => ({
-//     type: LOAD,
-//     payload: hobby
-// })
 
 const loadUserHobbies = (hobbies) => ({
     type: LOAD_USER_HOBBIES,
     payload: hobbies
 });
-
-const loadAllHobbies = (hobbies) => ({
-    type: LOAD_ALL_HOBBIES,
-    payload: hobbies
-});
-
-const loadEachHobby = (hobby) => ({
-    type: LOAD_EACH_HOBBY,
-    payload: hobby
-});
-
-const create = (hobby) => ({
-    type: CREATE,
-    payload: hobby
-})
-
-const update = (hobby) => ({
-    type: UPDATE,
-    payload: hobby
-})
-
-const remove = (hobby) => ({
-    type: DELETE,
-    payload: hobby
-})
-
-//! Thunks
-
-// export const getHobby = () => async (dispatch) => {
-//     const res = await fetch ("/api/hobbies/current")
-
-//     if (res.ok) {
-//         const hobby = await res.json();
-//         dispatch(load(hobby))
-//     }
-
-//     return res;
-// }
 
 export const getUserHobbies = () => async (dispatch) => {
     // Fetches hobbies for the current user
@@ -62,8 +13,18 @@ export const getUserHobbies = () => async (dispatch) => {
     if (response.ok) {
         const hobbies = await response.json();
         dispatch(loadUserHobbies(hobbies));
+        return hobbies;
     }
 };
+
+//! Load ALL hobbies
+
+const LOAD_ALL_HOBBIES = "hobbies/LOAD_ALL_HOBBIES";
+
+const loadAllHobbies = (hobbies) => ({
+    type: LOAD_ALL_HOBBIES,
+    payload: hobbies
+});
 
 export const getAllHobbies = () => async (dispatch) => {
     // Fetches all hobbies in the system
@@ -71,8 +32,18 @@ export const getAllHobbies = () => async (dispatch) => {
     if (response.ok) {
         const hobbies = await response.json();
         dispatch(loadAllHobbies(hobbies));
+        return hobbies;
     }
 };
+
+//! Load Each Hobby Details
+
+const LOAD_EACH_HOBBY = "hobbies/LOAD_EACH_HOBBY";
+
+const loadEachHobby = (hobby) => ({
+    type: LOAD_EACH_HOBBY,
+    payload: hobby
+});
 
 export const getHobbyById = (hobbyId) => async (dispatch) => {
     // Fetches details for a single hobby
@@ -80,8 +51,18 @@ export const getHobbyById = (hobbyId) => async (dispatch) => {
     if (response.ok) {
         const hobby = await response.json();
         dispatch(loadEachHobby(hobby));
+        return hobby;
     }
 };
+
+//! Create A Hobby
+
+const CREATE = "hobbies/CREATE";
+
+const create = (hobby) => ({
+    type: CREATE,
+    payload: hobby
+})
 
 export const createHobby = (payload) => async (dispatch) => {
     const requestMethod = {
@@ -102,6 +83,14 @@ export const createHobby = (payload) => async (dispatch) => {
     }
 }
 
+//! Update User Hobby
+
+const UPDATE = "hobbies/UPDATE";
+
+const update = (hobby) => ({
+    type: UPDATE,
+    payload: hobby
+})
 
 export const updateHobby = (hobbyId, payload) => async (dispatch) => {
     const requestMethod = {
@@ -121,6 +110,14 @@ export const updateHobby = (hobbyId, payload) => async (dispatch) => {
     }
 }
 
+//! Delete User Hobby
+
+const DELETE = "hobbies/DELETE";
+
+const remove = (hobby) => ({
+    type: DELETE,
+    payload: hobby
+})
 
 export const deleteHobby = (hobbyId) => async (dispatch) => {
     const requestMethod = {
@@ -137,58 +134,63 @@ export const deleteHobby = (hobbyId) => async (dispatch) => {
 
 //! Reducer 
 
-const initialState = {};
+const initialState = {
+    hobbies: {
+        userHobbies: [], 
+        allHobbies: [], 
+        details: {}, 
+    }
+};
 
 const hobbyReducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOAD_USER_HOBBIES: {
-            // Assumes action.payload is an array of hobby objects
-            const newState = { ...state };
-            action.payload.forEach((hobby) => {
-                newState[hobby.id] = hobby;
-            });
-            return newState;
-        }
-        case LOAD_ALL_HOBBIES: {
-            // Assumes action.payload is an array of all hobby objects
-            const newState = {};
-            action.payload.forEach((hobby) => {
-                newState[hobby.id] = hobby;
-            });
-            return newState;
-        }
-        case LOAD_EACH_HOBBY: {
-            // Assumes action.payload is a single hobby object
-            const newState = { ...state };
-            const selectedHobby = action.payload;
-            newState[selectedHobby.id] = selectedHobby;
-            return newState;
-        }
-        case CREATE: {
-            // Assumes action.payload is a new hobby object
+        case LOAD_USER_HOBBIES:
             return {
                 ...state,
-                [action.payload.id]: action.payload
+                hobbies: {
+                    ...state.hobbies,
+                    userHobbies: action.payload
+                }
             };
-        }
-        case UPDATE: {
-            // Assumes action.payload is an updated hobby object
-            const updatedHobby = action.payload;
+        case LOAD_ALL_HOBBIES:
             return {
                 ...state,
-                [updatedHobby.id]: updatedHobby,
+                allHobbies: action.payload,
             };
-        }
-        case DELETE: {
-            // Assumes action.payload is the ID of the hobby to delete
-            const newState = { ...state };
-            delete newState[action.payload];
-            return newState;
-        }
-        // Additional cases for any other actions
+        case LOAD_EACH_HOBBY:
+            return {
+                ...state,
+                details: { ...state.details, [action.payload.id]: action.payload },
+            };
+        case CREATE:
+            return {
+                ...state,
+                allHobbies: [...state.allHobbies, action.payload],
+                userHobbies: [...state.userHobbies, action.payload], // Assuming the new hobby is added to the current user's hobbies
+            };
+        case UPDATE:
+            return {
+                ...state,
+                allHobbies: state.allHobbies.map(hobby => hobby.id === action.payload.id ? action.payload : hobby),
+                userHobbies: state.userHobbies.map(hobby => hobby.id === action.payload.id ? action.payload : hobby),
+                details: { ...state.details, [action.payload.id]: action.payload },
+            };
+        case DELETE:
+            return {
+                ...state,
+                allHobbies: state.allHobbies.filter(hobby => hobby.id !== action.payload.id),
+                userHobbies: state.userHobbies.filter(hobby => hobby.id !== action.payload.id),
+                details: Object.keys(state.details).reduce((details, id) => {
+                    if (id !== action.payload.id.toString()) {
+                        details[id] = state.details[id];
+                    }
+                    return details;
+                }, {}),
+            };
         default:
             return state;
     }
 };
 
 export default hobbyReducer;
+

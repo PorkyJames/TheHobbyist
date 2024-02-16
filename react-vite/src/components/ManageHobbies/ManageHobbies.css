@@ -1,0 +1,33 @@
+.manage-hobbies {
+    max-width: 600px; /* Example width, adjust as necessary */
+    margin: auto;
+}
+
+.hobbies-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* Adjust the space between hobby items */
+}
+
+.hobby-item {
+    border: 1px solid #ccc; /* Example border, style as you like */
+    padding: 10px;
+    width: calc(33.333% - 20px); /* Adjust width for 3 items per row, accounting for the gap */
+}
+
+.hobby-content {
+    cursor: pointer; /* If the whole area is clickable */
+    /* Add additional styling */
+}
+
+.hobby-content img {
+    max-width: 100%;
+    height: auto;
+    /* Style as needed */
+}
+
+.hobby-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
