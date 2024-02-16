@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { createHobby } from '../../redux/hobby';
+import { useNavigate } from 'react-router-dom';
 
 import "./CreateHobbyForm.css"
 
 const CreateHobbyForm = () => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
     name: '',
@@ -21,11 +23,18 @@ const CreateHobbyForm = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
-    e.preventDefault();
-    // Dispatch an action to create a hobby
-    dispatch(createHobby(formData));
-    // Reset form or redirect as needed
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        dispatch(createHobby(formData))
+            .unwrap()
+            .then(hobbyId => {
+                // Assuming `hobbyId` is now available, navigate to the hobby details page
+                navigate(`/hobbies/${hobbyId}`);
+            })
+            .catch(error => {
+                console.error('Failed to create hobby:', error);
+                // Handle any errors, such as showing a notification to the user
+            });
     };
 
 return (
@@ -48,6 +57,7 @@ return (
             placeholder="Hobby Name"
             />
         </div>
+
         <div className="form-group">
             <label htmlFor="description">Description</label>    
             <textarea
