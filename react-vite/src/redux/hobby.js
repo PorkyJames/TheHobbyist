@@ -134,61 +134,22 @@ export const deleteHobby = (hobbyId) => async (dispatch) => {
 
 //! Reducer 
 
-const initialState = {
-    hobbies: {
-        userHobbies: [], 
-        allHobbies: [], 
-        details: {}, 
-    }
-};
+const initialState = [];
 
 const hobbyReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_USER_HOBBIES:
             return {
                 ...state,
-                hobbies: {
-                    ...state.hobbies,
-                    userHobbies: action.payload
-                }
-            };
+                userHobbies: action.payload
+            }
         case LOAD_ALL_HOBBIES:
             return {
                 ...state,
-                allHobbies: action.payload,
-            };
-        case LOAD_EACH_HOBBY:
-            return {
-                ...state,
-                details: { ...state.details, [action.payload.id]: action.payload },
-            };
-        case CREATE:
-            return {
-                ...state,
-                allHobbies: [...state.allHobbies, action.payload],
-                userHobbies: [...state.userHobbies, action.payload], // Assuming the new hobby is added to the current user's hobbies
-            };
-        case UPDATE:
-            return {
-                ...state,
-                allHobbies: state.allHobbies.map(hobby => hobby.id === action.payload.id ? action.payload : hobby),
-                userHobbies: state.userHobbies.map(hobby => hobby.id === action.payload.id ? action.payload : hobby),
-                details: { ...state.details, [action.payload.id]: action.payload },
-            };
-        case DELETE:
-            return {
-                ...state,
-                allHobbies: state.allHobbies.filter(hobby => hobby.id !== action.payload.id),
-                userHobbies: state.userHobbies.filter(hobby => hobby.id !== action.payload.id),
-                details: Object.keys(state.details).reduce((details, id) => {
-                    if (id !== action.payload.id.toString()) {
-                        details[id] = state.details[id];
-                    }
-                    return details;
-                }, {}),
-            };
+                allHobbies: action.payload
+            }
         default:
-            return state;
+            return state
     }
 };
 

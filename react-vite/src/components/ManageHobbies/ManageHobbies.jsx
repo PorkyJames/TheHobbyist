@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 
 const ManageHobbies = () => {
     const dispatch = useDispatch();
-    const userHobbies = useSelector(state => state.hobby.hobbies.userHobbies);
+    const userHobbies = useSelector(state => state.hobby.userHobbies);
     // console.log(userHobbies, "userHobbies <<<<<<<<<<<<<<<<")
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -51,7 +51,7 @@ const ManageHobbies = () => {
                         <div className="hobby-actions">
                             {/* Include the update and delete buttons as per the wireframe */}
                             <button onClick={() => handleDelete(hobby.id)}>Delete</button>
-                            <Link to={`/update-hobby/${hobby.id}`}>
+                            <Link to={`/hobbies/${hobby.id}/edit`}>
                                 <button>Update</button>
                             </Link>
                         </div>

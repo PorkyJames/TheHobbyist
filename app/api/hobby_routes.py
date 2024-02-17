@@ -74,7 +74,7 @@ def get_user_hobbies():
 
 #! Update Route
 # Logged in User can Update the hobby that they've created
-@hobby_routes.route("/hobbies/<int:hobbyId>", methods=["PUT"])
+@hobby_routes.route("/hobbies/<int:hobbyId>/edit", methods=["PUT"])
 @login_required
 def update_user_hobby(hobbyId):
     # Query for the Hobby
