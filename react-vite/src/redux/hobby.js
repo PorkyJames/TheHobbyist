@@ -101,7 +101,7 @@ export const updateHobby = (hobbyId, payload) => async (dispatch) => {
         body: JSON.stringify(payload)
     }
 
-    const res = await fetch(`/api/hobbies/${hobbyId}`, requestMethod)
+    const res = await fetch(`/api/hobbies/${hobbyId}/edit`, requestMethod)
 
     if (res.ok) {
         const updatedHobby = await res.json();
@@ -145,6 +145,18 @@ const hobbyReducer = (state = initialState, action) => {
             }
         case LOAD_ALL_HOBBIES:
             return action.payload
+        case LOAD_EACH_HOBBY:
+            return {
+                ...state,
+                [action.payload.id]: action.payload
+            };
+        case UPDATE: {
+            const updatedHobby = action.payload; 
+            return {
+                ...state,
+                [updatedHobby.id]: updatedHobby
+            };
+        }
         case DELETE: {
             const newState = {...state};
             delete newState[action.payload];
