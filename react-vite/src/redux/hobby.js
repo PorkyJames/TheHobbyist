@@ -148,6 +148,10 @@ const hobbyReducer = (state = initialState, action) => {
                 ...state,
                 allHobbies: action.payload
             }
+        case DELETE:
+            const newState = {...state};
+            delete newState[action.payload];
+            return newState
         default:
             return state
     }

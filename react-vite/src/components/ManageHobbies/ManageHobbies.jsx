@@ -1,32 +1,31 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUserHobbies, deleteHobby } from '../../redux/hobby';
+import { getUserHobbies } from '../../redux/hobby';
 import { Link } from 'react-router-dom';
+import DeleteHobbyModal from '../DeleteHobbyModal/DeleteHobbyModal';
+import { useModal } from '../../context/Modal';
 
 const ManageHobbies = () => {
     const dispatch = useDispatch();
     const userHobbies = useSelector(state => state.hobby.userHobbies);
-    // console.log(userHobbies, "userHobbies <<<<<<<<<<<<<<<<")
+    const { setModalContent } = useModal();
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
         dispatch(getUserHobbies()).then((hobbies) => {
-            if (hobbies) {
-                // console.log('Hobbies loaded:', hobbies);
-                setIsLoaded(true);
-            } else {
-                console.log('No hobbies loaded');
-            }
+            setIsLoaded(!!hobbies);
         }).catch((error) => {
             console.error('Error loading hobbies:', error);
         });
     }, [dispatch]);
     
-
-    const handleDelete = (hobbyId) => {
-        if (window.confirm('Are you sure you want to delete this hobby?')) {
-            dispatch(deleteHobby(hobbyId));
-        }
+    const openDeleteModal = (hobbyId) => {
+        setModalContent(
+            <DeleteHobbyModal 
+                hobbyId={hobbyId}
+                onClose={() => setModalContent(null)}
+            />
+        );
     };
 
     if (!isLoaded) {
@@ -39,21 +38,16 @@ const ManageHobbies = () => {
             <div className="hobbies-list">
                 {userHobbies.map(hobby => (
                     <div key={hobby.id} className="hobby-item">
-                        {/* Wrapping the entire hobby display in a Link may not be ideal if there are buttons inside */}
-                        <div className="hobby-content">
-                            {/* Use onClick to navigate for better control */}
-                            <h3 onClick={() => window.location.href = `/hobbies/${hobby.id}`}>{hobby.name}</h3>
-                            {/* Add hobby details if needed */}
+                        <div className="hobby-content" onClick={() => window.location.href = `/hobbies/${hobby.id}`}>
+                            <h3>{hobby.name}</h3>
                             <p>{hobby.description}</p>
-                            {/* Assuming you have images */}
                             {hobby.imageUrl && <img src={hobby.imageUrl} alt={hobby.name} />}
                         </div>
                         <div className="hobby-actions">
-                            {/* Include the update and delete buttons as per the wireframe */}
-                            <button onClick={() => handleDelete(hobby.id)}>Delete</button>
                             <Link to={`/hobbies/${hobby.id}/edit`}>
                                 <button>Update</button>
                             </Link>
+                            <button onClick={() => openDeleteModal(hobby.id)}>Delete</button>
                         </div>
                     </div>
                 ))}
@@ -63,4 +57,5 @@ const ManageHobbies = () => {
 };
 
 export default ManageHobbies;
+
 
