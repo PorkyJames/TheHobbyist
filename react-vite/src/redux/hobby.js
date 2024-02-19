@@ -77,7 +77,7 @@ export const createHobby = (payload) => async (dispatch) => {
 
     if (res.ok) {
         const newHobby = await res.json();
-        console.log(newHobby)
+        // console.log(newHobby)
         dispatch(create(newHobby));
         return newHobby
     }
@@ -150,6 +150,13 @@ const hobbyReducer = (state = initialState, action) => {
                 ...state,
                 [action.payload.id]: action.payload
             };
+        case CREATE: {
+            const newHobby = action.payload;
+            return {
+                ...state,
+                newHobby
+            }
+        }
         case UPDATE: {
             const updatedHobby = action.payload; 
             return {

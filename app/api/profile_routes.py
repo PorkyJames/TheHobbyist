@@ -29,7 +29,7 @@ def create_profile():
         # Create the profile with the validated data
         new_profile = Profile(
             user_id=current_user.id,
-            name=form.name.data,
+            username=form.username.data,
             bio=form.bio.data,
             mbti=form.mbti.data
         )
@@ -76,7 +76,6 @@ def each_profile_details(profileId):
 
     return jsonify(each_profile.to_dict()), 200
 
-# # User can see the details of their own Board in its own page
 # @profile_routes.route("/profiles/<int:profileId>")
 # @login_required
 # def user_profile_details(profileId):
@@ -89,7 +88,7 @@ def each_profile_details(profileId):
 
 #! Update Routes
 # Logged in User can update their profile in the profile menu / button
-@profile_routes.route("/profiles/<int:profileId>", methods=["PUT"])
+@profile_routes.route("/profiles/<int:profileId>/edit", methods=["PUT"])
 @login_required
 def update_user_profile(profileId):
     # Query to get the user's profile by ID and ensure it belongs to the current user
@@ -106,7 +105,7 @@ def update_user_profile(profileId):
     
     if form.validate_on_submit():
         # Update profile fields with data from the form
-        user_profile.name = form.name.data
+        user_profile.username = form.username.data
         user_profile.bio = form.bio.data
         user_profile.mbti = form.mbti.data
 

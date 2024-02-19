@@ -5,9 +5,9 @@ from sqlalchemy import text
 
 def seed_hobbies():
     # Fetch users by username
-    demo_user = User.query.filter_by(username='DemoUser').first()
-    marnie_user = User.query.filter_by(username='marnie').first()
-    bobbie_user = User.query.filter_by(username='bobbie').first()
+    demo_user = User.query.filter_by(username='demoo').first()
+    marnie_user = User.query.filter_by(username='marniee').first()
+    bobbie_user = User.query.filter_by(username='bobbiee').first()
 
     # Specific Seeded Hobby based on Demo, Marine, and Bobbie.
     rock_climbing_hobby = Hobby(

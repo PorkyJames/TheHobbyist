@@ -7,14 +7,15 @@ from sqlalchemy import text
 
 def seed_profiles():
     # Fetch each demo user by filter
-    demo_user = User.query.filter_by(username='DemoUser').first()
-    marnie_user = User.query.filter_by(username='marnie').first()
-    bobbie_user = User.query.filter_by(username='bobbie').first()
+    demo_user = User.query.filter_by(username='demoo').first()
+    marnie_user = User.query.filter_by(username='marniee').first()
+    bobbie_user = User.query.filter_by(username='bobbiee').first()
 
     # Demo Profile Seed
     demo_profile = Profile(
         user_id=demo_user.id,
-        name='Demo Profile',
+        username="demoo",
+        # name='Demo Profile',
         mbti='ENFP',
         bio='Hi, my name is Demo! I love to rock climb and snowboard.'
     )
@@ -22,7 +23,8 @@ def seed_profiles():
     # Marine Profile Seed
     marnie_profile = Profile(
         user_id=marnie_user.id,
-        name='Marnie Profile',
+        username="marniee",
+        # name='Marnie Profile',
         mbti='INTJ',
         bio='Marnie here! I am passionate about photography and exploring the great outdoors.'
     )
@@ -30,7 +32,8 @@ def seed_profiles():
     # Bobbie profile seed
     bobbie_profile = Profile(
         user_id=bobbie_user.id,
-        name='Bobbie Profile',
+        username="bobbiee",
+        # name='Bobbie Profile',
         mbti='ISTP',
         bio='Bobbie at your service, exploring the world of woodworking and DIY.'
     )

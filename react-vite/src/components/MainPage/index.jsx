@@ -1,7 +1,11 @@
 import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { getAllHobbies } from '../../redux/hobby';
+import { fetchUserProfile } from '../../redux/profile';
+import { useModal } from '../../context/Modal';
+
+import CreateProfileForm from '../CreateProfileForm/CreateProfileForm';
 
 import "./MainPage.css"
 
@@ -11,24 +15,50 @@ function MainPage({ hobbies }) {
     const allHobbies = useSelector(state => state.hobby);
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
-    console.log(allHobbies, "<<<< allHobbies searchpage")
+    const { setModalContent, closeModal } = useModal();
+    // console.log(allHobbies, "<<<< allHobbies searchpage")
 
+    const userId = useSelector(state => state.session.user.id)
+
+    const userProfile = useSelector(state => state.profile.profile);
+    const isLoadingProfile = useSelector(state => state.profile.isLoading);
+    // const [showProfileModal, setShowProfileModal] = useState(false);
+
+    //! Get all Hobbies
     useEffect(() => {
         dispatch(getAllHobbies());
     }, [dispatch]);
 
+    //! Check if user has a user Profile
+    useEffect(() => {
+        if (userId) {
+            dispatch(fetchUserProfile(userId));
+        }
+    }, [userId, dispatch]);
+
+    //! Modal For Create Profile Form
+    const stableCloseModal = useCallback(() => closeModal(), [closeModal]);
+
+    const [modalSet, setModalSet] = useState(false);
+
+    useEffect(() => {
+        if (!isLoadingProfile && userProfile === null && userId && !modalSet) {
+            setModalContent(<CreateProfileForm closeModal={stableCloseModal} />);
+            setModalSet(true);
+        }
+    }, [userProfile, isLoadingProfile, userId, setModalContent, stableCloseModal, modalSet]);
+
+    //! Search Feature for Hobbies
     const handleSearch = (e) => {
         e.preventDefault();
-        // Filter hobbies that match the searchTerm
         const results = allHobbies.filter(hobby =>
             hobby.name.toLowerCase().includes(searchTerm.toLowerCase())
-        ).slice(0, 3); // Take only the first 3 results
+        ).slice(0, 3); 
         setSearchResults(results); 
-
-        console.log('Search for:', searchTerm, 'Results:', results);
-    
+        // console.log('Search for:', searchTerm, 'Results:', results);
     };
 
+    //! Random Search Button
     const handleRandomHobby = () => {
         if (hobbies.length > 0) {
             const randomIndex = Math.floor(Math.random() * hobbies.length);
@@ -36,6 +66,13 @@ function MainPage({ hobbies }) {
             navigate(`/hobby/${randomHobby.id}`);
         }
     };
+
+    //! Testing purposes for Modal showing
+    // const handleShowModal = () => {
+    //     setModalContent(
+    //         <CreateProfileForm closeModal={closeModal} />
+    //     );
+    // };
 
     return (
         <div className="main-page-container">
@@ -71,6 +108,9 @@ function MainPage({ hobbies }) {
             <h3 className="inspirational-quote">
                 The Journey of a Thousand Miles begins with the First Step
             </h3>
+
+            {/* <button onClick={handleShowModal}>Show Modal</button> */}
+
         </div>
     );
 }

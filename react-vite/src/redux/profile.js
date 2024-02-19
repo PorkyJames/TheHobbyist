@@ -3,6 +3,9 @@ const CREATE = "profile/CREATE";
 const UPDATE = "profile/UPDATE";
 const DELETE = "profile/DELETE";
 
+const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
+const PROFILE_LOADING = 'profile/PROFILE_LOADING';
+
 //! Action Creators 
 const load = (profile) => ({
     type: LOAD,
@@ -23,6 +26,16 @@ const remove = (profile) => ({
     type: DELETE,
     payload: profile
 })
+
+export const setUserProfile = (profile) => ({
+    type: SET_USER_PROFILE,
+    payload: profile,
+  });
+  
+  export const profileLoading = (isLoading) => ({
+    type: PROFILE_LOADING,
+    payload: isLoading,
+  });
 
 //! Thunks
 
@@ -47,7 +60,7 @@ export const createProfile = (payload) => async (dispatch) => {
         body: JSON.stringify(payload)
     }
 
-    const res = await fetch(`/api/profile`, requestMethod)
+    const res = await fetch(`/api/profiles`, requestMethod)
 
     if (res.ok) {
         const newProfile = await res.json();
@@ -91,11 +104,35 @@ export const deleteProfile = (profileId) => async (dispatch) => {
 
 }
 
+export const fetchUserProfile = (userId) => async (dispatch) => {
+    dispatch(profileLoading(true));
+    try {
+        const response = await fetch(`/api/profiles/${userId}`);
+        if (response.ok) {
+            const profile = await response.json();
+            dispatch(setUserProfile(profile));
+        } else if (response.status === 404) {
+            // Explicitly handle the case where a profile does not exist
+            dispatch(setUserProfile(null));
+        } else {
+            // Handle other errors
+            console.error('Error fetching user profile:', response.statusText);
+            dispatch(setUserProfile(null));
+        }
+    } catch (error) {
+        console.error('Error fetching user profile:', error);
+        dispatch(setUserProfile(null));
+    } finally {
+        dispatch(profileLoading(false));
+    }
+};
+
 //! Reducer
 
 const initialState = {
-    Profile: {},
-}
+    profile: null,
+    isLoading: false,
+};
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -107,23 +144,27 @@ const profileReducer = (state = initialState, action) => {
         case CREATE:
             return {
                 ...state,
-                profiles: [...state.profiles, action.payload],
+                profile: action.payload,
             };
         case UPDATE:
             return {
                 ...state,
-                profiles: state.profiles.map(profile =>
-                    profile.id === action.payload.id ? action.payload : profile
-                ),
-                // If you only want to update the current profile
-                profile: action.payload,
+                profile: action.payload || null, // Ensure payload nullability reflects no profile
             };
         case DELETE:
             return {
                 ...state,
-                profiles: state.profiles.filter(profile => profile.id !== action.payload.id),
-                // If you only want to remove the current profile
-                profile: state.profile && state.profile.id === action.payload.id ? null : state.profile,
+                profile: null, // Reset to no profile
+            };
+        case SET_USER_PROFILE:
+            return {
+                ...state,
+                profile: action.payload, // Directly use the payload which can be null
+            };
+        case PROFILE_LOADING:
+            return {
+                ...state,
+                isLoading: action.payload,
             };
         default:
             return state;
