@@ -18,10 +18,13 @@ function MainPage({ hobbies }) {
     const { setModalContent, closeModal } = useModal();
     // console.log(allHobbies, "<<<< allHobbies searchpage")
 
-    const userId = useSelector(state => state.session.user.id)
+    const userId = useSelector(state => state.session.user?.id)
 
-    const userProfile = useSelector(state => state.profile.profile);
-    const isLoadingProfile = useSelector(state => state.profile.isLoading);
+    const { userProfile, isLoadingProfile, checkCompleted } = useSelector(state => ({
+        userProfile: state.profile.profile,
+        isLoadingProfile: state.profile.isLoading,
+        checkCompleted: state.profile.checkCompleted,
+    }));
     // const [showProfileModal, setShowProfileModal] = useState(false);
 
     //! Get all Hobbies
@@ -42,11 +45,13 @@ function MainPage({ hobbies }) {
     const [modalSet, setModalSet] = useState(false);
 
     useEffect(() => {
-        if (!isLoadingProfile && userProfile === null && userId && !modalSet) {
-            setModalContent(<CreateProfileForm closeModal={stableCloseModal} />);
-            setModalSet(true);
-        }
-    }, [userProfile, isLoadingProfile, userId, setModalContent, stableCloseModal, modalSet]);
+        if (!isLoadingProfile && checkCompleted) 
+            if (userProfile === null && !modalSet) {
+                setModalContent(<CreateProfileForm closeModal={stableCloseModal} />);
+                setModalSet(true);
+            }
+    }, [userProfile, isLoadingProfile, checkCompleted, setModalContent, stableCloseModal, modalSet]);
+
 
     //! Search Feature for Hobbies
     const handleSearch = (e) => {

@@ -8,6 +8,7 @@ import ManageHobbies from '../components/ManageHobbies/ManageHobbies';
 import UpdateHobbyForm from '../components/UpdateHobbyForm/UpdateHobbyForm';
 import AllHobbiesPage from '../components/AllHobbiesPage/AllHobbiesPage';
 import HobbyDetailsPage from '../components/HobbyDetailsPage/HobbyDetailsPage';
+import UserProfilePage from '../components/UserProfilePage/UserProfilePage';
 
 import Layout from './Layout';
 
@@ -50,6 +51,10 @@ export const router = createBrowserRouter([
       {
         path: "/hobbies/:hobbyId/edit",
         element: <UpdateHobbyForm />,
+      },
+      {
+        path: "/profiles/:profileId",
+        element: <UserProfilePage />,
       },
     ],
   },

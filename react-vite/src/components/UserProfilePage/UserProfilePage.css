@@ -1,0 +1,36 @@
+/* UserProfilePage.css */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* .user-icon {
+
+}
+
+.username {
+
+}
+
+.personal-info {
+
+} */
+
+.user-tabs {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.tab-content {
+    margin-top: 20px;   
+}
+
+
