@@ -29,15 +29,14 @@ const remove = (review) => ({
 //! Thunks
 
 export const getReview = () => async (dispatch) => {
-    const res = await fetch('/api/review')
-
-    if (res.ok) {
-        const user_review = await res.json();
-        dispatch(load(user_review))
-    }
-
-    return res;
-}
+        const res = await fetch('/api/reviews/current');
+        if (res.ok) {
+            const user_review = await res.json();
+            console.log(user_review, "<<<<user_review")
+            dispatch(load(user_review)); 
+            return user_review
+        }
+};
 
 export const createReview = (payload) => async (dispatch) => {
     const requestMethod = {
@@ -48,7 +47,7 @@ export const createReview = (payload) => async (dispatch) => {
         body: JSON.stringify(payload)
     }
 
-    const res = await fetch('/api/review', requestMethod)
+    const res = await fetch('/api/reviews', requestMethod)
 
     if (res.ok) {
         const newReview = await res.json();
@@ -66,7 +65,7 @@ export const updateReview = (reviewId, payload) => async (dispatch) => {
         body: JSON.stringify(payload)
     }
 
-    const res = await fetch(`/api/review/${reviewId}`, requestMethod)
+    const res = await fetch(`/api/reviews/${reviewId}`, requestMethod)
 
     if (res.ok) {
         const updatedReview = await res.json()
@@ -80,7 +79,7 @@ export const deleteReview = (reviewId) => async (dispatch) => {
         method: "DELETE",
     }
 
-    const res = await fetch(`/api/review/${reviewId}`, requestMethod)
+    const res = await fetch(`/api/reviews/${reviewId}`, requestMethod)
 
     if (res.ok) {
         const deletedReview = await res.json();
@@ -90,32 +89,44 @@ export const deleteReview = (reviewId) => async (dispatch) => {
 
 //! Reducer
 const initialState = {
-    review: [],
+    reviews: []
 }
 
 const reviewReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD:
+            const newReviews = {};
+            action.payload.forEach(review => {
+                newReviews[review.id] = review;
+            });
             return {
                 ...state,
-                reviews: action.payload,
-            };
+                reviews: newReviews
+            }
         case CREATE:
             return {
                 ...state,
-                reviews: [...state.reviews, action.payload],
+                reviews: {
+                    ...state.reviews,
+                    [action.payload.id]: action.payload,
+                },
             };
         case UPDATE:
             return {
                 ...state,
-                reviews: state.reviews.map(review =>
-                    review.id === action.payload.id ? action.payload : review
-                ),
+                reviews: {
+                    ...state.reviews,
+                    [action.payload.id]: {
+                        ...state.reviews[action.payload.id],
+                        ...action.payload,
+                    },
+                },
             };
         case DELETE:
+            const { [action.payload.id]: deletedReview, ...remainingReviews } = state.reviews;
             return {
                 ...state,
-                reviews: state.reviews.filter(review => review.id !== (action.payload.id || action.payload)),
+                reviews: remainingReviews,
             };
         default:
             return state;

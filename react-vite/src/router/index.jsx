@@ -9,6 +9,7 @@ import UpdateHobbyForm from '../components/UpdateHobbyForm/UpdateHobbyForm';
 import AllHobbiesPage from '../components/AllHobbiesPage/AllHobbiesPage';
 import HobbyDetailsPage from '../components/HobbyDetailsPage/HobbyDetailsPage';
 import UserProfilePage from '../components/UserProfilePage/UserProfilePage';
+import ManageReviews from "../components/ManageReviews/ManageReviews";
 
 import Layout from './Layout';
 
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
       {
         path: "/profiles/:profileId",
         element: <UserProfilePage />,
+      },
+      {
+        path: "/reviews/current",
+        element: <ManageReviews />,
       },
     ],
   },

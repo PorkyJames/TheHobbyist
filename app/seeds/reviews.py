@@ -6,9 +6,9 @@ from sqlalchemy import text
 
 def seed_reviews():
     # Fetch users by username
-    demo_user = User.query.filter_by(username='DemoUser').first()
-    marnie_user = User.query.filter_by(username='marnie').first()
-    bobbie_user = User.query.filter_by(username='bobbie').first()
+    demo_user = User.query.filter_by(username='demoo').first()
+    marnie_user = User.query.filter_by(username='marniee').first()
+    bobbie_user = User.query.filter_by(username='bobbiee').first()
 
     # Fetch hobbies by name
     rock_climbing_hobby = Hobby.query.filter_by(name='Rock Climbing').first()

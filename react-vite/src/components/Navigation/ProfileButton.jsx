@@ -73,7 +73,7 @@ function ProfileButton() {
   // };
 
   const manageReviews = () => {
-    navigate('/manage-reviews');
+    navigate('/reviews/current');
     setShowMenu(false);
   };
 

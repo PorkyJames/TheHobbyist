@@ -41,17 +41,16 @@ def create_review():
 
 #! Read Route
 # Logged in User should be able to see all of their own reviews in one spot.
-@review_routes.route("/reviews")
+@review_routes.route("/reviews/current")
+@login_required
 def view_all_reviews():
-
-    # Query the database for all reviews made by current user
     all_user_reviews = Review.query.filter_by(user_id=current_user.id).all()
 
-    # Convert into to_dict and list them in one area
     reviews_list = [review.to_dict() for review in all_user_reviews]
 
     # Return jsonified reviews list
     return jsonify(reviews_list)
+
 
 # Logged in user can view each review for a hobby
 @review_routes.route("/reviews/<int:reviewId>")
