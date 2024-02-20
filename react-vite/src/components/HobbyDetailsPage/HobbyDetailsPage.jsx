@@ -32,7 +32,7 @@ const HobbyDetailsPage = () => {
                 <p>Location: {hobbyDetails.location}</p>
             </div>
 
-            <div className="bookmarks-placeholder">Bookmarks will go here</div>
+            {/* <div className="bookmarks-placeholder">Bookmarks will go here</div> */}
             
             <div className="reviews-placeholder">Reviews will go here</div>
             {/* Eventually, you would map over the reviews and render them here */}
