@@ -12,10 +12,10 @@ const load = (profile) => ({
     payload: profile
 })
 
-const create = (profile) => ({
-    type: CREATE,
-    payload: profile
-})
+// const create = (profile) => ({
+//     type: CREATE,
+//     payload: profile
+// })
 
 const update = (profile) => ({
     type: UPDATE,
