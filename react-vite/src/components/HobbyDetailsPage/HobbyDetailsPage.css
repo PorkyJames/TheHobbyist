@@ -1,0 +1,44 @@
+.hobby-details-page {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hobby-details-page .name h1 {
+    margin-bottom: 10px;
+    color: #333;
+    font-size: 2em;
+}
+
+.hobby-details-page .description,
+.hobby-details-page .location {
+    background: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.hobby-details-page .description p,
+.hobby-details-page .location p {
+    margin: 0;
+    color: #666;
+}
+
+.bookmarks-placeholder,
+.reviews-placeholder {
+    background: #e2e2e2;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 4px;
+    text-align: center;
+    color: #333;
+}
+
+.hobby-details-page > div {
+    margin-bottom: 20px;
+}
+

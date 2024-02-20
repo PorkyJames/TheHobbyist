@@ -10,8 +10,8 @@ class Profile(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(15))
-    bio = db.Column(db.Text(50))
+    username = db.Column(db.String(15))
+    bio = db.Column(db.Text(100))
     mbti = db.Column(db.String(4))
 
     # Relationships
@@ -21,7 +21,7 @@ class Profile(db.Model):
         return {
             'id': self.id,
             "user_id": self.user_id,
-            "name": self.name,
+            "username": self.username,
             "mbti": self.mbti,
             "bio": self.bio
         }

@@ -9,8 +9,15 @@ from .models.profile import Profile
 from .models.hobby import Hobby
 from .models.bookmark import Bookmark
 from .models.review import Review
+
 from .api.user_routes import user_routes
 from .api.auth_routes import auth_routes
+from .api.profile_routes import profile_routes
+from .api.hobby_routes import hobby_routes
+from .api.bookmark_routes import bookmark_routes
+from .api.review_routes import review_routes
+
+
 from .seeds import seed_commands
 from .config import Config
 
@@ -32,6 +39,10 @@ app.cli.add_command(seed_commands)
 app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix='/api/users')
 app.register_blueprint(auth_routes, url_prefix='/api/auth')
+app.register_blueprint(profile_routes, url_prefix='/api')
+app.register_blueprint(hobby_routes, url_prefix='/api')
+app.register_blueprint(bookmark_routes, url_prefix='/api')
+app.register_blueprint(review_routes, url_prefix='/api')
 db.init_app(app)
 Migrate(app, db)
 

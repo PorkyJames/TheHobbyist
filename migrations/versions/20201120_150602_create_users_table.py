@@ -26,6 +26,8 @@ def upgrade():
     # Create users table
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
+    sa.Column('first_name', sa.String(length=25), nullable=False),
+    sa.Column('last_name', sa.String(length=25), nullable=False),
     sa.Column('username', sa.String(length=40), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
@@ -37,7 +39,8 @@ def upgrade():
     # Create profiles table
     op.create_table('profiles',
         sa.Column('id', sa.Integer(), nullable=False, primary_key=True),
-        sa.Column('name', sa.String(length=15), nullable=False),
+        # sa.Column('name', sa.String(length=15), nullable=False),
+        sa.Column('username', sa.String(length=15), nullable=False),
         sa.Column('bio', sa.Text(length=50), nullable=True),
         sa.Column('mbti', sa.String(length=4), nullable=True),
         sa.Column('user_id', sa.Integer(), sa.ForeignKey('users.id', ondelete='CASCADE'), nullable=False),
@@ -49,7 +52,7 @@ def upgrade():
         sa.Column('name', sa.String(), nullable=False),
         sa.Column('description', sa.Text(), nullable=True),
         sa.Column('location', sa.String(), nullable=True),
-        sa.Column('user_id', sa.Integer(), sa.ForeignKey('users.id', ondelete='SET NULL'), nullable=True),
+        sa.Column('user_id', sa.Integer(), sa.ForeignKey('users.id'), nullable=True),
     )
 
     # Create bookmarks table

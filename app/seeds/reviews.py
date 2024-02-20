@@ -6,9 +6,9 @@ from sqlalchemy import text
 
 def seed_reviews():
     # Fetch users by username
-    demo_user = User.query.filter_by(username='Demo').first()
-    marnie_user = User.query.filter_by(username='marnie').first()
-    bobbie_user = User.query.filter_by(username='bobbie').first()
+    demo_user = User.query.filter_by(username='demoo').first()
+    marnie_user = User.query.filter_by(username='marniee').first()
+    bobbie_user = User.query.filter_by(username='bobbiee').first()
 
     # Fetch hobbies by name
     rock_climbing_hobby = Hobby.query.filter_by(name='Rock Climbing').first()
@@ -24,6 +24,16 @@ def seed_reviews():
             star_rating=5
         )
         db.session.add(rock_climbing_review)
+
+    # Demo leaves a review for Snowboarding
+    if demo_user and snowboarding_hobby:
+        snowboarding_review = Review(
+            user_id=demo_user.id, 
+            hobby_id=rock_climbing_hobby.id,
+            review_text='Snowboarding is soooo fun! I love it so much.',
+            star_rating=5
+        )
+        db.session.add(snowboarding_review)
     
     # Marine leaves review for photography hobby
     if marnie_user and photography_hobby:
