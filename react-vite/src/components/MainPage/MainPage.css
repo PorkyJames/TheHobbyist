@@ -85,10 +85,12 @@
     box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     transition: transform 0.3s ease;
     width: 450px;
+    animation: slideInFromBelow 0.5s ease forwards;
+    transition: transform 0.5s ease, box-shadow 0.3s ease;
 }
 
 .hobby-search-item:hover {
-    transform: translateY(-5px); 
+    transform: translateY(-5px) !important; 
 }
 
 .hobby-search-item p {
@@ -116,3 +118,15 @@
     background-color: #e8e8e8; 
     border-color: #c6c6c6; 
 }
+
+@keyframes slideInFromBelow {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1; 
+    }
+}
+
