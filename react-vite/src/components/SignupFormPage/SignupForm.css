@@ -1,18 +1,41 @@
+@keyframes slideInFromRight {
+0% {
+    transform: translateX(100%);
+    opacity: 0;
+}
+100% {
+    transform: translateX(0);
+    opacity: 1;
+}
+}
+
 .signup-form-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    padding: 20px;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(to top, #FFB703, #ffffff); 
+    overflow-x: hidden; 
 }
 
 .signup-card {
-    background: #fff;
+    background: rgba(255, 255, 255, 0.9); 
     padding: 40px;
     border-radius: 15px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     width: 350px;
     max-width: 100%;
+    margin: 0 auto; 
+    animation: 0.5s ease-out 0s 1 slideInFromRight; 
+    transition: background-color 0.5s, transform 0.3s, box-shadow 0.5s;
+}
+
+.signup-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); 
 }
 
 .signup-title {
@@ -35,13 +58,14 @@
 }
 
 .signup-form input {
+    width: 100%;
     padding: 15px;
     margin-bottom: 20px;
     border-radius: 8px;
     border: 1px solid #ccc;
+    box-sizing: border-box; 
     transition: border-color 0.3s;
     display: block;
-    width: calc(100% - 30px);
 }
 
 .signup-form input:focus {
@@ -58,17 +82,26 @@
     padding: 15px;
     border: none;
     border-radius: 8px;
-    background-color: #32c787; 
+    background-color: #8ECAE6; 
     color: white;
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.3s;
-    width: 100%;
+    width: 50%; 
+    margin: 20px auto; 
+    display: block; 
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
 .signup-form button:hover {
-    background-color: #2aae67; 
+    background-color: #219EBC; 
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.button-container button {
+    width: 50%; 
+    display: block; 
+    margin: 20px auto; 
 }
 
 .error-message {
@@ -76,5 +109,22 @@
     font-size: 14px;
     margin-bottom: 15px;
     text-align: center;
-  }
-  
+}
+
+.title-button button {
+    background: none; 
+    border: none; 
+    padding: 0; 
+    margin: 0; 
+    cursor: pointer; 
+}
+
+.title-button button:hover {
+    text-decoration: underline; 
+}
+
+.title-button h1 {
+    font-size: 2em; 
+    color: #333; 
+    margin-top: 15px; 
+}

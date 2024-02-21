@@ -47,9 +47,19 @@ function SignupFormPage() {
     }
   };
 
+  const titleButton = () => {
+    navigate('/')
+  }
+
   return (
     <>
+
       <div className="signup-form-container">
+
+        <button className="title-button" onClick={titleButton}>
+          <h1>The Hobbyist</h1>
+        </button>
+
         <div className="signup-card">
           <h1 className="signup-title">Sign Up</h1>
           {errors.server && <p className="error-message">{errors.server}</p>}
@@ -64,10 +74,9 @@ function SignupFormPage() {
                 ))}
               </ul>
             ) : (
-              errors && <p className="error-message">{errors}</p> // If errors is not an array, display it directly
+              errors && <p className="error-message">{errors}</p>
             )}
           </div>
-
 
           <label>
               First Name

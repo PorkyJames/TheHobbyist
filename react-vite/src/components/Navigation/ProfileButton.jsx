@@ -77,30 +77,49 @@ function ProfileButton() {
     setShowMenu(false);
   };
 
+  const navigateCreateHobby = () => {
+    navigate("/hobby-form")
+  }
+
   return (
-    <>
-      <div className="navbar-container">
-        <div className="logo" onClick={homeButton}>TheHobbyist</div>
+  <>
+    <div className="navbar-container">
+      <div className="logo" onClick={homeButton}>TheHobbyist</div>
+      
+      <div className="navbar-right">
+        <div className="create-button">
+          <button onClick={navigateCreateHobby}>Create New Hobby</button>
+        </div>
+
+        <button onClick={toggleMenu} className="profile-button">
+          <i className="fas fa-user-circle"></i>
+        </button>
+        
         {user && (
           <>
-            <button onClick={toggleMenu} className="profile-button">
-              <i className="fas fa-user-circle"></i>
-            </button>
             {showMenu && (
               <ul className="profile-dropdown" ref={ulRef}>
-                <li>{user.username}</li>
-                <li>{user.email}</li>
+                <li className="account-info">
+                  <span className="icon">
+                    <i className="fas fa-user-circle"></i>
+                  </span>
+                  <span className="user-details">
+                    <div>{user.username}</div>
+                    <div>{user.email}</div>
+                  </span>
+                </li>
                 <li onClick={userProfile}>User Profile</li>
                 <li onClick={manageHobbies}>Manage Hobbies</li>
                 {/* <li onClick={manageBookmarks}>Manage Bookmarks</li> */}
-                <li onClick={manageReviews}>Manage Reviews</li>
+                {/* <li onClick={manageReviews}>Manage Reviews</li> */}
                 <li className="logout-button" onClick={logout}>Log Out</li>
               </ul>
             )}
           </>
         )}
       </div>
-    </>
+    </div>
+  </>
   );
 }
 //       {/* {showMenu && (

@@ -40,7 +40,7 @@ export const profileLoading = (isLoading) => ({
 //! Thunks
 
 export const getProfile = () => async (dispatch) => {
-    const res = await fetch("/api/profile")
+    const res = await fetch("/api/profiles")
 
     if (res.ok) {
         const user_profile = await res.json();
@@ -77,7 +77,7 @@ export const updateProfile = (profileId, payload) => async (dispatch) => {
         body: JSON.stringify(payload)
     }
 
-    const res = await fetch(`/api/profile/${profileId}`, requestMethod)
+    const res = await fetch(`/api/profiles/${profileId}`, requestMethod)
 
     if (res.ok) {
         const updatedProfile = await res.json();
@@ -92,7 +92,7 @@ export const deleteProfile = (profileId) => async (dispatch) => {
         method: "DELETE",
     }
 
-    const res = await fetch(`/api/profile/${profileId}`, requestMethod)
+    const res = await fetch(`/api/profiles/${profileId}`, requestMethod)
     
     if (res.ok) {
         const deletedProfile = await res.json();
@@ -109,20 +109,26 @@ export const fetchUserProfile = (userId) => async (dispatch) => {
             const profile = await response.json();
             dispatch(setUserProfile(profile));
         } else if (response.status === 404) {
-            // Explicitly handle the case where a profile does not exist
             dispatch(setUserProfile(null));
         } else {
-            // Handle other errors
             console.error('Error fetching user profile:', response.statusText);
             dispatch(setUserProfile(null));
         }
     } catch (error) {
-        // console.error('Error fetching user profile:', error);
+        console.error('Error fetching user profile:', error);
         dispatch(setUserProfile(null));
     } finally {
         dispatch(profileLoading(false));
+        dispatch(profileCheckCompleted()); // Mark profile check as completed
     }
 };
+
+const PROFILE_CHECK_COMPLETED = 'profiles/PROFILE_CHECK_COMPLETED';
+
+// Action creator for setting checkCompleted flag
+export const profileCheckCompleted = () => ({
+    type: PROFILE_CHECK_COMPLETED,
+});
 
 //! Reducer
 
@@ -164,7 +170,7 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 isLoading: action.payload,
             };
-        case 'PROFILE_CHECK_COMPLETED':
+        case PROFILE_CHECK_COMPLETED:
             return {
                 ...state,
                 checkCompleted: true,

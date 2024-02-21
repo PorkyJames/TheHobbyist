@@ -11,10 +11,8 @@ const HobbyDetailsPage = () => {
     const hobbyDetails = useSelector((state) => state.hobby[hobbyId]);
 
     useEffect(() => {
-    if (!hobbyDetails) {
-            dispatch(getHobbyById(hobbyId));
-        }
-    }, [dispatch, hobbyId, hobbyDetails]);
+        dispatch(getHobbyById(hobbyId));
+    }, [dispatch, hobbyId]);
 
     if (!hobbyDetails) {
         return <div>Loading hobby details...</div>;
