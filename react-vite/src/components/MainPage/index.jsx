@@ -66,11 +66,11 @@ function MainPage({ hobbies }) {
     //! Random Search Button
     const handleRandomHobby = () => {
         // console.log(hobbies, "<<<<hobbies")
-        if (hobbies.length > 0) {
-            const randomIndex = Math.floor(Math.random() * hobbies.length);
-            const randomHobby = hobbies[randomIndex];
+        if (allHobbies.length > 0) {
+            const randomIndex = Math.floor(Math.random() * allHobbies.length);
+            const randomHobby = allHobbies[randomIndex];
 
-            navigate(`/hobby/${randomHobby.id}`);
+            navigate(`/hobbies/${randomHobby.id}`);
         }
     };
 
