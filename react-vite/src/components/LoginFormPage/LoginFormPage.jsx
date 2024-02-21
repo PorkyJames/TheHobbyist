@@ -48,16 +48,25 @@ const handleSignUp = () => {
     navigate("/signup");
 };
 
+const titleButton = () => {
+	navigate('/')
+}
+
 return (
     <>
+			<div className="title-button">
+				<button onClick={titleButton}>
+					<h1>The Hobbyist</h1>
+				</button>
+			</div>
 
 			<div className="login-form-container">
 				<div className="login-card">
 
 					<h1 className="login-title">
-						The Hobbyist
+						Login or Sign Up
 					</h1>
-
+	
 					<form onSubmit={handleSubmit}>
 						<div className="error-messages">
 							<ul>

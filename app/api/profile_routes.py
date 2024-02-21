@@ -88,7 +88,7 @@ def each_profile_details(profileId):
 
 #! Update Routes
 # Logged in User can update their profile in the profile menu / button
-@profile_routes.route("/profiles/<int:profileId>/edit", methods=["PUT"])
+@profile_routes.route("/profiles/<int:profileId>", methods=["PUT"])
 @login_required
 def update_user_profile(profileId):
     # Query to get the user's profile by ID and ensure it belongs to the current user

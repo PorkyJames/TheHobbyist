@@ -45,13 +45,13 @@ function MainPage({ hobbies }) {
     const [modalSet, setModalSet] = useState(false);
 
     useEffect(() => {
-        if (!isLoadingProfile && checkCompleted) 
+        if (!isLoadingProfile && checkCompleted) {
             if (userProfile === null && !modalSet) {
                 setModalContent(<CreateProfileForm closeModal={stableCloseModal} />);
                 setModalSet(true);
             }
+        }
     }, [userProfile, isLoadingProfile, checkCompleted, setModalContent, stableCloseModal, modalSet]);
-
 
     //! Search Feature for Hobbies
     const handleSearch = (e) => {
@@ -79,6 +79,14 @@ function MainPage({ hobbies }) {
     //     );
     // };
 
+    const navigateToEachHobby = (hobbyId) => {
+        navigate(`/hobbies/${hobbyId}`)
+    }
+
+    const navigateToAllHobbies = () => {
+        navigate("/hobbies")
+    }
+
     return (
         <div className="main-page-container">
             <h1 className="main-title">The Hobbyist</h1>
@@ -100,15 +108,18 @@ function MainPage({ hobbies }) {
 
             {searchResults.length > 0 && (
                 <div className="search-results">
+                    {/* {console.log(searchResults)} */}
                     {searchResults.map(hobby => (
-                        <div key={hobby.id} className="hobby-search-item">
-                            <p>{hobby.name}</p>
-                            <p>{hobby.description}</p>
-                            <button>View</button>
-                        </div>
+                    <div key={hobby.id} className="hobby-search-item">
+                        <p>{hobby.name}</p>
+                        <p>{hobby.description}</p>
+                        <button onClick={() => navigateToEachHobby(hobby.id)}>View</button>
+                    </div>
                     ))}
                 </div>
             )}
+
+            <button onClick={navigateToAllHobbies}>View All Hobby Entries</button>
 
             <h3 className="inspirational-quote">
                 The Journey of a Thousand Miles begins with the First Step
