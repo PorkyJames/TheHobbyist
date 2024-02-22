@@ -25,7 +25,8 @@ def create_hobby():
             user_id = current_user.id,
             name = form.name.data,
             description = form.description.data,
-            location = form.location.data
+            location = form.location.data,
+            thoughts = form.thoughts.data
         )
 
         # Add the new profile created to our database and commit
@@ -96,7 +97,8 @@ def update_user_hobby(hobbyId):
     if form.validate_on_submit():
         hobby.name = form.name.data
         hobby.description = form.description.data
-        hobby.location = form.location.data
+        hobby.location = form.location.data,
+        hobby.thoughts = hobby.thoughts.data
 
         # Commit changes to db
         db.session.commit()

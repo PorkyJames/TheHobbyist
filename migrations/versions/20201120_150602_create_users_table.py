@@ -43,6 +43,11 @@ def upgrade():
         sa.Column('username', sa.String(length=15), nullable=False),
         sa.Column('bio', sa.Text(length=50), nullable=True),
         sa.Column('mbti', sa.String(length=4), nullable=True),
+        sa.Column('interests', sa.Text(), nullable=True),
+        sa.Column('city', sa.String(length=50), nullable=True), 
+        sa.Column('state', sa.String(length=50), nullable=True),  
+        sa.Column('first_name', sa.String(length=50), nullable=True),  
+        sa.Column('last_name', sa.String(length=50), nullable=True),  
         sa.Column('user_id', sa.Integer(), sa.ForeignKey('users.id', ondelete='CASCADE'), nullable=False),
     )
 
@@ -52,6 +57,7 @@ def upgrade():
         sa.Column('name', sa.String(), nullable=False),
         sa.Column('description', sa.Text(), nullable=True),
         sa.Column('location', sa.String(), nullable=True),
+        sa.Column('thoughts', sa.Text(), nullable=True),  
         sa.Column('user_id', sa.Integer(), sa.ForeignKey('users.id'), nullable=True),
     )
 

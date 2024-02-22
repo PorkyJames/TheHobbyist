@@ -17,7 +17,12 @@ def seed_profiles():
         username="demoo",
         # name='Demo Profile',
         mbti='ENFP',
-        bio='Hi, my name is Demo! I love to rock climb and snowboard.'
+        bio='Hi, my name is Demo! I love to rock climb and snowboard.',
+        interests="The Great Outdoors!",
+        city="Salinas",
+        state="CA",
+        first_name="Demo",
+        last_name="User"
     )
 
     # Marine Profile Seed
@@ -26,7 +31,12 @@ def seed_profiles():
         username="marniee",
         # name='Marnie Profile',
         mbti='INTJ',
-        bio='Marnie here! I am passionate about photography and exploring the great outdoors.'
+        bio='Marnie here! I am passionate about photography and exploring the great outdoors.',
+        interests="Art and Photography",
+        city="Reno",
+        state="NV",
+        first_name="Marnie",
+        last_name="Person"
     )
 
     # Bobbie profile seed
@@ -35,7 +45,12 @@ def seed_profiles():
         username="bobbiee",
         # name='Bobbie Profile',
         mbti='ISTP',
-        bio='Bobbie at your service, exploring the world of woodworking and DIY.'
+        bio='Bobbie at your service, exploring the world of woodworking and DIY.',
+        interests="Woodworking and Crafting",
+        city="Austin",
+        state="TX",
+        first_name="Bobbie",
+        last_name="Human"
     )
 
     # Add each profile to the database

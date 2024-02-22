@@ -31,7 +31,12 @@ def create_profile():
             user_id=current_user.id,
             username=form.username.data,
             bio=form.bio.data,
-            mbti=form.mbti.data
+            mbti=form.mbti.data,
+            interests=form.interests.data,
+            city=form.city.data,
+            state=form.state.data,
+            first_name=form.first_name.data,
+            last_name=form.last_name.data
         )
         # Add the new profile created to our database
         db.session.add(new_profile)
@@ -108,6 +113,11 @@ def update_user_profile(profileId):
         user_profile.username = form.username.data
         user_profile.bio = form.bio.data
         user_profile.mbti = form.mbti.data
+        user_profile.interests = form.interests.data
+        user_profile.city = form.city.data,
+        user_profile.state = form.state.data,
+        user_profile.first_name = form.first_name.data,
+        user_profile.last_name = form.last_name.data
 
         db.session.commit()
 

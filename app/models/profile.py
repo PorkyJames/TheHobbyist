@@ -11,8 +11,13 @@ class Profile(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(15))
-    bio = db.Column(db.Text(100))
+    bio = db.Column(db.Text(200))
     mbti = db.Column(db.String(4))
+    interests = db.Column(db.String(50)) 
+    city = db.Column(db.String(50))  
+    state = db.Column(db.String(50))  
+    first_name = db.Column(db.String(25))  
+    last_name = db.Column(db.String(25)) 
 
     # Relationships
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
@@ -23,5 +28,10 @@ class Profile(db.Model):
             "user_id": self.user_id,
             "username": self.username,
             "mbti": self.mbti,
-            "bio": self.bio
+            "bio": self.bio,
+            "interests": self.interests,
+            "city": self.city,
+            "state": self.state,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
         }
