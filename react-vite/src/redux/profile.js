@@ -1,27 +1,11 @@
 const CREATE = "profile/CREATE";
-// const UPDATE = "profile/UPDATE";
 const DELETE = "profile/DELETE";
-
 const LOAD_PROFILE = 'profile/LOAD_PROFILE';
 const SET_PROFILE_LOADING = 'profile/SET_PROFILE_LOADING';
 const PROFILE_CHECK_COMPLETED = 'profile/PROFILE_CHECK_COMPLETED';
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
 
 //! Action Creators 
-// const load = (profile) => ({
-//     type: LOAD,
-//     payload: profile
-// })
-
-// const create = (profile) => ({
-//     type: CREATE,
-//     payload: profile
-// })
-
-// const update = (profile) => ({
-//     type: UPDATE,
-//     payload: profile
-// })
 
 const remove = (profile) => ({
     type: DELETE,
@@ -32,11 +16,6 @@ export const setUserProfile = (profile) => ({
     type: SET_USER_PROFILE,
     payload: profile,
 });
-
-// export const profileLoading = (isLoading) => ({
-//     type: PROFILE_LOADING,
-//     payload: isLoading,
-// });
 
 const loadProfile = (profile) => ({
     type: LOAD_PROFILE,
@@ -55,16 +34,6 @@ const profileCheckCompleted = () => ({
 
 
 //! Thunks
-
-// export const getProfile = () => async (dispatch) => {
-//     const res = await fetch("/api/profiles")
-
-//     if (res.ok) {
-//         const user_profile = await res.json();
-//         dispatch(load(user_profile))
-//         return user_profile;
-//     }
-// }
 
 export const createProfile = (payload) => async (dispatch) => {
     const requestMethod = {
@@ -152,21 +121,11 @@ const initialState = {
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
-        // case LOAD:
-        //     return {
-        //         ...state,
-        //         profile: action.payload,
-        //     };
         case CREATE:
             return {
                 ...state,
                 profile: action.payload,
             };
-        // case UPDATE:
-        //     return {
-        //         ...state,
-        //         profile: action.payload || null, 
-        //     };
         case DELETE:
             return {
                 ...state,

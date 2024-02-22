@@ -1,21 +1,41 @@
-/* UserInfo.module.css */
+.user-info-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+}
 
 .user-info {
     display: flex;
-    flex-direction: column;
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    flex-direction: row;
+    width: 100%;
+    align-items: flex-start; /* This ensures that items align at the top */
 }
 
+.left-column, .right-column {
+    display: flex;
+    flex-direction: column;
+}
+
+
 .user-icon {
-    font-size: 3rem; /* Adjust size as needed */
+    font-size: 3rem; 
     color: #4f4f4f;
     display: flex;
     justify-content: center;
     margin-bottom: 10px;
+}
+
+.user-icon i {
+    font-size: 200px;
+}
+
+.first-name, .last-name, .mbti, .city, .state, .interests, .bio {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px; 
+    border-radius: 5px;
 }
 
 .username {
@@ -24,48 +44,4 @@
     font-weight: bold;
     color: #333;
     margin-bottom: 20px;
-}
-
-.personal-info {
-    text-align: center;
-    color: #666;
-}
-
-.personal-info div {
-    margin-bottom: 10px;
-}
-
-/* Additional styles for tabs and content */
-.tab-container {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-}
-
-.tab {
-    padding: 10px 20px;
-    cursor: pointer;
-    font-weight: bold;
-    border: 2px solid transparent;
-    border-radius: 5px;
-}
-
-.tab:hover,
-.tab.active {
-    border-color: #007bff;
-}
-
-.content-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.content-item {
-    background-color: #fff;
-    padding: 15px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
 }

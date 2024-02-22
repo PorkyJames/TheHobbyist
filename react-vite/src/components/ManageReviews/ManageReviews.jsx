@@ -38,8 +38,8 @@ const ManageReviews = () => {
 
     return (
         <>
-            <h1>Manage Reviews Component</h1>
-            <ul>{reviewList}</ul>
+            <h1>Review Component Coming Soon...</h1>
+            {/* <ul>{reviewList}</ul> */}
         </>
     );
 };
