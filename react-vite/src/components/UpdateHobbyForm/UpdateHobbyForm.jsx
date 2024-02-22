@@ -16,6 +16,7 @@ const UpdateHobbyForm = () => {
         name: '',
         description: '',
         location: '',
+        thoughts: '',
     });
 
     // Fetch hobby details when component mounts or hobbyId changes
@@ -27,6 +28,7 @@ const UpdateHobbyForm = () => {
                 name: hobbyDetails.name || '',
                 description: hobbyDetails.description || '',
                 location: hobbyDetails.location || '',
+                thoughts: hobbyDetails.thoughts || '',
             });
         }
     }, [hobbyId, hobbyDetails, dispatch]);
@@ -100,6 +102,18 @@ const UpdateHobbyForm = () => {
                         value={formData.location}
                         onChange={handleChange}
                         placeholder="Location"
+                    />
+                </div>
+
+                <div className="form-group">
+                    <label htmlFor="thoughts">Thoughts</label>
+                    <input
+                        type="text"
+                        id="location"
+                        name="thoughts"
+                        value={formData.thoughts}
+                        onChange={handleChange}
+                        placeholder="Thoughts"
                     />
                 </div>
 

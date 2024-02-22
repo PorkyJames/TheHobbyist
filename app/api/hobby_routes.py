@@ -88,7 +88,9 @@ def update_user_hobby(hobbyId):
     if not hobby:
         abort(404, {"message": "Hobby could not be found"})
 
-    form = HobbyForm()
+    data = request.get_json()
+
+    form = HobbyForm(data=data)
 
     # CSRF Token authentication
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -97,8 +99,8 @@ def update_user_hobby(hobbyId):
     if form.validate_on_submit():
         hobby.name = form.name.data
         hobby.description = form.description.data
-        hobby.location = form.location.data,
-        hobby.thoughts = hobby.thoughts.data
+        hobby.location = form.location.data
+        hobby.thoughts = form.thoughts.data
 
         # Commit changes to db
         db.session.commit()

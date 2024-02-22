@@ -163,7 +163,10 @@ const profileReducer = (state = initialState, action) => {
         case SET_USER_PROFILE:
             return {
                 ...state,
-                profile: action.payload, 
+                profile: {
+                    ...state.profile,
+                    ...action.payload,
+                },
             };
         case PROFILE_LOADING:
             return {

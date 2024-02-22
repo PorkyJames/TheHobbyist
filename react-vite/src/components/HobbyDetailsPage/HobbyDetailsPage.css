@@ -14,7 +14,8 @@
 }
 
 .hobby-details-page .description,
-.hobby-details-page .location {
+.hobby-details-page .location,
+.hobby-details-page .thoughts {
     background: #fff;
     padding: 15px;
     margin-bottom: 10px;
@@ -23,12 +24,13 @@
 }
 
 .hobby-details-page .description p,
-.hobby-details-page .location p {
+.hobby-details-page .location p 
+.hobby-details-page .thoughts p {
     margin: 0;
     color: #666;
 }
 
-.bookmarks-placeholder,
+/* .bookmarks-placeholder,
 .reviews-placeholder {
     background: #e2e2e2;
     padding: 15px;
@@ -36,7 +38,7 @@
     border-radius: 4px;
     text-align: center;
     color: #333;
-}
+} */
 
 .hobby-details-page > div {
     margin-bottom: 20px;

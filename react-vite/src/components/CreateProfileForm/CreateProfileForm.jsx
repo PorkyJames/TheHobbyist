@@ -8,11 +8,25 @@ const CreateProfileForm = ({ closeModal }) => {
     const [username, setUsername] = useState('');
     const [bio, setBio] = useState('');
     const [mbti, setMbti] = useState('');
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [interests, setInterests] = useState(''); 
+    const [city, setCity] = useState(''); 
+    const [state, setState] = useState(''); 
     const dispatch = useDispatch();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const payload = { username, bio, mbti };
+        const payload = { 
+            username, 
+            bio, 
+            mbti,
+            first_name: firstName, 
+            last_name: lastName, 
+            interests, 
+            city, 
+            state 
+        };
         await dispatch(createProfile(payload));
         closeModal();
     };
@@ -21,7 +35,9 @@ const CreateProfileForm = ({ closeModal }) => {
         <div className="create-profile-modal-overlay">
             <div className="create-profile-modal-content">
                 <form onSubmit={handleSubmit} className="create-profile-form">
+
                 <h2 className="create-profile-title">Create Profile</h2>
+
                 <div className="create-profile-form-group">
                     <input
                     type="text"
@@ -34,6 +50,7 @@ const CreateProfileForm = ({ closeModal }) => {
                     placeholder="User Name"
                     />
                 </div>
+
                 <div className="create-profile-form-group">
                     <textarea
                     id="bio"
@@ -44,6 +61,7 @@ const CreateProfileForm = ({ closeModal }) => {
                     placeholder="Bio"
                     />
                 </div>
+
                 <div className="create-profile-form-group">
                     <input
                     type="text"
@@ -55,6 +73,68 @@ const CreateProfileForm = ({ closeModal }) => {
                     placeholder="MBTI"
                     />
                 </div>
+
+                <div className="create-profile-form-group">
+                    <input
+                    type="text"
+                    id="firstName"
+                    className="create-profile-input"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                    required
+                    maxLength="50"
+                    placeholder="First Name"
+                    />
+                </div>
+
+                <div className="create-profile-form-group">
+                    <input
+                    type="text"
+                    id="lastName"
+                    className="create-profile-input"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                    required
+                    maxLength="50"
+                    placeholder="Last Name"
+                    />
+                </div>
+
+                <div className="create-profile-form-group">
+                    <textarea
+                    id="interests"
+                    className="create-profile-input"
+                    value={interests}
+                    onChange={(e) => setInterests(e.target.value)}
+                    maxLength="200" 
+                    placeholder="Interests"
+                    />
+                </div>
+
+                <div className="create-profile-form-group">
+                    <input
+                    type="text"
+                    id="city"
+                    className="create-profile-input"
+                    value={city}
+                    onChange={(e) => setCity(e.target.value)}
+                    maxLength="50"
+                    placeholder="City"
+                    />
+                </div>
+
+                <div className="create-profile-form-group">
+                    <input
+                    type="text"
+                    id="state"
+                    className="create-profile-input"
+                    value={state}
+                    onChange={(e) => setState(e.target.value)}
+                    maxLength="50"
+                    placeholder="State"
+                    />
+                </div>
+                
                 <button type="submit" className="create-profile-btn">Create Profile</button>
                 </form>
             </div>

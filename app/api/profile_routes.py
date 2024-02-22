@@ -102,8 +102,10 @@ def update_user_profile(profileId):
     if user_profile is None:
         return jsonify({"error": "Profile not found or not authorized"}), 404
 
+    data = request.get_json()
+
     # Instantiate a new form instance with data from the request
-    form = ProfileForm()
+    form = ProfileForm(data=data)
 
     # CSRF Token authentication
     form['csrf_token'].data = request.cookies['csrf_token']

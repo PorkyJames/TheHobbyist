@@ -63,7 +63,7 @@ return (
                     onChange={handleChange}
                     required
                     placeholder="Hobby Description"
-                    rows="6" /* This will make the textarea taller */
+                    rows="6" 
                 />
             </div>
 
@@ -76,6 +76,18 @@ return (
                     value={formData.location}
                     onChange={handleChange}
                     placeholder="Location"
+                />
+            </div>
+
+            <div className="form-group">
+                <label htmlFor="thoughts">Thoughts</label>
+                <input
+                    type="text"
+                    id="thoughts"
+                    name="thoughts"
+                    value={formData.thoughts}
+                    onChange={handleChange}
+                    placeholder="Thoughts"
                 />
             </div>
 
