@@ -34,47 +34,48 @@ const CreateHobbyForm = () => {
 return (
     <div className="create-hobby-form-container">
 
-        <form onSubmit={handleSubmit} className="create-hobby-form">    
+        <div className="form-introduction">
+            <h2>Tell us About the Hobby</h2>
+            <p>Anything exciting happen that'll give someone else some insight?</p>
+        </div>
 
-            <h2>Create a New Hobby</h2>
+        <form onSubmit={handleSubmit} className="create-hobby-form">    
 
             <div className="form-group">
                 <label htmlFor="name">Name</label>
                 <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                maxLength="20"
-                placeholder="Hobby Name"
+                    type="text"
+                    id="name"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                    placeholder="Hobby Name"
                 />
             </div>
 
             <div className="form-group">
                 <label htmlFor="description">Description</label>    
                 <textarea
-                id="description"
-                name="description"
-                value={formData.description}
-                onChange={handleChange}
-                required
-                maxLength="50"
-                placeholder="Hobby Description"
+                    id="description"
+                    name="description"
+                    value={formData.description}
+                    onChange={handleChange}
+                    required
+                    placeholder="Hobby Description"
+                    rows="6" /* This will make the textarea taller */
                 />
             </div>
 
             <div className="form-group">
                 <label htmlFor="location">Location</label>
                 <input
-                type="text"
-                id="location"
-                name="location"
-                value={formData.location}
-                onChange={handleChange}
-                maxLength="30"
-                placeholder="Location"
+                    type="text"
+                    id="location"
+                    name="location"
+                    value={formData.location}
+                    onChange={handleChange}
+                    placeholder="Location"
                 />
             </div>
 

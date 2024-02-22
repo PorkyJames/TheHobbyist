@@ -1,0 +1,71 @@
+.all-hobbies-page {
+    max-width: 1200px;
+    margin: 0 auto; 
+    padding: 20px;
+    text-align: center; 
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.hobbies-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start; 
+    gap: 30px; 
+}
+
+.hobby-item {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    margin-bottom: 30px; 
+    padding: 20px;
+    width: calc(33.333% - 40px); 
+    box-sizing: border-box; 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hobby-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    border-width: 3px;
+    padding: 18px;
+    border-color: #FFB703;
+}
+
+.hobby-content {
+    padding: 20px;
+}
+
+.hobby-content h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 24px; 
+}
+
+.hobby-content p {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.hobby-actions {
+    padding: 20px;
+    text-align: center; 
+}
+
+.hobby-actions button {
+    background-color: #f8f9fa;
+    border: 1px solid #dfe1e5;
+    border-radius: 4px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+.hobby-actions button:hover {
+    background-color: #e8e8e8;
+    border-color: #c6c6c6;
+}

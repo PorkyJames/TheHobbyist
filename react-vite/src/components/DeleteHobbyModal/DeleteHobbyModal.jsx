@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import { getUserHobbies, deleteHobby } from '../../redux/hobby';
 import { useModal } from '../../context/Modal';
 
+import './DeleteHobbyModal.css'
 
 const DeleteHobbyModal = ({ hobbyId, onDeleted }) => {
     const dispatch = useDispatch();
@@ -23,28 +24,26 @@ const DeleteHobbyModal = ({ hobbyId, onDeleted }) => {
     };
 
     return (
-        <div className="modal-background">
-            <div className="modal-content">
-                <button className="close-button" onClick={handleCloseModal}>
-                    &times;
+        <div className="delete-hobby-modal-overlay">
+            <div className="delete-hobby-modal-content">
+            <div className="delete-hobby-modal-header">
+                <h2>Confirm Delete</h2>
+                <button className="delete-hobby-close-button" onClick={handleCloseModal}>
+                &times;
                 </button>
-                <div className="confirm-delete-text">
-                    <h2>Confirm Delete</h2> 
-                </div>
-                <div className="delete-hobby-paragraph">
-                    <p>Are you sure you want to delete this hobby?</p>
-                </div>
-                <div className="modal-buttons">
-                    <button className="delete-button" onClick={handleDelete}>
-                        Yes (Delete Hobby)
-                    </button>
-                    <button className="cancel-button" onClick={handleCloseModal}>
-                        No (Keep Hobby)
-                    </button>
-                </div>
+            </div>
+            <p className="delete-hobby-modal-message">Are you sure you want to delete this hobby?</p>
+            <div className="delete-hobby-modal-actions">
+                <button className="delete-hobby-modal-delete-button" onClick={handleDelete}>
+                Yes (Delete Hobby)
+                </button>
+                <button className="delete-hobby-modal-cancel-button" onClick={handleCloseModal}>
+                No (Keep Hobby)
+                </button>
+            </div>
             </div>
         </div>
-    );
+        );
 };
 
 export default DeleteHobbyModal;

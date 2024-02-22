@@ -3,6 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getAllHobbies } from '../../redux/hobby';
 import { Link } from 'react-router-dom';
 
+import './AllHobbiesPage.css'
+
 const AllHobbiesPage = () => {
     const dispatch = useDispatch();
     const allHobbies = useSelector(state => state.hobby);

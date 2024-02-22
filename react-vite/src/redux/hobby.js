@@ -134,7 +134,7 @@ export const deleteHobby = (hobbyId) => async (dispatch) => {
 
 //! Reducer 
 
-const initialState = [];
+const initialState = {};
 
 const hobbyReducer = (state = initialState, action) => {
     switch (action.type) {

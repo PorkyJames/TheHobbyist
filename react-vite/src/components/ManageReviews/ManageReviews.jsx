@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { getReview } from "../../redux/review";
 import { useEffect } from "react";
+import { updateReview, deleteReview } from "../../redux/review";
 
 const ManageReviews = () => {
     const dispatch = useDispatch();

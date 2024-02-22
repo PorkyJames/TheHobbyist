@@ -72,10 +72,10 @@ function ProfileButton() {
   //   setShowMenu(false);
   // };
 
-  const manageReviews = () => {
-    navigate('/reviews/current');
-    setShowMenu(false);
-  };
+  // const manageReviews = () => {
+  //   navigate('/reviews/current');
+  //   setShowMenu(false);
+  // };
 
   const navigateCreateHobby = () => {
     navigate("/hobby-form")

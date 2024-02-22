@@ -58,8 +58,13 @@ const UpdateHobbyForm = () => {
 
     return (
         <div className="update-hobby-form-container">
+
+            <div className="form-introduction">
+                <h2>Anything new with the Hobby?</h2>
+                <p>Let us know what's changed or any new insights you have.</p>
+            </div>
+            
             <form onSubmit={handleSubmit} className="update-hobby-form">
-                <h2>Update Hobby</h2>
 
                 <div className="form-group">
                     <label htmlFor="name">Name</label>
@@ -70,7 +75,6 @@ const UpdateHobbyForm = () => {
                         value={formData.name}
                         onChange={handleChange}
                         required
-                        maxLength="20"
                         placeholder="Hobby Name"
                     />
                 </div>
@@ -83,7 +87,6 @@ const UpdateHobbyForm = () => {
                         value={formData.description}
                         onChange={handleChange}
                         required
-                        maxLength="50"
                         placeholder="Hobby Description"
                     />
                 </div>
@@ -96,7 +99,6 @@ const UpdateHobbyForm = () => {
                         name="location"
                         value={formData.location}
                         onChange={handleChange}
-                        maxLength="30"
                         placeholder="Location"
                     />
                 </div>
