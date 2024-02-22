@@ -1,16 +1,17 @@
-const LOAD = "profile/LOAD";
 const CREATE = "profile/CREATE";
 const UPDATE = "profile/UPDATE";
 const DELETE = "profile/DELETE";
 
+const LOAD_PROFILE = 'profile/LOAD_PROFILE';
+const SET_PROFILE_LOADING = 'profile/SET_PROFILE_LOADING';
+const PROFILE_CHECK_COMPLETED = 'profile/PROFILE_CHECK_COMPLETED';
 const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
-const PROFILE_LOADING = 'profile/PROFILE_LOADING';
 
 //! Action Creators 
-const load = (profile) => ({
-    type: LOAD,
-    payload: profile
-})
+// const load = (profile) => ({
+//     type: LOAD,
+//     payload: profile
+// })
 
 // const create = (profile) => ({
 //     type: CREATE,
@@ -32,10 +33,26 @@ export const setUserProfile = (profile) => ({
     payload: profile,
 });
 
-export const profileLoading = (isLoading) => ({
-    type: PROFILE_LOADING,
+// export const profileLoading = (isLoading) => ({
+//     type: PROFILE_LOADING,
+//     payload: isLoading,
+// });
+
+const loadProfile = (profile) => ({
+    type: LOAD_PROFILE,
+    payload: profile
+});
+
+const setProfileLoading = (isLoading) => ({
+    type: SET_PROFILE_LOADING,
     payload: isLoading,
 });
+
+const profileCheckCompleted = () => ({
+    type: PROFILE_CHECK_COMPLETED,
+});
+
+
 
 //! Thunks
 
@@ -102,49 +119,39 @@ export const deleteProfile = (profileId) => async (dispatch) => {
 }
 
 export const fetchUserProfile = (userId) => async (dispatch) => {
-    dispatch(profileLoading(true));
+    dispatch(setProfileLoading(true));
     try {
         const response = await fetch(`/api/profiles/${userId}`);
         if (response.ok) {
             const profile = await response.json();
-            dispatch(setUserProfile(profile));
-        } else if (response.status === 404) {
-            dispatch(setUserProfile(null));
+            dispatch(loadProfile(profile));
         } else {
-            console.error('Error fetching user profile:', response.statusText);
-            dispatch(setUserProfile(null));
+            dispatch(loadProfile(null)); 
         }
     } catch (error) {
         console.error('Error fetching user profile:', error);
-        dispatch(setUserProfile(null));
+        dispatch(loadProfile(null));
     } finally {
-        dispatch(profileLoading(false));
-        dispatch(profileCheckCompleted()); // Mark profile check as completed
+        dispatch(setProfileLoading(false));
+        dispatch(profileCheckCompleted());
     }
 };
-
-const PROFILE_CHECK_COMPLETED = 'profiles/PROFILE_CHECK_COMPLETED';
-
-// Action creator for setting checkCompleted flag
-export const profileCheckCompleted = () => ({
-    type: PROFILE_CHECK_COMPLETED,
-});
 
 //! Reducer
 
 const initialState = {
-    profile: null,
+    profile: undefined,
     isLoading: false,
     checkCompleted: false,
 };
 
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOAD:
-            return {
-                ...state,
-                profile: action.payload,
-            };
+        // case LOAD:
+        //     return {
+        //         ...state,
+        //         profile: action.payload,
+        //     };
         case CREATE:
             return {
                 ...state,
@@ -160,15 +167,12 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 profile: null,
             };
-        case SET_USER_PROFILE:
+        case LOAD_PROFILE:
             return {
                 ...state,
-                profile: {
-                    ...state.profile,
-                    ...action.payload,
-                },
+                profile: action.payload,
             };
-        case PROFILE_LOADING:
+        case SET_PROFILE_LOADING:
             return {
                 ...state,
                 isLoading: action.payload,
@@ -177,6 +181,11 @@ const profileReducer = (state = initialState, action) => {
             return {
                 ...state,
                 checkCompleted: true,
+            };
+        case SET_USER_PROFILE:
+            return {
+                ...state,
+                profile: action.payload,
             };
         default:
             return state;

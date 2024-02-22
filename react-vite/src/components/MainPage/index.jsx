@@ -9,7 +9,7 @@ import CreateProfileForm from '../CreateProfileForm/CreateProfileForm';
 
 import "./MainPage.css"
 
-function MainPage({ hobbies }) {
+function MainPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const allHobbies = useSelector(state => state.hobby);
@@ -52,7 +52,7 @@ function MainPage({ hobbies }) {
             }
         }
     }, [userProfile, isLoadingProfile, checkCompleted, setModalContent, stableCloseModal, modalSet]);
-
+    
     //! Search Feature for Hobbies
     const handleSearch = (e) => {
         e.preventDefault();
@@ -103,7 +103,6 @@ function MainPage({ hobbies }) {
             />
             </form>
 
-
             <div className="buttons-container">
             <button
                 type="submit"
@@ -139,7 +138,7 @@ function MainPage({ hobbies }) {
             )}
 
             <h3 className="inspirational-quote">
-                "The Journey of a Thousand Miles begins with the First Step"
+                The Journey of a Thousand Miles begins with the First Step
             </h3>
 
         </div>
