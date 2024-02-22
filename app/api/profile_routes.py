@@ -116,9 +116,9 @@ def update_user_profile(profileId):
         user_profile.bio = form.bio.data
         user_profile.mbti = form.mbti.data
         user_profile.interests = form.interests.data
-        user_profile.city = form.city.data,
-        user_profile.state = form.state.data,
-        user_profile.first_name = form.first_name.data,
+        user_profile.city = form.city.data
+        user_profile.state = form.state.data
+        user_profile.first_name = form.first_name.data
         user_profile.last_name = form.last_name.data
 
         db.session.commit()

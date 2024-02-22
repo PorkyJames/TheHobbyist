@@ -36,7 +36,10 @@ const CreateProfileForm = ({ closeModal }) => {
             <div className="create-profile-modal-content">
                 <form onSubmit={handleSubmit} className="create-profile-form">
 
-                <h2 className="create-profile-title">Create Profile</h2>
+                <h2 className="create-profile-title">
+                    <p> Create Profile </p>
+                    <p> Create a New Profile to get Started! </p>
+                </h2>
 
                 <div className="create-profile-form-group">
                     <input

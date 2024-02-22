@@ -1,5 +1,5 @@
 const CREATE = "profile/CREATE";
-const UPDATE = "profile/UPDATE";
+// const UPDATE = "profile/UPDATE";
 const DELETE = "profile/DELETE";
 
 const LOAD_PROFILE = 'profile/LOAD_PROFILE';
@@ -18,10 +18,10 @@ const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
 //     payload: profile
 // })
 
-const update = (profile) => ({
-    type: UPDATE,
-    payload: profile
-})
+// const update = (profile) => ({
+//     type: UPDATE,
+//     payload: profile
+// })
 
 const remove = (profile) => ({
     type: DELETE,
@@ -56,15 +56,15 @@ const profileCheckCompleted = () => ({
 
 //! Thunks
 
-export const getProfile = () => async (dispatch) => {
-    const res = await fetch("/api/profiles")
+// export const getProfile = () => async (dispatch) => {
+//     const res = await fetch("/api/profiles")
 
-    if (res.ok) {
-        const user_profile = await res.json();
-        dispatch(load(user_profile))
-        return user_profile;
-    }
-}
+//     if (res.ok) {
+//         const user_profile = await res.json();
+//         dispatch(load(user_profile))
+//         return user_profile;
+//     }
+// }
 
 export const createProfile = (payload) => async (dispatch) => {
     const requestMethod = {
@@ -91,18 +91,23 @@ export const updateProfile = (profileId, payload) => async (dispatch) => {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+    };
+
+    try {
+        const res = await fetch(`/api/profiles/${profileId}`, requestMethod);
+        if (res.ok) {
+            const updatedProfile = await res.json();
+            dispatch(setUserProfile(updatedProfile));
+        } else {
+            const error = await res.json();
+            console.error('Failed to update profile:', error);
+        }
+    } catch (error) {
+        console.error('Error updating user profile:', error);
+
     }
-
-    const res = await fetch(`/api/profiles/${profileId}`, requestMethod)
-
-    if (res.ok) {
-        const updatedProfile = await res.json();
-
-        dispatch(update(updatedProfile));
-        return updatedProfile
-    }
-}
+};
 
 export const deleteProfile = (profileId) => async (dispatch) => {
     const requestMethod= {
@@ -157,11 +162,11 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 profile: action.payload,
             };
-        case UPDATE:
-            return {
-                ...state,
-                profile: action.payload || null, 
-            };
+        // case UPDATE:
+        //     return {
+        //         ...state,
+        //         profile: action.payload || null, 
+        //     };
         case DELETE:
             return {
                 ...state,

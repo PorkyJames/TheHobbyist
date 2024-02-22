@@ -35,15 +35,33 @@ const UserInfo = ({ userId }) => {
     };
 
     const handleInputChange = (field, value) => {
-        const updatedField = field === 'firstName' ? 'first_name' : field === 'lastName' ? 'last_name' : field;
+        const fieldMap = {
+            'firstName': 'first_name',
+            'lastName': 'last_name',
+        };
+        const updatedField = fieldMap[field] || field;
         setEditedValues(values => ({ ...values, [updatedField]: value }));
     };
-
+    
     const handleSave = (field) => {
-        const updatedField = field === 'firstName' ? 'first_name' : field === 'lastName' ? 'last_name' : field;
-        dispatch(updateProfile(profile.id, { ...profile, [updatedField]: editedValues[field] }));
+        const fieldMap = {
+            'firstName': 'first_name',
+            'lastName': 'last_name',
+            // Continue mapping other camelCase fields to their snake_case equivalents
+        };
+        const apiField = fieldMap[field] || field;
+    
+        // Create a new object with the updated field
+        const updatedProfile = {
+            ...profile,
+            [apiField]: editedValues[apiField]
+        };
+    
+        // Dispatch the updateProfile action
+        dispatch(updateProfile(profile.id, updatedProfile));
         setEditMode(null);
     };
+    
 
     const handleCancel = () => {
         setEditMode(null);
@@ -86,42 +104,7 @@ const UserInfo = ({ userId }) => {
                 </div>
                 <h2>About Me</h2>
                 <div className="personal-info">
-                    <div className="mbti">
-                        {editMode === 'mbti' ? (
-                            <div>
-                                <input
-                                    type="text"
-                                    value={editedValues.mbti || profile.mbti}
-                                    onChange={(e) => handleInputChange('mbti', e.target.value)}
-                                />
-                                <button onClick={() => handleSave('mbti')}>Save</button>
-                                <button onClick={handleCancel}>Cancel</button>
-                            </div>
-                        ) : (
-                            <div>
-                                {profile.mbti}
-                                <button onClick={() => handleEditClick('mbti')}>Edit</button>
-                            </div>
-                        )}
-                    </div>
-                    <div className="bio">
-                        {editMode === 'bio' ? (
-                            <div>
-                                <textarea
-                                    value={editedValues.bio || profile.bio}
-                                    onChange={(e) => handleInputChange('bio', e.target.value)}
-                                />
-                                <button onClick={() => handleSave('bio')}>Save</button>
-                                <button onClick={handleCancel}>Cancel</button>
-                            </div>
-                        ) : (
-                            <div>
-                                {profile.bio}
-                                <button onClick={() => handleEditClick('bio')}>Edit</button>
-                            </div>
-                        )}
-                    </div>
-                    
+
                     <div className="first-name">
                         {editMode === 'firstName' ? (
                             <div>
@@ -158,6 +141,43 @@ const UserInfo = ({ userId }) => {
                             </div>
                         )}
                     </div>
+
+                    <div className="mbti">
+                        {editMode === 'mbti' ? (
+                            <div>
+                                <input
+                                    type="text"
+                                    value={editedValues.mbti || profile.mbti}
+                                    onChange={(e) => handleInputChange('mbti', e.target.value)}
+                                />
+                                <button onClick={() => handleSave('mbti')}>Save</button>
+                                <button onClick={handleCancel}>Cancel</button>
+                            </div>
+                        ) : (
+                            <div>
+                                {profile.mbti}
+                                <button onClick={() => handleEditClick('mbti')}>Edit</button>
+                            </div>
+                        )}
+                    </div>
+                    <div className="bio">
+                        {editMode === 'bio' ? (
+                            <div>
+                                <textarea
+                                    value={editedValues.bio || profile.bio}
+                                    onChange={(e) => handleInputChange('bio', e.target.value)}
+                                />
+                                <button onClick={() => handleSave('bio')}>Save</button>
+                                <button onClick={handleCancel}>Cancel</button>
+                            </div>
+                        ) : (
+                            <div>
+                                {profile.bio}
+                                <button onClick={() => handleEditClick('bio')}>Edit</button>
+                            </div>
+                        )}
+                    </div>
+                    
                     <div className="interests">
                         {editMode === 'interests' ? (
                             <div>
@@ -175,6 +195,7 @@ const UserInfo = ({ userId }) => {
                             </div>
                         )}
                     </div>
+
                     <div className="city">
                         {editMode === 'city' ? (
                             <div>

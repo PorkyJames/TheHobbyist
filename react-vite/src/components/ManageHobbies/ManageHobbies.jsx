@@ -32,6 +32,12 @@ const ManageHobbies = () => {
         return <div>Loading...</div>;
     }
 
+    if(!userHobbies || userHobbies.length === 0) {
+        return (
+            <h1>No current Hobby Entries! Create a new Hobby to get started</h1>
+        );
+    }
+
     return (
         <div className="manage-hobbies">
             <h1>Manage Hobbies</h1>
