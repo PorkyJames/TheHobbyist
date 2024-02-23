@@ -30,7 +30,7 @@ def seed_hobbies():
 
     photography_hobby = Hobby(
         # user_id=marnie_user.id, 
-        profile_id=demo_user.profile.id, 
+        profile_id=marnie_user.profile.id, 
         name='Photography',
         description='Capturing life moments and the unseen beauty of the world.',
         location='Anywhere you want',
@@ -39,7 +39,7 @@ def seed_hobbies():
 
     hiking_hobby = Hobby(
         # user_id=marnie_user.id,
-        profile_id=demo_user.profile.id,
+        profile_id=marnie_user.profile.id,
         name='Hiking',
         description='Exploring the beauty of nature through trails and mountains.',
         location='National Parks',
@@ -48,7 +48,7 @@ def seed_hobbies():
 
     woodworking_hobby = Hobby(
         # user_id=bobbie_user.id, 
-        profile_id=demo_user.profile.id,
+        profile_id=bobbie_user.profile.id,
         name='Woodworking',
         description='Creating beautiful and functional items from different types of wood.',
         location='Workshop',

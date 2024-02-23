@@ -84,7 +84,7 @@ def update_user_hobby(hobbyId):
     hobby = Hobby.query.get(hobbyId)
 
     # Edge Cases for any Errors / Authentication
-    if hobby.user_id != current_user.id:
+    if hobby.profile_id != current_user.profile.id:
         abort(403, {"message": "Hobby does not belong to the User"})
 
     if not hobby:

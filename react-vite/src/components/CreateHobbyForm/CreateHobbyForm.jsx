@@ -13,6 +13,7 @@ const CreateHobbyForm = () => {
     name: '',
     description: '',
     location: '',
+    thoughts: ''
     });
 
     const handleChange = (e) => {
