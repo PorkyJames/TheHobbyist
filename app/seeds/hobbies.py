@@ -11,7 +11,8 @@ def seed_hobbies():
 
     # Specific Seeded Hobby based on Demo, Marine, and Bobbie.
     rock_climbing_hobby = Hobby(
-        user_id=demo_user.id, 
+        # user_id=demo_user.id, 
+        profile_id=demo_user.profile.id,
         name='Rock Climbing',
         description='Testing your limits by climbing natural rock formations or artificial rock walls.',
         location='Climbing Gyms and Outdoor Crags',
@@ -19,7 +20,8 @@ def seed_hobbies():
     )
 
     snowboarding_hobby = Hobby(
-        user_id=demo_user.id,
+        # user_id=demo_user.id,
+        profile_id=demo_user.profile.id,
         name='Snowboarding',
         description='Sliding down snow-covered slopes with your feet strapped to a snowboard.',
         location='Mountain Resorts',
@@ -27,7 +29,8 @@ def seed_hobbies():
     )
 
     photography_hobby = Hobby(
-        user_id=marnie_user.id,  
+        # user_id=marnie_user.id, 
+        profile_id=demo_user.profile.id, 
         name='Photography',
         description='Capturing life moments and the unseen beauty of the world.',
         location='Anywhere you want',
@@ -35,7 +38,8 @@ def seed_hobbies():
     )
 
     hiking_hobby = Hobby(
-        user_id=marnie_user.id,
+        # user_id=marnie_user.id,
+        profile_id=demo_user.profile.id,
         name='Hiking',
         description='Exploring the beauty of nature through trails and mountains.',
         location='National Parks',
@@ -43,7 +47,8 @@ def seed_hobbies():
     )
 
     woodworking_hobby = Hobby(
-        user_id=bobbie_user.id, 
+        # user_id=bobbie_user.id, 
+        profile_id=demo_user.profile.id,
         name='Woodworking',
         description='Creating beautiful and functional items from different types of wood.',
         location='Workshop',

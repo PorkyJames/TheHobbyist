@@ -9,6 +9,7 @@ class Hobby(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    profile_id = db.Column(db.Integer, db.ForeignKey('profiles.id', ondelete='CASCADE'), nullable=False)
     name = db.Column(db.String, nullable=False)
     description = db.Column(db.Text)
     location = db.Column(db.String)

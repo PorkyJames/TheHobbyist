@@ -54,6 +54,7 @@ def upgrade():
     # Create hobbies table
     op.create_table('hobbies',
         sa.Column('id', sa.Integer(), nullable=False, primary_key=True),
+        sa.Column('profile_id', sa.Integer(), sa.ForeignKey('profiles.id', ondelete='CASCADE'), nullable=False),
         sa.Column('name', sa.String(), nullable=False),
         sa.Column('description', sa.Text(), nullable=True),
         sa.Column('location', sa.String(), nullable=True),

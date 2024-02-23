@@ -21,7 +21,8 @@ class Profile(db.Model):
 
     # Relationships
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-
+    hobbies = db.relationship('Hobby', backref='profile', lazy='dynamic', cascade='delete, delete-orphan')
+    
     def to_dict(self):
         return {
             'id': self.id,

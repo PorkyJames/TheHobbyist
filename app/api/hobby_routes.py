@@ -21,8 +21,10 @@ def create_hobby():
 
     # Validate the form
     if form.validate_on_submit():
+        user_profile = current_user.profile
         new_hobby = Hobby(
-            user_id = current_user.id,
+            # user_id = current_user.id,
+            profile_id=user_profile.id,
             name = form.name.data,
             description = form.description.data,
             location = form.location.data,
