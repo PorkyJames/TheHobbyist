@@ -25,6 +25,7 @@ class Hobby(db.Model):
         return {
             "id": self.id,
             "user_id": self.user_id, 
+            "profile_id": self.profile_id,
             "name": self.name,
             "description": self.description,
             "location": self.location,
