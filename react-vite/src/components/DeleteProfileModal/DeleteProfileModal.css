@@ -66,20 +66,20 @@
     transition: background-color 0.3s;
 }
 
-.delete-profile-modal-delete-button {
-    background-color: #FB8500; /* Orange */
+.delete-button {
+    background-color: #FB8500 !important; 
     color: white;
 }
 
-.delete-profile-modal-delete-button:hover {
+.delete-button:hover {
     background-color: #ff9f1a;
 }
 
-.delete-profile-modal-cancel-button {
-    background-color: #023047; /* Dark blue */
+.cancel-button {
+    background-color: #023047 !important; 
     color: white;
 }
 
-.delete-profile-modal-cancel-button:hover {
-    background-color: #03506f; /* Darker blue */
+.cancel-button:hover {
+    background-color: #03506f; 
 }

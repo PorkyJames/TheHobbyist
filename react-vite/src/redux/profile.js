@@ -47,7 +47,7 @@ export const createProfile = (payload) => async (dispatch) => {
 
         if (response.ok) {
             dispatch(setUserProfile(data));
-            return {}; 
+            // return {}; 
         } else {
             return { errors: data.errors || ["An unknown error occurred."] };
         }

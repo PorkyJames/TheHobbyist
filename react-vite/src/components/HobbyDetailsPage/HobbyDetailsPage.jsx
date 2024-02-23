@@ -9,6 +9,7 @@ const HobbyDetailsPage = () => {
     const { hobbyId } = useParams();
     const dispatch = useDispatch();
     const hobbyDetails = useSelector((state) => state.hobby[hobbyId]);
+    console.log(hobbyDetails, "<<<hobbyDetails")
 
     useEffect(() => {
         dispatch(getHobbyById(hobbyId));
@@ -23,6 +24,7 @@ const HobbyDetailsPage = () => {
             <div className="left-column">
                 <h1>{hobbyDetails.name}</h1>
             </div>
+
             <div className="right-column">
                 <div className="section">
                     <h2>Details</h2>

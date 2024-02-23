@@ -38,10 +38,10 @@ const DeleteProfileModal = ({ profileId, closeModal }) => {
                     Deleting this profile will remove all associated user data. This action cannot be undone. Are you sure you want to proceed?
                 </p>
                 <div className="delete-profile-modal-actions">
-                    <button className="delete-profile-modal-delete-button" onClick={handleDelete}>
+                    <button className="delete-button" onClick={handleDelete}>
                         Yes, Delete Profile
                     </button>
-                    <button className="delete-profile-modal-cancel-button" onClick={closeModal}>
+                    <button className="cancel-button" onClick={closeModal}>
                         No, Go Back
                     </button>
                 </div>
