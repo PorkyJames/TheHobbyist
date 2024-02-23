@@ -10,6 +10,16 @@ from ..forms.profile_form import ProfileForm
 
 profile_routes = Blueprint("/profiles", __name__)
 
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
+
 #! Create Route
 @profile_routes.route("/profiles", methods = ["POST"])
 @login_required
@@ -44,7 +54,7 @@ def create_profile():
 
         return jsonify(new_profile.to_dict()), 201
     
-    return jsonify(form.errors), 400
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
     # # ! Now that we've created the profile and added to our Database,
     # # ! we need to let the User select their first hobby. 
@@ -126,7 +136,7 @@ def update_user_profile(profileId):
         return jsonify(user_profile.to_dict()), 200
     else:
         # If the form does not validate, return the form errors
-        return jsonify({"errors": form.errors}), 400
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 #! Delete Routes
 # User can delete their profile which will result in them being logged out 

@@ -14,34 +14,33 @@ const CreateProfileForm = ({ closeModal }) => {
     const [city, setCity] = useState(''); 
     const [state, setState] = useState(''); 
 
-    const [errors, setErrors] = useState({});
+    const [errors, setErrors] = useState([]);
 
     const dispatch = useDispatch();
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        const payload = { 
-            username, 
-            bio, 
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        const payload = {
+            username,
+            bio,
             mbti,
-            first_name: firstName, 
-            last_name: lastName, 
-            interests, 
-            city, 
-            state 
+            first_name: firstName,
+            last_name: lastName,
+            interests,
+            city,
+            state,
         };
+    
+        const serverResponse = await dispatch(createProfile(payload));
+    
+        // console.log(serverResponse, "<<<< serverResponse")
 
-        try {
-            const response = await dispatch(createProfile(payload));
-            if (response.ok) {
-                closeModal();
-            } else {
-                const data = await response.json();
-                setErrors(data.errors); // Assuming errors are returned in a field called 'errors'
-            }
-        } catch (error) {
-            console.error('Failed to create profile:', error);
-        };
+        if (serverResponse && serverResponse.errors) {
+            // console.log(serverResponse.errors, "<<<<serverResponse.errors")
+            setErrors(serverResponse.errors); 
+        } else {
+            closeModal();
+        }
     };
 
     return (
@@ -55,8 +54,12 @@ const CreateProfileForm = ({ closeModal }) => {
                     <p> Create a New Profile to get Started! </p>
                 </h2>
 
-                <div className="error-message">
-                    {errors.username && <div className="error">{errors.username}</div>}
+                <div className="error-messages">
+                    <ul>
+                        {errors.map((error, idx) => (
+                            <li key={idx}>{error}</li>
+                        ))}
+                    </ul>
                 </div>
 
                 <div className="create-profile-form-group">
@@ -72,9 +75,9 @@ const CreateProfileForm = ({ closeModal }) => {
                     />
                 </div>
 
-                <div className="error-message">
+                {/* <div className="error-message">
                     {errors.bio && <div className="error">{errors.bio}</div>}
-                </div>
+                </div> */}
 
                 <div className="create-profile-form-group">
                     <textarea
@@ -87,9 +90,9 @@ const CreateProfileForm = ({ closeModal }) => {
                     />
                 </div>
 
-                <div className="error-message">
+                {/* <div className="error-message">
                     {errors.mbti && <div className="error">{errors.mbti}</div>}
-                </div>
+                </div> */}
 
                 <div className="create-profile-form-group">
                     <input
@@ -103,9 +106,9 @@ const CreateProfileForm = ({ closeModal }) => {
                     />
                 </div>
 
-                <div className="error-message">
+                {/* <div className="error-message">
                     {errors.firstName && <div className="error">{errors.firstName}</div>}
-                </div>
+                </div> */}
 
                 <div className="create-profile-form-group">
                     <input
@@ -120,9 +123,9 @@ const CreateProfileForm = ({ closeModal }) => {
                     />
                 </div>
 
-                <div className="error-message">
+                {/* <div className="error-message">
                     {errors.lastName && <div className="error">{errors.lastName}</div>}
-                </div>
+                </div> */}
 
                 <div className="create-profile-form-group">
                     <input
@@ -137,9 +140,9 @@ const CreateProfileForm = ({ closeModal }) => {
                     />
                 </div>
 
-                <div className="error-message">
+                {/* <div className="error-message">
                     {errors.interests && <div className="error">{errors.interests}</div>}
-                </div>
+                </div> */}
 
                 <div className="create-profile-form-group">
                     <textarea
@@ -152,9 +155,9 @@ const CreateProfileForm = ({ closeModal }) => {
                     />
                 </div>
 
-                <div className="error-message">
+                {/* <div className="error-message">
                     {errors.city && <div className="error">{errors.city}</div>}
-                </div>
+                </div> */}
 
                 <div className="create-profile-form-group">
                     <input
@@ -168,9 +171,9 @@ const CreateProfileForm = ({ closeModal }) => {
                     />
                 </div>
 
-                <div className="error-message">
+                {/* <div className="error-message">
                     {errors.state && <div className="error">{errors.state}</div>}
-                </div>
+                </div> */}
 
                 <div className="create-profile-form-group">
                     <input

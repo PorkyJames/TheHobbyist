@@ -31,28 +31,31 @@ const profileCheckCompleted = () => ({
     type: PROFILE_CHECK_COMPLETED,
 });
 
-
-
 //! Thunks
 
 export const createProfile = (payload) => async (dispatch) => {
-    const requestMethod = {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify(payload),
-    };
+    try {
+        const response = await fetch(`/api/profiles`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+        });
 
-    const res = await fetch(`/api/profiles`, requestMethod);
+        const data = await response.json();
 
-    if (res.ok) {
-        const newProfile = await res.json();
-        dispatch(setUserProfile(newProfile)); 
-        return newProfile;
+        if (response.ok) {
+            dispatch(setUserProfile(data));
+            return {}; 
+        } else {
+            return { errors: data.errors || ["An unknown error occurred."] };
+        }
+    } catch (error) {
+        console.error("Error in createProfile:", error);
+        return { errors: ["An error occurred while creating the profile."] };
     }
 };
-
 
 export const updateProfile = (profileId, payload) => async (dispatch) => {
     const requestMethod = {

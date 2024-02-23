@@ -49,6 +49,7 @@ def upgrade():
         sa.Column('first_name', sa.String(length=50), nullable=True),  
         sa.Column('last_name', sa.String(length=50), nullable=True),  
         sa.Column('user_id', sa.Integer(), sa.ForeignKey('users.id', ondelete='CASCADE'), nullable=False),
+        sa.UniqueConstraint('username')
     )
 
     # Create hobbies table

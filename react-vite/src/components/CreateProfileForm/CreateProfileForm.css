@@ -75,3 +75,7 @@
     background-color: #ff9f1a;
 }
 
+.error-message {
+    color: red;
+    font-weight: bold;
+}
