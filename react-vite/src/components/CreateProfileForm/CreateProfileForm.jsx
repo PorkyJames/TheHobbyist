@@ -20,6 +20,9 @@ const CreateProfileForm = ({ closeModal }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        setErrors([]);
+
         const payload = {
             username,
             bio,
@@ -38,6 +41,7 @@ const CreateProfileForm = ({ closeModal }) => {
         if (serverResponse && serverResponse.errors) {
             // console.log(serverResponse.errors, "<<<<serverResponse.errors")
             setErrors(serverResponse.errors); 
+
         } else {
             closeModal();
         }
@@ -56,7 +60,7 @@ const CreateProfileForm = ({ closeModal }) => {
 
                 <div className="error-messages">
                     <ul>
-                        {errors.map((error, idx) => (
+                        {Object.values(errors).map((error, idx) => (
                             <li key={idx}>{error}</li>
                         ))}
                     </ul>
