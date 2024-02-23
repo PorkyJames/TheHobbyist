@@ -21,11 +21,14 @@ def create_hobby():
 
     # Validate the form
     if form.validate_on_submit():
+        user_profile = current_user.profile
         new_hobby = Hobby(
-            user_id = current_user.id,
+            # user_id = current_user.id,
+            profile_id=user_profile.id,
             name = form.name.data,
             description = form.description.data,
-            location = form.location.data
+            location = form.location.data,
+            thoughts = form.thoughts.data
         )
 
         # Add the new profile created to our database and commit
@@ -68,8 +71,8 @@ def get_each_hobby(hobbyId):
 @hobby_routes.route("/hobbies/current")
 @login_required
 def get_user_hobbies():
-    user_id = current_user.id 
-    hobbies = Hobby.query.filter_by(user_id=user_id).all()
+    user_profile_id = current_user.profile.id
+    hobbies = Hobby.query.filter_by(profile_id=user_profile_id).all()
     return jsonify([hobby.to_dict() for hobby in hobbies])
 
 #! Update Route
@@ -81,13 +84,15 @@ def update_user_hobby(hobbyId):
     hobby = Hobby.query.get(hobbyId)
 
     # Edge Cases for any Errors / Authentication
-    if hobby.user_id != current_user.id:
+    if hobby.profile_id != current_user.profile.id:
         abort(403, {"message": "Hobby does not belong to the User"})
 
     if not hobby:
         abort(404, {"message": "Hobby could not be found"})
 
-    form = HobbyForm()
+    data = request.get_json()
+
+    form = HobbyForm(data=data)
 
     # CSRF Token authentication
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -97,6 +102,7 @@ def update_user_hobby(hobbyId):
         hobby.name = form.name.data
         hobby.description = form.description.data
         hobby.location = form.location.data
+        hobby.thoughts = form.thoughts.data
 
         # Commit changes to db
         db.session.commit()

@@ -10,6 +10,16 @@ from ..forms.profile_form import ProfileForm
 
 profile_routes = Blueprint("/profiles", __name__)
 
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
+
 #! Create Route
 @profile_routes.route("/profiles", methods = ["POST"])
 @login_required
@@ -31,7 +41,12 @@ def create_profile():
             user_id=current_user.id,
             username=form.username.data,
             bio=form.bio.data,
-            mbti=form.mbti.data
+            mbti=form.mbti.data,
+            interests=form.interests.data,
+            city=form.city.data,
+            state=form.state.data,
+            first_name=form.first_name.data,
+            last_name=form.last_name.data
         )
         # Add the new profile created to our database
         db.session.add(new_profile)
@@ -39,7 +54,7 @@ def create_profile():
 
         return jsonify(new_profile.to_dict()), 201
     
-    return jsonify(form.errors), 400
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
     # # ! Now that we've created the profile and added to our Database,
     # # ! we need to let the User select their first hobby. 
@@ -97,8 +112,10 @@ def update_user_profile(profileId):
     if user_profile is None:
         return jsonify({"error": "Profile not found or not authorized"}), 404
 
+    data = request.get_json()
+
     # Instantiate a new form instance with data from the request
-    form = ProfileForm()
+    form = ProfileForm(data=data)
 
     # CSRF Token authentication
     form['csrf_token'].data = request.cookies['csrf_token']
@@ -108,13 +125,18 @@ def update_user_profile(profileId):
         user_profile.username = form.username.data
         user_profile.bio = form.bio.data
         user_profile.mbti = form.mbti.data
+        user_profile.interests = form.interests.data
+        user_profile.city = form.city.data
+        user_profile.state = form.state.data
+        user_profile.first_name = form.first_name.data
+        user_profile.last_name = form.last_name.data
 
         db.session.commit()
 
         return jsonify(user_profile.to_dict()), 200
     else:
         # If the form does not validate, return the form errors
-        return jsonify({"errors": form.errors}), 400
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
 
 #! Delete Routes
 # User can delete their profile which will result in them being logged out 

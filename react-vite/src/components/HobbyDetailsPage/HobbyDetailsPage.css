@@ -1,20 +1,47 @@
 .hobby-details-page {
-    max-width: 800px;
+    display: flex;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    background: #f9f9f9;
+    background: #8ECAE6;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: slideUp 0.5s ease-out forwards;
 }
 
-.hobby-details-page .name h1 {
-    margin-bottom: 10px;
-    color: #333;
-    font-size: 2em;
+.hobby-details-page .left-column {
+    flex: 1;
+    background: #023047;
+    color: #fff;
+    padding: 20px;
+    border-radius: 8px 0 0 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.hobby-details-page .description,
-.hobby-details-page .location {
+.hobby-details-page .left-column h1 {
+    text-align: center;
+}
+
+.hobby-details-page .right-column {
+    flex: 2;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.right-column {
+    flex: 2;
+    padding: 20px;
+}
+
+.right-column .section {
     background: #fff;
     padding: 15px;
     margin-bottom: 10px;
@@ -22,23 +49,28 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.hobby-details-page .description p,
-.hobby-details-page .location p {
-    margin: 0;
-    color: #666;
+.right-column .section h2 {
+    color: #219EBC; 
+    font-size: 1.2em;
+    margin-bottom: 8px;
 }
 
-.bookmarks-placeholder,
-.reviews-placeholder {
-    background: #e2e2e2;
-    padding: 15px;
-    margin: 10px 0;
-    border-radius: 4px;
-    text-align: center;
-    color: #333;
+.right-column .section p {
+    color: #023047; 
 }
 
-.hobby-details-page > div {
-    margin-bottom: 20px;
+.hobby-details-page h1 {
+    color: #fff;
+    margin-bottom: 16px;
 }
 
+@keyframes slideUp {
+    0% {
+        transform: translate(-50%, 100vh);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%);
+        opacity: 1; 
+    }
+}

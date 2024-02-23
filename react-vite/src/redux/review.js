@@ -32,7 +32,7 @@ export const getReview = () => async (dispatch) => {
         const res = await fetch('/api/reviews/current');
         if (res.ok) {
             const user_review = await res.json();
-            console.log(user_review, "<<<<user_review")
+            // console.log(user_review, "<<<<user_review")
             dispatch(load(user_review)); 
             return user_review
         }

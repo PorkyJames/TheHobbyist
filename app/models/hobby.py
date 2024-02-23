@@ -9,9 +9,11 @@ class Hobby(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    profile_id = db.Column(db.Integer, db.ForeignKey('profiles.id', ondelete='CASCADE'), nullable=False)
     name = db.Column(db.String, nullable=False)
     description = db.Column(db.Text)
     location = db.Column(db.String)
+    thoughts = db.Column(db.String)
     # created_at = db.Column(db.DateTime)
     # updated_at = db.Column(db.DateTime)
 
@@ -22,10 +24,11 @@ class Hobby(db.Model):
     def to_dict(self):
         return {
             "id": self.id,
-            "user_id": self.user_id,  # if this field is necessary
+            "user_id": self.user_id, 
             "name": self.name,
             "description": self.description,
             "location": self.location,
+            "thoughts": self.thoughts
             # "created_at": self.created_at.isoformat() if self.created_at else None,
             # "updated_at": self.updated_at.isoformat() if self.updated_at else None,
         }

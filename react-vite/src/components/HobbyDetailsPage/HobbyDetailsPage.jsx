@@ -9,6 +9,7 @@ const HobbyDetailsPage = () => {
     const { hobbyId } = useParams();
     const dispatch = useDispatch();
     const hobbyDetails = useSelector((state) => state.hobby[hobbyId]);
+    console.log(hobbyDetails, "<<<hobbyDetails")
 
     useEffect(() => {
         dispatch(getHobbyById(hobbyId));
@@ -20,20 +21,24 @@ const HobbyDetailsPage = () => {
 
     return (
         <div className="hobby-details-page">
-            <div className ="name">
+            <div className="left-column">
                 <h1>{hobbyDetails.name}</h1>
             </div>
-            <div className="description">
-                <p>Details: {hobbyDetails.description}</p>
-            </div>
-            <div className="location">
-                <p>Location: {hobbyDetails.location}</p>
-            </div>
 
-            {/* <div className="bookmarks-placeholder">Bookmarks will go here</div> */}
-            
-            <div className="reviews-placeholder">Reviews will go here</div>
-            {/* Eventually, you would map over the reviews and render them here */}
+            <div className="right-column">
+                <div className="section">
+                    <h2>Details</h2>
+                    <p>{hobbyDetails.description}</p>
+                </div>
+                <div className="section">
+                    <h2>Location</h2>
+                    <p>{hobbyDetails.location}</p>
+                </div>
+                <div className="section">
+                    <h2>Thoughts</h2>
+                    <p>{hobbyDetails.thoughts}</p>
+                </div>
+            </div>
         </div>
     );
 };

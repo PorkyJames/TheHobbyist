@@ -3,10 +3,12 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getAllHobbies } from '../../redux/hobby';
 import { Link } from 'react-router-dom';
 
+import './AllHobbiesPage.css'
+
 const AllHobbiesPage = () => {
     const dispatch = useDispatch();
     const allHobbies = useSelector(state => state.hobby);
-    // console.log(allHobbies, "<<<<<All hobbies")
+    console.log(allHobbies, "<<<<<All hobbies")
 
     useEffect(() => {
         dispatch(getAllHobbies());
@@ -16,7 +18,7 @@ const AllHobbiesPage = () => {
         <div className="all-hobbies-page">
             <h1>All Hobbies</h1>
             <div className="hobbies-list">
-                {allHobbies.map(hobby => (
+                {Array.isArray(allHobbies) && allHobbies.map(hobby => (
                     <div key={hobby.id} className="hobby-item">
                         <div className="hobby-content">
                             <h3>{hobby.name}</h3>

@@ -1,47 +1,74 @@
 .create-hobby-form-container {
-    max-width: 500px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 50px;
-    margin-bottom: 50px;
-  }
-  
-  .create-hobby-form h2 {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .form-group input[type="text"],
-  .form-group textarea {
-    width: 100%;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-  }
-  
-  .submit-btn {
-    width: 100%;
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  .submit-btn:hover {
-    background-color: #0056b3;
-  }
-  
+  display: flex; 
+  max-width: 1200px; 
+  margin: 0 auto;
+  padding: 0; 
+  background-color: #fff; 
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  margin-top: 50px;
+  margin-bottom: 50px;
+  overflow: hidden; 
+}
+
+.create-hobby-form {
+  flex: 2; 
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.create-hobby-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.form-introduction {
+  background-color: #8ECAE6;
+    color: #023047;
+    flex: 1; 
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; 
+}
+
+.form-introduction h2 {
+  margin-bottom: 10px;
+  font-size: 24px; 
+}
+
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  color: #023047;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 2px solid #219EBC;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #FB8500;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.submit-btn:hover {
+  background-color: #FFB703
+}
