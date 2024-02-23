@@ -71,8 +71,8 @@ def get_each_hobby(hobbyId):
 @hobby_routes.route("/hobbies/current")
 @login_required
 def get_user_hobbies():
-    user_id = current_user.id 
-    hobbies = Hobby.query.filter_by(user_id=user_id).all()
+    user_profile_id = current_user.profile.id
+    hobbies = Hobby.query.filter_by(profile_id=user_profile_id).all()
     return jsonify([hobby.to_dict() for hobby in hobbies])
 
 #! Update Route
