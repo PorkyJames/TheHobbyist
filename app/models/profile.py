@@ -11,7 +11,7 @@ class Profile(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(15))
-    bio = db.Column(db.String(200))
+    bio = db.Column(db.Text)
     mbti = db.Column(db.String(4))
     interests = db.Column(db.String(50)) 
     city = db.Column(db.String(50))  
