@@ -8,6 +8,7 @@ import "./CreateHobbyForm.css"
 const CreateHobbyForm = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [errors, setErrors] = useState([]);
 
     const [formData, setFormData] = useState({
     name: '',
@@ -22,13 +23,23 @@ const CreateHobbyForm = () => {
             ...prevState,
             [name]: value,
         }));
+
+        if (errors[name]) {
+            setErrors(prevErrors => ({
+                ...prevErrors,
+                [name]: null
+            }));
+        }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const createdHobby = await dispatch(createHobby(formData));
-        if (createdHobby && createdHobby.id) {
-            navigate(`/hobbies/${createdHobby.id}`);
+        const result = await dispatch(createHobby(formData));
+        if (result && result.id) {
+            navigate(`/hobbies/${result.id}`);
+        } else if (result && result.errors) {
+            // Here you would set the error state with the errors from result.errors
+            setErrors(result.errors);
         }
     };
 
@@ -43,6 +54,7 @@ return (
         <form onSubmit={handleSubmit} className="create-hobby-form">    
 
             <div className="form-group">
+                {errors.name && <div className="error-message">{errors.name}</div>}
                 <label htmlFor="name">Name</label>
                 <input
                     type="text"
@@ -56,6 +68,7 @@ return (
             </div>
 
             <div className="form-group">
+                {errors.description && <div className="error-message">{errors.description}</div>}
                 <label htmlFor="description">Description</label>    
                 <textarea
                     id="description"
@@ -69,6 +82,7 @@ return (
             </div>
 
             <div className="form-group">
+                {errors.location && <div className="error-message">{errors.location}</div>}
                 <label htmlFor="location">Location</label>
                 <input
                     type="text"
@@ -81,6 +95,7 @@ return (
             </div>
 
             <div className="form-group">
+                {errors.thoughts && <div className="error-message">{errors.thoughts}</div>}
                 <label htmlFor="thoughts">Thoughts</label>
                 <input
                     type="text"

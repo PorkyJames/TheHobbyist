@@ -67,6 +67,7 @@ const CreateProfileForm = ({ closeModal }) => {
                 </div>
 
                 <div className="create-profile-form-group">
+                <label className="input-labels">UserName</label>
                     <input
                     type="text"
                     id="username"
@@ -84,6 +85,7 @@ const CreateProfileForm = ({ closeModal }) => {
                 </div> */}
 
                 <div className="create-profile-form-group">
+                <label className="input-labels">Bio</label>
                     <textarea
                     id="bio"
                     className="create-profile-input"
@@ -99,6 +101,7 @@ const CreateProfileForm = ({ closeModal }) => {
                 </div> */}
 
                 <div className="create-profile-form-group">
+                <label className="input-labels">MBTI</label>
                     <input
                     type="text"
                     id="mbti"
@@ -115,6 +118,7 @@ const CreateProfileForm = ({ closeModal }) => {
                 </div> */}
 
                 <div className="create-profile-form-group">
+                <label className="input-labels">First Name</label>
                     <input
                     type="text"
                     id="firstName"
@@ -132,6 +136,7 @@ const CreateProfileForm = ({ closeModal }) => {
                 </div> */}
 
                 <div className="create-profile-form-group">
+                <label className="input-labels">Last Name</label>
                     <input
                     type="text"
                     id="lastName"
@@ -149,6 +154,7 @@ const CreateProfileForm = ({ closeModal }) => {
                 </div> */}
 
                 <div className="create-profile-form-group">
+                <label className="input-labels">Interests</label>
                     <textarea
                     id="interests"
                     className="create-profile-input"
@@ -164,6 +170,7 @@ const CreateProfileForm = ({ closeModal }) => {
                 </div> */}
 
                 <div className="create-profile-form-group">
+                <label className="input-labels">City</label>
                     <input
                     type="text"
                     id="city"
@@ -180,6 +187,7 @@ const CreateProfileForm = ({ closeModal }) => {
                 </div> */}
 
                 <div className="create-profile-form-group">
+                <label className="input-labels">State</label>
                     <input
                     type="text"
                     id="state"

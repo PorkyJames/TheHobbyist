@@ -64,14 +64,18 @@
 .submit-btn {
     width: 50%;
     padding: 10px;
-    background-color: #FB8500; /* Orange color for the button */
+    background-color: #FB8500; 
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    align-self: center; /* Center the button within its container */
+    align-self: center; 
 }
 
 .submit-btn:hover {
-    background-color: #FFB703; /* Lighter orange for hover state */
+    background-color: #FFB703; 
+}
+
+.error-messages {
+    color: red
 }
