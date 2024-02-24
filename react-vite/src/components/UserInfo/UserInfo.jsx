@@ -52,17 +52,14 @@ const UserInfo = ({ userId }) => {
         const fieldMap = {
             'firstName': 'first_name',
             'lastName': 'last_name',
-            // Continue mapping other camelCase fields to their snake_case equivalents
         };
         const apiField = fieldMap[field] || field;
     
-        // Create a new object with the updated field
         const updatedProfile = {
             ...profile,
             [apiField]: editedValues[apiField]
         };
     
-        // Dispatch the updateProfile action
         dispatch(updateProfile(profile.id, updatedProfile));
         setEditMode(null);
     };
@@ -100,7 +97,7 @@ const UserInfo = ({ userId }) => {
                                 <div className="username">
                                     <input
                                         type="text"
-                                        value={editedValues.username || profile.username}
+                                        value={profile.username}
                                         onChange={(e) => handleInputChange('username', e.target.value)}
                                     />
                                     <button onClick={() => handleSave('username')}>Save</button>
@@ -132,18 +129,24 @@ const UserInfo = ({ userId }) => {
                             <div className="first-name">
                                 {editMode === 'firstName' ? (
                                     <div>
+                                        <label className="label" htmlFor="firstName">First Name</label>
                                         <input
+                                            className="input-edit"
                                             type="text"
+                                            id="firstName"
                                             value={editedValues.first_name || profile.first_name}
                                             onChange={(e) => handleInputChange('firstName', e.target.value)}
                                         />
-                                        <button onClick={() => handleSave('firstName')}>Save</button>
-                                        <button onClick={handleCancel}>Cancel</button>
+                                        <div className="button-group">
+                                            <button className="save-btn" onClick={() => handleSave('firstName')}>Save</button>
+                                            <button className="cancel-btn" onClick={handleCancel}>Cancel</button>
+                                        </div>
                                     </div>
                                 ) : (
                                     <div>
-                                        {profile.first_name}
-                                        <button onClick={() => handleEditClick('firstName')}>Edit</button>
+                                        <label className="label">First Name</label>
+                                        <span>{profile.first_name}</span>
+                                        <button className="edit-btn" onClick={() => handleEditClick('firstName')}>Edit</button>
                                     </div>
                                 )}
                             </div>
@@ -151,39 +154,47 @@ const UserInfo = ({ userId }) => {
                             <div className="last-name">
                                 {editMode === 'lastName' ? (
                                     <div>
+                                        <label className="label" htmlFor="lastName">Last Name</label>
                                         <input
+                                            className="input-edit"
                                             type="text"
                                             value={editedValues.last_name || profile.last_name}
                                             onChange={(e) => handleInputChange('lastName', e.target.value)}
                                         />
-                                        <button onClick={() => handleSave('lastName')}>Save</button>
-                                        <button onClick={handleCancel}>Cancel</button>
+                                        <div className="button-group">
+                                            <button className="save-btn" onClick={() => handleSave('lastName')}>Save</button>
+                                            <button className="cancel-btn" onClick={handleCancel}>Cancel</button>
+                                        </div>
                                     </div>
                                 ) : (
                                     <div>
-                                        {profile.last_name}
-                                        <button onClick={() => handleEditClick('lastName')}>Edit</button>
+                                        <label className="label">Last Name</label>
+                                        <span>{profile.last_name}</span>
+                                        <button className="edit-btn" onClick={() => handleEditClick('lastName')}>Edit</button>
                                     </div>
                                 )}
                             </div>
 
-
-                        
                             <div className="mbti">
                                 {editMode === 'mbti' ? (
                                     <div>
+                                        <label className="label" htmlFor="mbti">MBTI</label>
                                         <input
+                                            className="input-edit"
                                             type="text"
                                             value={editedValues.mbti || profile.mbti}
                                             onChange={(e) => handleInputChange('mbti', e.target.value)}
                                         />
-                                        <button onClick={() => handleSave('mbti')}>Save</button>
-                                        <button onClick={handleCancel}>Cancel</button>
+                                        <div className="button-group">
+                                            <button className="save-btn" onClick={() => handleSave('mbti')}>Save</button>
+                                            <button className="cancel-btn" onClick={handleCancel}>Cancel</button>
+                                        </div>
                                     </div>
                                 ) : (
                                     <div>
-                                        {profile.mbti}
-                                        <button onClick={() => handleEditClick('mbti')}>Edit</button>
+                                        <label className="label">MBTI</label>
+                                        <span>{profile.mbti}</span>
+                                        <button className="edit-btn"onClick={() => handleEditClick('mbti')}>Edit</button>
                                     </div>
                                 )}
                             </div>
@@ -191,18 +202,23 @@ const UserInfo = ({ userId }) => {
                             <div className="city">
                                 {editMode === 'city' ? (
                                     <div>
+                                        <label className="label" htmlFor="city">City</label>
                                         <input
+                                            className="input-edit"
                                             type="text"
                                             value={editedValues.city || profile.city}
                                             onChange={(e) => handleInputChange('city', e.target.value)}
                                         />
-                                        <button onClick={() => handleSave('city')}>Save</button>
-                                        <button onClick={handleCancel}>Cancel</button>
+                                        <div className="button-group">
+                                            <button className="save-btn" onClick={() => handleSave('city')}>Save</button>
+                                            <button className="cancel-btn" onClick={handleCancel}>Cancel</button>
+                                        </div>
                                     </div>
                                 ) : (
                                     <div>
-                                        {profile.city}
-                                        <button onClick={() => handleEditClick('city')}>Edit</button>
+                                        <label className="label">City</label>
+                                        <span>{profile.city}</span>
+                                        <button className="edit-btn" onClick={() => handleEditClick('city')}>Edit</button>
                                     </div>
                                 )}
                             </div>
@@ -210,56 +226,69 @@ const UserInfo = ({ userId }) => {
                             <div className="state">
                                 {editMode === 'state' ? (
                                     <div>
+                                        <label className="label" htmlFor="state">State</label>
                                         <input
+                                            className="input-edit"
                                             type="text"
                                             value={editedValues.state || profile.state}
                                             onChange={(e) => handleInputChange('state', e.target.value)}
                                         />
-                                        <button onClick={() => handleSave('state')}>Save</button>
-                                        <button onClick={handleCancel}>Cancel</button>
+                                        <div className="button-group">
+                                            <button className="save-btn" onClick={() => handleSave('state')}>Save</button>
+                                            <button className="cancel-btn" onClick={handleCancel}>Cancel</button>
+                                        </div>
                                     </div>
                                 ) : (
                                     <div>
-                                        {profile.state}
-                                        <button onClick={() => handleEditClick('state')}>Edit</button>
+                                        <label className="label">State</label>
+                                        <span>{profile.state}</span>
+                                        <button className="edit-btn" onClick={() => handleEditClick('state')}>Edit</button>
                                     </div>
                                 )}
                             </div>
-
 
                             <div className="interests">
                                 {editMode === 'interests' ? (
                                     <div>
+                                        <label className="label" htmlFor="interests">Interests</label>
                                         <textarea
-                                            value={editedValues.interests || profile.interests}
+                                            className="textarea-edit"
+                                            value={editedValues.interests ||profile.interests}
                                             onChange={(e) => handleInputChange('interests', e.target.value)}
                                         />
-                                        <button onClick={() => handleSave('interests')}>Save</button>
-                                        <button onClick={handleCancel}>Cancel</button>
+                                        <div className="button-group">
+                                            <button className="save-btn" onClick={() => handleSave('interests')}>Save</button>
+                                            <button className="cancel-btn" onClick={handleCancel}>Cancel</button>
+                                        </div>
                                     </div>
                                 ) : (
                                     <div>
-                                        {profile.interests}
-                                        <button onClick={() => handleEditClick('interests')}>Edit</button>
+                                        <label className="label">Interests</label>
+                                        <span>{profile.interests}</span>
+                                        <button className="edit-btn" onClick={() => handleEditClick('interests')}>Edit</button>
                                     </div>
                                 )}
                             </div>
 
-
                             <div className="bio">
                                 {editMode === 'bio' ? (
                                     <div>
+                                        <label className="label" htmlFor="bio">Bio</label>
                                         <textarea
-                                            value={editedValues.bio || profile.bio}
+                                            className="textarea-edit"
+                                            value={editedValues.bio ||profile.bio}
                                             onChange={(e) => handleInputChange('bio', e.target.value)}
                                         />
-                                        <button onClick={() => handleSave('bio')}>Save</button>
-                                        <button onClick={handleCancel}>Cancel</button>
+                                        <div className="button-group">
+                                            <button className="save-btn" onClick={() => handleSave('bio')}>Save</button>
+                                            <button className="cancel-btn" onClick={handleCancel}>Cancel</button>
+                                        </div>
                                     </div>
                                 ) : (
                                     <div>
-                                        {profile.bio}
-                                        <button onClick={() => handleEditClick('bio')}>Edit</button>
+                                        <label className="label">Bio</label>
+                                        <span>{profile.bio}</span>
+                                        <button className="edit-btn" onClick={() => handleEditClick('bio')}>Edit</button>
                                     </div>
                                 )}
                             </div>
