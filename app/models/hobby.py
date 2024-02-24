@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from .db import db, environment, SCHEMA
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 class Hobby(db.Model):
     __tablename__ = 'hobbies'
@@ -8,7 +8,7 @@ class Hobby(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    profile_id = db.Column(db.Integer, db.ForeignKey('profiles.id', ondelete='CASCADE'), nullable=False)
+    profile_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('profiles.id'), ondelete='CASCADE'), nullable=False)
     name = db.Column(db.String, nullable=False)
     description = db.Column(db.Text)
     location = db.Column(db.String)
