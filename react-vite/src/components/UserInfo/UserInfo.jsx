@@ -17,6 +17,19 @@ const UserInfo = ({ userId }) => {
     const [editedValues, setEditedValues] = useState({});
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
+    //! Error Handling, but in the frontend
+    const [errors, setErrors] = useState({
+        username: '',
+        firstName: '',
+        lastName: '',
+        mbti: '',
+        city: '',
+        state: '',
+        interests: '',
+        bio: ''
+    });
+
+
     const [activeTab, setActiveTab] = useState('hobbies');
 
     useEffect(() => {
@@ -48,7 +61,7 @@ const UserInfo = ({ userId }) => {
         setEditedValues(values => ({ ...values, [updatedField]: value }));
     };
     
-    const handleSave = (field) => {
+    const handleSave = async (field) => {
         const fieldMap = {
             'firstName': 'first_name',
             'lastName': 'last_name',
@@ -60,12 +73,40 @@ const UserInfo = ({ userId }) => {
             [apiField]: editedValues[apiField]
         };
     
-        dispatch(updateProfile(profile.id, updatedProfile));
-        setEditMode(null);
+        // Dispatch the action and wait for the response
+        const serverResponse = await dispatch(updateProfile(profile.id, updatedProfile));
+
+        // Check for errors in the server response
+        if (serverResponse && serverResponse.errors) {
+            // Initialize an empty object to hold the new errors
+            const newErrors = {
+                ...errors,
+                first_name: serverResponse.errors.first_name || [],
+                last_name: serverResponse.errors.last_name || [],
+            };
+
+            // Iterate over the keys of the serverResponse.errors object
+            for (const [key, value] of Object.entries(serverResponse.errors)) {
+                // Here we assume each key has an array of errors, take the first one as the message
+                newErrors[key] = value[0];
+            }
+
+            // Set the errors state with the new errors
+            setErrors(newErrors);
+        } else {
+            // If there are no errors, clear any existing errors and exit edit mode
+            setErrors({});
+            setEditMode(null);
+        }
     };
     
 
     const handleCancel = () => {
+        setEditedValues({
+            ...editedValues,
+            first_name: profile.first_name, 
+            last_name: profile.last_name,  
+        });
         setEditMode(null);
     };
 
@@ -97,7 +138,8 @@ const UserInfo = ({ userId }) => {
                                         type="text"
                                         value={editedValues.username || profile.username}
                                         onChange={(e) => handleInputChange('username', e.target.value)}
-                                    />
+                                        />
+                                    {errors.username && <div className="error-message">{errors.username}</div>}
                                     <div className="button-group">
                                         <button className="save-btn" onClick={() => handleSave('username')}>Save</button>
                                         <button className="cancel-btn" onClick={handleCancel}>Cancel</button>
@@ -127,6 +169,9 @@ const UserInfo = ({ userId }) => {
                                 {editMode === 'firstName' ? (
                                     <div>
                                         <label className="label" htmlFor="firstName">First Name</label>
+                                        {errors.first_name && errors.first_name.length > 0 && (
+                                            <div className="error-message">{errors.first_name}</div>
+                                        )}
                                         <input
                                             className="input-edit"
                                             type="text"
@@ -152,9 +197,13 @@ const UserInfo = ({ userId }) => {
                                 {editMode === 'lastName' ? (
                                     <div>
                                         <label className="label" htmlFor="lastName">Last Name</label>
+                                        {errors.last_name && errors.last_name.length > 0 && (
+                                            <div className="error-message">{errors.last_name}</div>
+                                        )}
                                         <input
                                             className="input-edit"
                                             type="text"
+                                            id="lastName"
                                             value={editedValues.last_name || profile.last_name}
                                             onChange={(e) => handleInputChange('lastName', e.target.value)}
                                         />
@@ -176,6 +225,7 @@ const UserInfo = ({ userId }) => {
                                 {editMode === 'mbti' ? (
                                     <div>
                                         <label className="label" htmlFor="mbti">MBTI</label>
+                                        {errors.mbti && <div className="error-message">{errors.mbti}</div>}
                                         <input
                                             className="input-edit"
                                             type="text"
@@ -200,6 +250,7 @@ const UserInfo = ({ userId }) => {
                                 {editMode === 'city' ? (
                                     <div>
                                         <label className="label" htmlFor="city">City</label>
+                                        {errors.city && <div className="error-message">{errors.city}</div>}
                                         <input
                                             className="input-edit"
                                             type="text"
@@ -224,6 +275,7 @@ const UserInfo = ({ userId }) => {
                                 {editMode === 'state' ? (
                                     <div>
                                         <label className="label" htmlFor="state">State</label>
+                                        {errors.state && <div className="error-message">{errors.state}</div>}
                                         <input
                                             className="input-edit"
                                             type="text"
@@ -248,6 +300,7 @@ const UserInfo = ({ userId }) => {
                                 {editMode === 'interests' ? (
                                     <div>
                                         <label className="label" htmlFor="interests">Interests</label>
+                                        {errors.interests && <div className="error-message">{errors.interests}</div>}
                                         <textarea
                                             className="textarea-edit"
                                             value={editedValues.interests ||profile.interests}
@@ -271,6 +324,7 @@ const UserInfo = ({ userId }) => {
                                 {editMode === 'bio' ? (
                                     <div>
                                         <label className="label" htmlFor="bio">Bio</label>
+                                        {errors.bio && <div className="error-message">{errors.bio}</div>}
                                         <textarea
                                             className="textarea-edit"
                                             value={editedValues.bio ||profile.bio}
