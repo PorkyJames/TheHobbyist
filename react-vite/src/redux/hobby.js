@@ -134,7 +134,7 @@ export const deleteHobby = (hobbyId) => async (dispatch) => {
         method: "DELETE",
     }
 
-    const res = await fetch (`/api/hobbies/${hobbyId}`, requestMethod)
+    const res = await fetch(`/api/hobbies/${hobbyId}`, requestMethod)
 
     if (res.ok) {
         const deletedHobby = await res.json();

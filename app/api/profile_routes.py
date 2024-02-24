@@ -54,7 +54,7 @@ def create_profile():
 
         return jsonify(new_profile.to_dict()), 201
     
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+    return {'errors': (form.errors)}, 400
 
     # # ! Now that we've created the profile and added to our Database,
     # # ! we need to let the User select their first hobby. 
