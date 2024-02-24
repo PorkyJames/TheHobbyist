@@ -41,7 +41,7 @@ def upgrade():
         sa.Column('id', sa.Integer(), nullable=False, primary_key=True),
         # sa.Column('name', sa.String(length=15), nullable=False),
         sa.Column('username', sa.String(length=15), nullable=False),
-        sa.Column('bio', sa.Text(length=50), nullable=True),
+        sa.Column('bio', sa.String(length=50), nullable=True),
         sa.Column('mbti', sa.String(length=4), nullable=True),
         sa.Column('interests', sa.Text(), nullable=True),
         sa.Column('city', sa.String(length=50), nullable=True), 
