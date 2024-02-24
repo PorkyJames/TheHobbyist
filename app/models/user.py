@@ -4,11 +4,11 @@ from flask_login import UserMixin
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
-    id = db.Column(db.Integer, primary_key=True)
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}
 
+    id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(25), nullable=False)
     last_name = db.Column(db.String(25), nullable=False)
     username = db.Column(db.String(40), nullable=False, unique=True)
@@ -16,7 +16,7 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
 
     # Relationship between User and Profile. If profile is delete, user gets deleted
-    profile = db.relationship('Profile', backref='user', lazy=True, uselist=False, cascade="delete, delete-orphan")
+    profile = db.relationship('Profile', back_populates='user', uselist=False, cascade="delete, delete-orphan")
 
 
     @property

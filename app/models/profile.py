@@ -10,7 +10,7 @@ class Profile(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id', ondelete='CASCADE'), nullable=False, unique=True)
     username = db.Column(db.String(15))
     bio = db.Column(db.Text)
     mbti = db.Column(db.String(4))
@@ -21,7 +21,8 @@ class Profile(db.Model):
     last_name = db.Column(db.String(25)) 
 
     # Relationships
-    user_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id'), nullable=False)
+    # user_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id'), nullable=False)
+    user = db.relationship('User', back_populates='profile')
     hobbies = db.relationship('Hobby', backref='profile', lazy='dynamic', cascade='delete, delete-orphan')
     
     def to_dict(self):
