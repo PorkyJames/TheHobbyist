@@ -154,3 +154,28 @@
 .button-container {
     text-align: center;
 }
+
+.username-edit input {
+    width: 200px; 
+    padding: 10px;
+    margin: 0 auto 10px; 
+    display: block; 
+}
+
+.username-edit .button-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+
+.username-edit button {
+    width: 200px; 
+    margin-top: 5px;
+}
+
+.username { 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    margin-bottom: 20px;
+}

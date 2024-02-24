@@ -10,15 +10,15 @@ from ..forms.profile_form import ProfileForm
 
 profile_routes = Blueprint("/profiles", __name__)
 
-def validation_errors_to_error_messages(validation_errors):
-    """
-    Simple function that turns the WTForms validation errors into a simple list
-    """
-    errorMessages = []
-    for field in validation_errors:
-        for error in validation_errors[field]:
-            errorMessages.append(f'{field} : {error}')
-    return errorMessages
+# def validation_errors_to_error_messages(validation_errors):
+#     """
+#     Simple function that turns the WTForms validation errors into a simple list
+#     """
+#     errorMessages = []
+#     for field in validation_errors:
+#         for error in validation_errors[field]:
+#             errorMessages.append(f'{field} : {error}')
+#     return errorMessages
 
 #! Create Route
 @profile_routes.route("/profiles", methods = ["POST"])
@@ -109,16 +109,37 @@ def update_user_profile(profileId):
     # Query to get the user's profile by ID and ensure it belongs to the current user
     user_profile = Profile.query.filter_by(id=profileId, user_id=current_user.id).first()
 
+    # if profile not found
     if user_profile is None:
         return jsonify({"error": "Profile not found or not authorized"}), 404
 
     data = request.get_json()
 
+    # if 'username' in data and data['username'] != user_profile.username:
+    #     existing_user = User.query.filter(
+    #         User.username == data['username'],
+    #         User.id != current_user.id
+    #     ).first()
+    #     if existing_user:
+    #         return jsonify({'errors': ['Username already taken']}), 400
+
     # Instantiate a new form instance with data from the request
-    form = ProfileForm(data=data)
+    form = ProfileForm(data=data, user_id=current_user.id)
 
     # CSRF Token authentication
     form['csrf_token'].data = request.cookies['csrf_token']
+
+    # if 'username' in data and data['username'] != user_profile.username:
+
+    #     existing_user = User.query.filter(
+    #         User.username == data['username'],
+    #         User.id != current_user.id
+    #     ).first()
+
+    #     # print(f"Existing user found: {existing_user}")
+
+    #     if existing_user:
+    #         return jsonify({"error": "Username already taken"}), 400
     
     if form.validate_on_submit():
         # Update profile fields with data from the form
@@ -136,7 +157,8 @@ def update_user_profile(profileId):
         return jsonify(user_profile.to_dict()), 200
     else:
         # If the form does not validate, return the form errors
-        return {'errors': validation_errors_to_error_messages(form.errors)}, 400
+        print(form.errors)
+        return {'errors': (form.errors)}, 400
 
 #! Delete Routes
 # User can delete their profile which will result in them being logged out 

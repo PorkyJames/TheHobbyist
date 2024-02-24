@@ -86,42 +86,39 @@ const UserInfo = ({ userId }) => {
 
                 <div className="user-info">
                     <div className="left-column">
-
                         <div className="user-icon">
                             <i className="fas fa-user-circle"></i>
                         </div>
-
                         <div className="top-row">
-
                             {editMode === 'username' ? (
-                                <div className="username">
+                                <div className="username-edit">
                                     <input
+                                        className="input-edit"
                                         type="text"
-                                        value={profile.username}
+                                        value={editedValues.username || profile.username}
                                         onChange={(e) => handleInputChange('username', e.target.value)}
                                     />
-                                    <button onClick={() => handleSave('username')}>Save</button>
-                                    <button onClick={handleCancel}>Cancel</button>
+                                    <div className="button-group">
+                                        <button className="save-btn" onClick={() => handleSave('username')}>Save</button>
+                                        <button className="cancel-btn" onClick={handleCancel}>Cancel</button>
+                                    </div>
                                 </div>
                             ) : (
                                 <div className="username">
                                     <span>{profile.username}</span>
-                                    <button onClick={() => handleEditClick('username')}>Edit</button>
+                                    <button className="edit-btn" onClick={() => handleEditClick('username')}>Edit</button>
                                 </div>
                             )}
-
                             <div className="delete-profile-button">
                                 <button className="delete-profile" onClick={openDeleteModal}>Delete Profile</button>
-                                    {showDeleteModal && (
-                                        <DeleteProfileModal 
-                                            profileId={profile.id} 
-                                            closeModal={closeDeleteModal} 
-                                        />
-                                    )}
+                                {showDeleteModal && (
+                                    <DeleteProfileModal 
+                                        profileId={profile.id} 
+                                        closeModal={closeDeleteModal} 
+                                    />
+                                )}
                             </div>
-
                         </div>
-
                     </div>
 
                     <div className="right-column">
