@@ -156,8 +156,8 @@ def update_user_profile(profileId):
 
         return jsonify(user_profile.to_dict()), 200
     else:
-        # If the form does not validate, return the form errors
-        print(form.errors)
+        # # If the form does not validate, return the form errors
+        # print(form.errors)
         return {'errors': (form.errors)}, 400
 
 #! Delete Routes

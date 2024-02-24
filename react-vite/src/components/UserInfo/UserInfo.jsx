@@ -26,7 +26,7 @@ const UserInfo = ({ userId }) => {
         city: '',
         state: '',
         interests: '',
-        bio: ''
+        bio: '',
     });
 
 
@@ -303,7 +303,7 @@ const UserInfo = ({ userId }) => {
                                         {errors.interests && <div className="error-message">{errors.interests}</div>}
                                         <textarea
                                             className="textarea-edit"
-                                            value={editedValues.interests ||profile.interests}
+                                            value={editedValues.interests || profile.interests}
                                             onChange={(e) => handleInputChange('interests', e.target.value)}
                                         />
                                         <div className="button-group">
@@ -327,7 +327,7 @@ const UserInfo = ({ userId }) => {
                                         {errors.bio && <div className="error-message">{errors.bio}</div>}
                                         <textarea
                                             className="textarea-edit"
-                                            value={editedValues.bio ||profile.bio}
+                                            value={editedValues.bio || profile.bio}
                                             onChange={(e) => handleInputChange('bio', e.target.value)}
                                         />
                                         <div className="button-group">
