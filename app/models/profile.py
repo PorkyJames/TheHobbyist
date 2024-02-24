@@ -20,7 +20,7 @@ class Profile(db.Model):
     last_name = db.Column(db.String(25)) 
 
     # Relationships
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(f'{SCHEMA}.users.id'), nullable=False)
     hobbies = db.relationship('Hobby', backref='profile', lazy='dynamic', cascade='delete, delete-orphan')
     
     def to_dict(self):
