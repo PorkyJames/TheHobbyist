@@ -10,6 +10,7 @@ class Profile(db.Model):
         __table_args__ = {'schema': SCHEMA}
 
     id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
     username = db.Column(db.String(15))
     bio = db.Column(db.Text)
     mbti = db.Column(db.String(4))
