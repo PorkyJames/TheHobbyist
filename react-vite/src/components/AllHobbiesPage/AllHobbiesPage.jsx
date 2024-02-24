@@ -7,8 +7,8 @@ import './AllHobbiesPage.css'
 
 const AllHobbiesPage = () => {
     const dispatch = useDispatch();
-    const allHobbies = useSelector(state => state.hobby);
-    console.log(allHobbies, "<<<<<All hobbies")
+    const allHobbies = useSelector(state => state.hobby.allHobbies);
+    // console.log(allHobbies, "<<<<<All hobbies")
 
     useEffect(() => {
         dispatch(getAllHobbies());

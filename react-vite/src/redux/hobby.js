@@ -154,7 +154,10 @@ const hobbyReducer = (state = initialState, action) => {
                 userHobbies: action.payload
             }
         case LOAD_ALL_HOBBIES:
-            return action.payload
+            return {
+                ...state,
+                allHobbies: action.payload,
+            };
         case LOAD_EACH_HOBBY:
             return {
                 ...state,
