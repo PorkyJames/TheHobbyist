@@ -22,7 +22,7 @@ class ProfileForm(FlaskForm):
             raise ValidationError('Username already taken.')
         
     username = StringField('User Name', validators=[DataRequired(), Length(max=15), username_exists])
-    bio = TextAreaField('Bio', validators=[DataRequired(), Length(max=100)])
+    bio = StringField('Bio', validators=[DataRequired(), Length(max=100)])
     mbti = StringField('MBTI', validators=[DataRequired(), Length(max=4)])
     interests = StringField('Interests', validators=[Length(max=100)])
     city = StringField("City", validators=[Length(max=50)])
