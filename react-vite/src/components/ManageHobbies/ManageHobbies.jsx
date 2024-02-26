@@ -54,7 +54,6 @@ const ManageHobbies = () => {
                             <div className="hobby-content" onClick={() => window.location.href = `/hobbies/${hobby.id}`}>
                                 <h3>{hobby.name}</h3>
                                 <p>{hobby.description}</p>
-                                {/* {hobby.imageUrl && <img src={hobby.imageUrl} alt={hobby.name} />} */}
                             </div>
                             <div className="hobby-actions">
                                 <Link to={`/hobbies/${hobby.id}/edit`}>

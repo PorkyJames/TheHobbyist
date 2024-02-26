@@ -73,7 +73,6 @@ const UserInfo = ({ userId }) => {
             [apiField]: editedValues[apiField]
         };
     
-        // Dispatch the action and wait for the response
         const serverResponse = await dispatch(updateProfile(profile.id, updatedProfile));
 
         // Check for errors in the server response

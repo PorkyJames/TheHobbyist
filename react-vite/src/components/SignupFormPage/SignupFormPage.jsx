@@ -23,7 +23,6 @@ function SignupFormPage() {
     e.preventDefault();
   
     if (password !== confirmPassword) {
-      // Set errors as an array
       setErrors(["Confirm Password field must be the same as the Password field"]);
       return;
     }
@@ -38,7 +37,6 @@ function SignupFormPage() {
       })
     );
   
-    // Assuming serverResponse.errors is an object, convert the values to an array
     if (serverResponse && serverResponse.errors) {
       const errorMessages = Object.values(serverResponse.errors);
       setErrors(errorMessages);

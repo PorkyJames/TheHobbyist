@@ -77,11 +77,11 @@
 
 @keyframes fadeInAndSlideUpContainer {
   0% {
-    transform: translateY(20vh); /* Only vertical movement */
+    transform: translateY(20vh); 
     opacity: 0;
   }
   100% {
-    transform: translateY(0); /* Return to original vertical position */
+    transform: translateY(0); 
     opacity: 1;
   }
 }

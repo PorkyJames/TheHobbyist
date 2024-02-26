@@ -38,7 +38,6 @@ const CreateHobbyForm = () => {
         if (result && result.id) {
             navigate(`/hobbies/${result.id}`);
         } else if (result && result.errors) {
-            // Here you would set the error state with the errors from result.errors
             setErrors(result.errors);
         }
     };
