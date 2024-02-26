@@ -9,6 +9,8 @@
   margin-top: 50px;
   margin-bottom: 50px;
   overflow: hidden; 
+  animation: fadeInAndSlideUpContainer 0.5s ease-out forwards;
+  border: 3px solid #023047;
 }
 
 .create-hobby-form {
@@ -71,4 +73,15 @@
 
 .submit-btn:hover {
   background-color: #FFB703
+}
+
+@keyframes fadeInAndSlideUpContainer {
+  0% {
+    transform: translateY(20vh); /* Only vertical movement */
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0); /* Return to original vertical position */
+    opacity: 1;
+  }
 }

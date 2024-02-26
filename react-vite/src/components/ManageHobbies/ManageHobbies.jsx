@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import DeleteHobbyModal from '../DeleteHobbyModal/DeleteHobbyModal';
 import { useModal } from '../../context/Modal';
 
+import "./ManageHobbies.css"
+
 const ManageHobbies = () => {
     const dispatch = useDispatch();
     const userHobbies = useSelector(state => state.hobby.userHobbies);
@@ -39,26 +41,33 @@ const ManageHobbies = () => {
     }
 
     return (
-        <div className="manage-hobbies">
-            <h1>Manage Hobbies</h1>
-            <div className="hobbies-list">
-                {userHobbies.map(hobby => (
-                    <div key={hobby.id} className="hobby-item">
-                        <div className="hobby-content" onClick={() => window.location.href = `/hobbies/${hobby.id}`}>
-                            <h3>{hobby.name}</h3>
-                            <p>{hobby.description}</p>
-                            {/* {hobby.imageUrl && <img src={hobby.imageUrl} alt={hobby.name} />} */}
+        <>
+        <div className="manage-hobbies-container">
+            <div className="manage-hobbies-title">
+                <h1>Manage Hobbies</h1>
+            </div>
+
+            <div className="manage-hobbies-list-container">
+                <div className="manage-hobbies-list-page">
+                    {userHobbies.map(hobby => (
+                        <div key={hobby.id} className="manage-hobby-item">
+                            <div className="hobby-content" onClick={() => window.location.href = `/hobbies/${hobby.id}`}>
+                                <h3>{hobby.name}</h3>
+                                <p>{hobby.description}</p>
+                                {/* {hobby.imageUrl && <img src={hobby.imageUrl} alt={hobby.name} />} */}
+                            </div>
+                            <div className="hobby-actions">
+                                <Link to={`/hobbies/${hobby.id}/edit`}>
+                                    <button>Update</button>
+                                </Link>
+                                <button onClick={() => openDeleteModal(hobby.id)}>Delete</button>
+                            </div>
                         </div>
-                        <div className="hobby-actions">
-                            <Link to={`/hobbies/${hobby.id}/edit`}>
-                                <button>Update</button>
-                            </Link>
-                            <button onClick={() => openDeleteModal(hobby.id)}>Delete</button>
-                        </div>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
+        </>
     );
 };
 

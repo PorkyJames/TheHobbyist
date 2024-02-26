@@ -14,6 +14,28 @@
     align-items: flex-start;
 }
 
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
 .left-column, .right-column {
     display: flex;
     flex-direction: column;
@@ -25,11 +47,14 @@
 .left-column {
     width: 540px;
     height: auto;
+    animation: .8s ease-out 0s 1 slideInFromLeft;
+    margin-bottom: 15px;
 }
 
 .right-column {
     width: 500px; 
     height: auto; 
+    animation: .8s ease-out 0s 1 slideInFromRight;
 }
 
 .user-icon {

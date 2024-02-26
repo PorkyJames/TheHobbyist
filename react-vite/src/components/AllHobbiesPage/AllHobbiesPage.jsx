@@ -16,7 +16,9 @@ const AllHobbiesPage = () => {
 
     return (
         <div className="all-hobbies-page">
-            <h1>All Hobbies</h1>
+            <div className='title-all-hobbies'>
+                <h1>All Hobbies</h1>
+            </div>
             <div className="hobbies-list">
                 {Array.isArray(allHobbies) && allHobbies.map(hobby => (
                     <div key={hobby.id} className="hobby-item">

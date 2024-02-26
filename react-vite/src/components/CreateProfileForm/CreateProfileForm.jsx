@@ -41,6 +41,7 @@ const CreateProfileForm = ({ closeModal }) => {
         if (serverResponse && serverResponse.errors) {
             // console.log(serverResponse.errors, "<<<<serverResponse.errors")
             setErrors(serverResponse.errors); 
+            // console.log(errors, "<<<<errors")
 
         } else {
             closeModal();
@@ -58,16 +59,20 @@ const CreateProfileForm = ({ closeModal }) => {
                     <p> Create a New Profile to get Started! </p>
                 </h2>
 
-                <div className="error-messages">
+                {/* <div className="error-messages">
                     <ul>
                         {Object.values(errors).map((error, idx) => (
                             <li key={idx}>{error}</li>
                         ))}
                     </ul>
+                </div> */}
+
+                <div className="error-message">
+                    {errors.username && <div className="error">{errors.username}</div>}
                 </div>
 
                 <div className="create-profile-form-group">
-                <label className="input-labels">UserName</label>
+                <label className="input-labels">Username</label>
                     <input
                     type="text"
                     id="username"
@@ -80,9 +85,9 @@ const CreateProfileForm = ({ closeModal }) => {
                     />
                 </div>
 
-                {/* <div className="error-message">
+                <div className="error-message">
                     {errors.bio && <div className="error">{errors.bio}</div>}
-                </div> */}
+                </div>
 
                 <div className="create-profile-form-group">
                 <label className="input-labels">Bio</label>
@@ -96,9 +101,9 @@ const CreateProfileForm = ({ closeModal }) => {
                     />
                 </div>
 
-                {/* <div className="error-message">
+                <div className="error-message">
                     {errors.mbti && <div className="error">{errors.mbti}</div>}
-                </div> */}
+                </div>
 
                 <div className="create-profile-form-group">
                 <label className="input-labels">MBTI</label>
@@ -113,9 +118,9 @@ const CreateProfileForm = ({ closeModal }) => {
                     />
                 </div>
 
-                {/* <div className="error-message">
-                    {errors.firstName && <div className="error">{errors.firstName}</div>}
-                </div> */}
+                <div className="error-message">
+                    {errors.first_name && <div className="error">{errors.first_name}</div>}
+                </div>
 
                 <div className="create-profile-form-group">
                 <label className="input-labels">First Name</label>
@@ -131,9 +136,9 @@ const CreateProfileForm = ({ closeModal }) => {
                     />
                 </div>
 
-                {/* <div className="error-message">
-                    {errors.lastName && <div className="error">{errors.lastName}</div>}
-                </div> */}
+                <div className="error-message">
+                    {errors.last_name && <div className="error">{errors.last_name}</div>}
+                </div>
 
                 <div className="create-profile-form-group">
                 <label className="input-labels">Last Name</label>
@@ -149,9 +154,9 @@ const CreateProfileForm = ({ closeModal }) => {
                     />
                 </div>
 
-                {/* <div className="error-message">
+                <div className="error-message">
                     {errors.interests && <div className="error">{errors.interests}</div>}
-                </div> */}
+                </div>
 
                 <div className="create-profile-form-group">
                 <label className="input-labels">Interests</label>
@@ -165,9 +170,9 @@ const CreateProfileForm = ({ closeModal }) => {
                     />
                 </div>
 
-                {/* <div className="error-message">
+                <div className="error-message">
                     {errors.city && <div className="error">{errors.city}</div>}
-                </div> */}
+                </div>
 
                 <div className="create-profile-form-group">
                 <label className="input-labels">City</label>
@@ -182,9 +187,9 @@ const CreateProfileForm = ({ closeModal }) => {
                     />
                 </div>
 
-                {/* <div className="error-message">
+                <div className="error-message">
                     {errors.state && <div className="error">{errors.state}</div>}
-                </div> */}
+                </div>
 
                 <div className="create-profile-form-group">
                 <label className="input-labels">State</label>
