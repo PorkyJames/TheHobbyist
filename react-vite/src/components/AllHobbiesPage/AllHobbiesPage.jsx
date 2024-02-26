@@ -9,6 +9,7 @@ const AllHobbiesPage = () => {
     const dispatch = useDispatch();
     const allHobbies = useSelector(state => state.hobby.allHobbies);
     // console.log(allHobbies, "<<<<<All hobbies")
+    // re-commit
 
     useEffect(() => {
         dispatch(getAllHobbies());
