@@ -351,7 +351,7 @@ const UserInfo = ({ userId }) => {
 
                 <div className="manage-section">
                     {activeTab === 'hobbies' && <ManageHobbies />}
-                    {activeTab === 'reviews' && <ManageReviews />}
+                    {/* {activeTab === 'reviews' && <ManageReviews />} */}
                 </div>
 
                 {/* {console.log("Rendering UserInfo", { activeTab })} */}

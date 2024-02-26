@@ -16,7 +16,7 @@ function MainPage() {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const { setModalContent, closeModal } = useModal();
-    console.log(allHobbies, "<<<< allHobbies searchpage")
+    // console.log(allHobbies, "<<<< allHobbies searchpage")
 
     const userId = useSelector(state => state.session.user?.id)
 
