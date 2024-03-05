@@ -1,6 +1,6 @@
 # TheHobbyist
 
-TheHobbyist is an online journal where Users can create Journal entries regarding their thoughts and experiences after participating in that hobby.
+TheHobbyist is an online journal where Users can create Journal entries regarding their thoughts and experiences after participating in a specific hobby.
 
 ## Features
 Users can:
