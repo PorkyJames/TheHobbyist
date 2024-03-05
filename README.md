@@ -35,5 +35,5 @@ Bookmark Feature where Users can:
 - Delete their Bookmark
 
 ## Potential Features for the future:
-AWS S3 for Images
-Google Maps / Places API
+- AWS S3 for Images
+- Google Maps / Places API
