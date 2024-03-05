@@ -23,3 +23,17 @@ Users can:
 ![image](https://github.com/PorkyJames/TheHobbyist/assets/120065147/860ac68f-712d-49fa-8a5a-054fa123befa)
 ![image](https://github.com/PorkyJames/TheHobbyist/assets/120065147/3fd8b17b-7cb0-457a-9193-fe568ca30bca)
 
+## Upcoming Features
+Review Feature where Users can:
+- Create a Review
+- Update their Review
+- Delete their Review
+
+Bookmark Feature where Users can:
+- Create a Bookmark
+- Update their Bookmark
+- Delete their Bookmark
+
+## Potential Features for the future:
+AWS S3 for Images
+Google Maps / Places API
