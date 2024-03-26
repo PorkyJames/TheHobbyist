@@ -1,0 +1,128 @@
+.login-form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; 
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(to bottom, #ffffff, #FFB703, #FB8500);
+}
+
+.login-card {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 40px 40px 25px;
+    border-radius: 8px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    width: 300px; 
+    transition: background-color 0.5s, transform 0.3s, box-shadow 0.5s;
+}
+
+.login-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.login-title {
+    font-size: 32px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 16px;
+    color: #333;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input-group input:focus {
+    border-color: #ff5e62;
+    box-shadow: 0 1px 3px rgba(255, 94, 98, 0.4);
+    outline: none;
+}
+
+.button-group button,
+.sign-up-button button {
+    width: 100%;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.button-group button {
+    background-color: #FB8500;
+    color: white;
+}
+
+.button-group button:hover,
+.sign-up-button button:hover,
+.demo-login button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.sign-up-button button {
+    background-color: #FFB703;
+    color: white;
+    margin-top: 15px;
+}
+
+.demo-login {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.demo-login button {
+    width: 50%; 
+    padding: 10px 20px;
+    background-color: none;
+    margin: 0 auto; 
+    display: block; 
+}
+
+.error-messages ul {
+    padding: 0;
+    list-style: none;
+}
+
+.error-messages li {
+    color: #dc3545;
+    margin-bottom: 10px;
+    font-size: 14px;
+    text-align: center;
+}
+
+.title-button button {
+    background: none; 
+    border: none; 
+    padding: 0; 
+    margin: 0; 
+    cursor: pointer; 
+}
+
+.title-button button:hover {
+    text-decoration: underline; 
+}
+
+.title-button h1 {
+    font-size: 2em; 
+    color: #333; 
+    margin-top: 15px; 
+}

@@ -1,0 +1,16 @@
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.user-tabs {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.tab-content {
+    width: 100%;
+    margin-top: 20px;   
+}
+

@@ -1,18 +1,19 @@
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 
-function Navigation() {
-  return (
-    <ul>
-      <li>
-        <NavLink to="/">Home</NavLink>
-      </li>
+// import { useNavigate } from "react-router-dom";
 
-      <li>
-        <ProfileButton />
-      </li>
-    </ul>
+
+function Navigation() {
+
+  // const navigate = useNavigate();
+
+  return (
+    <>
+      <ProfileButton />
+      
+    </>
   );
 }
 

@@ -4,55 +4,146 @@
 }
 
 .main-title {
-    margin-bottom: 50px;
-    font-size: 50px;
+    margin-top: 150px;
+    margin-bottom: 30px;
+    font-size: 90px; 
+    animation: slideDown 1s ease forwards;
+}
+
+.search-bar-form {
+    margin-bottom: 20px;
 }
 
 .search-bar {
     padding: 10px 20px;
     font-size: 16px;
-    width: 50%;
-    border: 1px solid #dfe1e5; 
-    border-radius: 24px; 
-    margin-bottom: 20px; 
-    outline: none; 
-    box-shadow: none; 
+    width: 40%; 
+    border: 1px solid #dfe1e5;
+    border-radius: 24px;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+.search-bar:hover {
+    border-color: black;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.search-button,
+.random-button,
+.view-all-button {
+    padding: 10px 20px;
+    background-color: #f8f9fa; 
+    border: 1px solid #f8f9fa; 
+    border-radius: 4px;
+    font-size: 14px; 
+    cursor: pointer;
+    transition: box-shadow 0.3s, border-color 0.3s;
+    margin-bottom: 20px;
 }
 
 .search-button {
-    padding: 10px 20px;
-    background-color: #f8f9fa; 
-    border: 1px solid #f8f9fa;
-    border-radius: 4px;
-    color: #3c4043; 
-    margin-left: 10px; 
-    cursor: pointer; 
-    transition: background-color 0.2s, border-color 0.2s, color 0.2s; 
-}
-
-.search-button:hover {
-    border-color: #c6c6c6;
-    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    background-color: #8ECAE6;
 }
 
 .random-button {
-    display: block;
-    margin: 20px auto;
-    padding: 10px 20px;
-    background-color: #f8f9fa;
-    border: 1px solid #f8f9fa;
-    border-radius: 4px;
-    color: #3c4043;
-    cursor: pointer;
-    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+    background-color: #FFB703;
 }
 
-.random-button:hover {
-    border-color: #c6c6c6;
+.view-all-button {
+    background-color: #FB8500;
+}
+
+.search-button:hover,
+.random-button:hover,
+.view-all-button:hover {
     box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+    border-color: #c6c6c6; 
 }
 
 .inspirational-quote {
     font-style: italic;
     margin-top: 40px;
+}
+
+.search-results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    padding: 0;
+    list-style-type: none;
+    margin-top: 20px;
+}
+
+.hobby-search-item {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+    width: 450px;
+    animation: slideInFromBelow 0.5s ease forwards;
+    transition: transform 0.5s ease, box-shadow 0.3s ease;
+}
+
+.hobby-search-item:hover {
+    transform: translateY(-5px) !important; 
+    border: 3px solid #FFB703;
+}
+
+.hobby-search-item p {
+    margin: 0; 
+    padding: 5px 0; 
+}
+
+.hobby-search-item p:first-child {
+    font-size: 1.2em; 
+    font-weight: bold; 
+    color: #333; 
+}
+
+.hobby-search-item button {
+    background-color: #f8f9fa; 
+    border: 1px solid #dfe1e5; 
+    color: #3c4043; 
+    padding: 10px 20px;
+    border-radius: 4px; 
+    cursor: pointer; 
+    transition: background-color 0.2s, border-color 0.2s; 
+}
+
+.hobby-search-item button:hover {
+    background-color: #e8e8e8; 
+    border-color: #c6c6c6; 
+}
+
+@keyframes slideInFromBelow {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1; 
+    }
+}
+
+@keyframes slideDown {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }

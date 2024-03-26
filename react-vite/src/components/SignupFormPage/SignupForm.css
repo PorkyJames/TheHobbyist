@@ -1,0 +1,143 @@
+@keyframes slideInFromRight {
+0% {
+    transform: translateX(100%);
+    opacity: 0;
+}
+100% {
+    transform: translateX(0);
+    opacity: 1;
+}
+}
+
+.signup-form-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(to bottom, #ffffff, #8ECAE6, #219EBC, #023047);
+    overflow-x: hidden; 
+}
+
+.signup-card {
+    background: rgba(255, 255, 255, 0.9); 
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    max-width: 100%;
+    margin: 0 auto; 
+    animation: 0.5s ease-out 0s 1 slideInFromRight; 
+    transition: background-color 0.5s, transform 0.3s, box-shadow 0.5s;
+}
+
+.signup-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2); 
+}
+
+.signup-title {
+    font-size: 28px;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+.signup-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-form label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #444;
+    display: block; 
+}
+
+.signup-form input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    box-sizing: border-box; 
+    transition: border-color 0.3s;
+    display: block;
+}
+
+.signup-form input:focus {
+    outline: none;
+    border-color: black;
+}
+
+.signup-form p {
+    color: #dc3545;
+    margin-bottom: 5px;
+}
+
+.signup-form button {
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: #8ECAE6; 
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 50%; 
+    margin: 20px auto; 
+    display: block; 
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+}
+
+.signup-form button:hover {
+    background-color: #219EBC; 
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.button-container button {
+    width: 50%; 
+    display: block; 
+    margin: 20px auto; 
+}
+
+.error-message {
+    color: #dc3545;
+    font-size: 14px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.title-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 10px; 
+    margin-left: 10px; 
+    background: none; 
+    border: none; 
+    padding: 0; 
+}
+
+.title-button button {
+    background: none; 
+    border: none; 
+    padding: 0; 
+    margin: 0; 
+    cursor: pointer; 
+}
+
+.title-button button:hover {
+    text-decoration: underline !important; 
+    cursor: pointer !important;
+}
+
+.title-button h1 {
+    font-size: 2em; 
+    color: #333; 
+    margin-top: 15px; 
+}

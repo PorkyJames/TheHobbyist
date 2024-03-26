@@ -1,0 +1,164 @@
+const CREATE = "profile/CREATE";
+const DELETE = "profile/DELETE";
+const LOAD_PROFILE = 'profile/LOAD_PROFILE';
+const SET_PROFILE_LOADING = 'profile/SET_PROFILE_LOADING';
+const PROFILE_CHECK_COMPLETED = 'profile/PROFILE_CHECK_COMPLETED';
+const SET_USER_PROFILE = 'profile/SET_USER_PROFILE';
+
+//! Action Creators 
+
+const remove = (profile) => ({
+    type: DELETE,
+    payload: profile
+})
+
+export const setUserProfile = (profile) => ({
+    type: SET_USER_PROFILE,
+    payload: profile,
+});
+
+const loadProfile = (profile) => ({
+    type: LOAD_PROFILE,
+    payload: profile
+});
+
+const setProfileLoading = (isLoading) => ({
+    type: SET_PROFILE_LOADING,
+    payload: isLoading,
+});
+
+const profileCheckCompleted = () => ({
+    type: PROFILE_CHECK_COMPLETED,
+});
+
+//! Thunks
+
+export const createProfile = (payload) => async (dispatch) => {
+    try {
+        const response = await fetch(`/api/profiles`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            dispatch(setUserProfile(data));
+            // return {}; 
+        } else {
+            return { errors: data.errors || ["An unknown error occurred."] };
+        }
+    } catch (error) {
+        console.error("Error in createProfile:", error);
+        return { errors: ["An error occurred while creating the profile."] };
+    }
+};
+
+export const updateProfile = (profileId, payload) => async (dispatch) => {
+    const requestMethod = {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+    };
+
+    try {
+        const res = await fetch(`/api/profiles/${profileId}`, requestMethod);
+        if (res.ok) {
+            const updatedProfile = await res.json();
+            dispatch(setUserProfile(updatedProfile));
+            return updatedProfile; // Return the updated profile for further processing
+        } else {
+            const error = await res.json();
+            console.error('Failed to update profile:', error);
+            return error; // Return the error for further processing
+        }
+    } catch (error) {
+        console.error('Error updating user profile:', error);
+        return { errors: [error.toString()] }; // Return a structured error for consistency
+    }
+};
+
+export const deleteProfile = (profileId) => async (dispatch) => {
+    const requestMethod= {
+        method: "DELETE",
+    }
+
+    const res = await fetch(`/api/profiles/${profileId}`, requestMethod)
+    
+    if (res.ok) {
+        const deletedProfile = await res.json();
+        dispatch(remove(deletedProfile));
+    }
+
+}
+
+export const fetchUserProfile = (userId) => async (dispatch) => {
+    dispatch(setProfileLoading(true));
+    try {
+        const response = await fetch(`/api/profiles/${userId}`);
+        if (response.ok) {
+            const profile = await response.json();
+            dispatch(loadProfile(profile));
+        } else {
+            dispatch(loadProfile(null)); 
+        }
+    } catch (error) {
+        console.error('Error fetching user profile:', error);
+        dispatch(loadProfile(null));
+    } finally {
+        dispatch(setProfileLoading(false));
+        dispatch(profileCheckCompleted());
+    }
+};
+
+//! Reducer
+
+const initialState = {
+    profile: undefined,
+    isLoading: false,
+    checkCompleted: false,
+};
+
+const profileReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case CREATE:
+            return {
+                ...state,
+                profile: action.payload,
+            };
+        case DELETE:
+            return {
+                ...state,
+                profile: null,
+            };
+        case LOAD_PROFILE:
+            return {
+                ...state,
+                profile: action.payload,
+            };
+        case SET_PROFILE_LOADING:
+            return {
+                ...state,
+                isLoading: action.payload,
+            };
+        case PROFILE_CHECK_COMPLETED:
+            return {
+                ...state,
+                checkCompleted: true,
+            };
+        case SET_USER_PROFILE:
+            return {
+                ...state,
+                profile: action.payload,
+            };
+        default:
+            return state;
+    }
+}
+
+export default profileReducer;
