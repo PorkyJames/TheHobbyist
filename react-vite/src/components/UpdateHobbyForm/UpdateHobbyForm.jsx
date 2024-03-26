@@ -10,6 +10,9 @@ const UpdateHobbyForm = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const hobbyDetails = useSelector(state => state.hobby[hobbyId]);
+
+    const [errors, setErrors] = useState([])
+
     // console.log(hobbyDetails, "<<<< hobbyDetails")
 
     const [formData, setFormData] = useState({
@@ -43,14 +46,12 @@ const UpdateHobbyForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        try {
-            const updatedHobby = await dispatch(updateHobby(hobbyId, formData));
-            if (updatedHobby.error) {
-                throw new Error(updatedHobby.error.message);
-            }
+        const res = await dispatch(updateHobby(hobbyId, formData));
+        if (res.error) {
+            setErrors(res.error);
+        } else {
+            setErrors([]); 
             navigate(`/hobbies/${hobbyId}`);
-        } catch (error) {
-            console.error('Failed to update hobby:', error);
         }
     };
 
@@ -69,6 +70,16 @@ const UpdateHobbyForm = () => {
             <form onSubmit={handleSubmit} className="update-hobby-form">
 
                 <div className="form-group">
+
+                {/* {Object.keys(errors).length > 0 && (
+                    <div className="error-messages">
+                        {Object.keys(errors).map((errorKey) => (
+                            <p key={errorKey}>{errors[errorKey]}</p>
+                        ))}
+                    </div>
+                )} */}
+
+                {errors.name && <div className="error-message">{errors.name}</div>}
                     <label htmlFor="name">Name</label>
                     <input
                         type="text"
@@ -81,6 +92,7 @@ const UpdateHobbyForm = () => {
                     />
                 </div>
 
+                {errors.description && <div className="error-message">{errors.description}</div>}
                 <div className="form-group">
                     <label htmlFor="description">Description</label>
                     <textarea
@@ -93,6 +105,7 @@ const UpdateHobbyForm = () => {
                     />
                 </div>
 
+                {errors.location && <div className="error-message">{errors.location}</div>}
                 <div className="form-group">
                     <label htmlFor="location">Location</label>
                     <input
@@ -105,6 +118,7 @@ const UpdateHobbyForm = () => {
                     />
                 </div>
 
+                {errors.thoughts && <div className="error-message">{errors.thoughts}</div>}
                 <div className="form-group">
                     <label htmlFor="thoughts">Thoughts</label>
                     <input

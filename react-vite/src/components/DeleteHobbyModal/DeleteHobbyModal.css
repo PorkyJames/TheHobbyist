@@ -67,7 +67,7 @@
 }
 
 .delete-hobby-modal-delete-button {
-    background-color: #FB8500; /* Orange */
+    background-color: #FB8500;
     color: white;
 }
 
@@ -76,10 +76,10 @@
 }
 
 .delete-hobby-modal-cancel-button {
-    background-color: #023047; /* Dark blue */
+    background-color: #023047; 
     color: white;
 }
 
 .delete-hobby-modal-cancel-button:hover {
-    background-color: #03506f; /* Darker blue */
+    background-color: #03506f; 
 }

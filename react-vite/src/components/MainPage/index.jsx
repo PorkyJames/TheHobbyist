@@ -12,7 +12,7 @@ import "./MainPage.css"
 function MainPage() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const allHobbies = useSelector(state => state.hobby);
+    const allHobbies = useSelector(state => state.hobby.allHobbies);
     const [searchTerm, setSearchTerm] = useState('');
     const [searchResults, setSearchResults] = useState([]);
     const { setModalContent, closeModal } = useModal();

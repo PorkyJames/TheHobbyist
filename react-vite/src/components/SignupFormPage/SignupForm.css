@@ -10,6 +10,7 @@
 }
 
 .signup-form-container {
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,7 +18,7 @@
     width: 100%;
     padding: 0;
     margin: 0;
-    background: linear-gradient(to top, #FFB703, #ffffff); 
+    background: linear-gradient(to bottom, #ffffff, #8ECAE6, #219EBC, #023047);
     overflow-x: hidden; 
 }
 
@@ -111,6 +112,17 @@
     text-align: center;
 }
 
+.title-button {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-top: 10px; 
+    margin-left: 10px; 
+    background: none; 
+    border: none; 
+    padding: 0; 
+}
+
 .title-button button {
     background: none; 
     border: none; 
@@ -120,7 +132,8 @@
 }
 
 .title-button button:hover {
-    text-decoration: underline; 
+    text-decoration: underline !important; 
+    cursor: pointer !important;
 }
 
 .title-button h1 {

@@ -84,11 +84,11 @@ def update_user_hobby(hobbyId):
     hobby = Hobby.query.get(hobbyId)
 
     # Edge Cases for any Errors / Authentication
-    if hobby.profile_id != current_user.profile.id:
-        abort(403, {"message": "Hobby does not belong to the User"})
-
     if not hobby:
         abort(404, {"message": "Hobby could not be found"})
+
+    if hobby.profile_id != current_user.profile.id:
+        abort(403, {"message": "Hobby does not belong to the User"})
 
     data = request.get_json()
 
@@ -122,12 +122,12 @@ def delete_user_hobby(hobbyId):
     # Query for the hobby
     hobby = Hobby.query.get(hobbyId)
 
-    # Edge Cases for any Errors / Authentication
-    if hobby.user_id != current_user.id:
-        abort(403, {"message": "Hobby does not belong to the User"})
-
     if not hobby:
         abort(404, {"message": "Hobby could not be found"})
+
+    # Edge Cases for any Errors / Authentication
+    if hobby.profile_id != current_user.profile.id:
+        abort(403, {"message": "Hobby does not belong to the User"})
 
     db.session.delete(hobby)
     db.session.commit()

@@ -16,18 +16,18 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background-color: #FFB703; /* Using the yellow from the color palette for the form background */
+    background-color: #FFB703; 
 }
 
 .update-hobby-form h2 {
     text-align: center;
     margin-bottom: 20px;
-    color: #023047; /* Dark blue color for the text */
+    color: #023047;
 }
 
 .form-introduction {
-    background-color: #023047; /* Dark blue from the color palette */
-    color: #fff; /* White color for the text */
+    background-color: #023047; 
+    color: #fff; 
     flex: 1;
     padding: 40px;
     display: flex;
@@ -64,14 +64,18 @@
 .submit-btn {
     width: 50%;
     padding: 10px;
-    background-color: #FB8500; /* Orange color for the button */
+    background-color: #FB8500; 
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    align-self: center; /* Center the button within its container */
+    align-self: center; 
 }
 
 .submit-btn:hover {
-    background-color: #FFB703; /* Lighter orange for hover state */
+    background-color: #FFB703; 
+}
+
+.error-messages {
+    color: red
 }

@@ -57,7 +57,6 @@ function ProfileButton() {
       navigate(`/profiles/${user.id}`);
       setShowMenu(false);
     } else {
-      // Handle the case where userId is not available
       console.error("User ID is undefined.");
     }
   };
