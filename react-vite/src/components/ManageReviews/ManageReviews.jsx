@@ -27,8 +27,8 @@ const ManageReviews = () => {
         Object.values(userReviews).map((review) => (
             <li key={review.id}>
                 {review.review_text} - {review.star_rating} stars
-                {/* <button onClick={() => handleUpdate(review.id)}>Update</button>
-                <button onClick={() => handleDelete(review.id)}>Delete</button> */}
+                <button onClick={() => handleUpdate(review.id)}>Update</button>
+                <button onClick={() => handleDelete(review.id)}>Delete</button>
             </li>
         ))
     ) : (

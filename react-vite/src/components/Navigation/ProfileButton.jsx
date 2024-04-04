@@ -66,15 +66,15 @@ function ProfileButton() {
     setShowMenu(false);
   };
 
-  // const manageBookmarks = () => {
-  //   navigate('/manage-bookmarks');
-  //   setShowMenu(false);
-  // };
+  const manageBookmarks = () => {
+    navigate('/manage-bookmarks');
+    setShowMenu(false);
+  };
 
-  // const manageReviews = () => {
-  //   navigate('/reviews/current');
-  //   setShowMenu(false);
-  // };
+  const manageReviews = () => {
+    navigate('/reviews/current');
+    setShowMenu(false);
+  };
 
   const navigateCreateHobby = () => {
     navigate("/hobby-form")
@@ -110,7 +110,7 @@ function ProfileButton() {
                 <li onClick={userProfile}>User Profile</li>
                 <li onClick={manageHobbies}>Manage Hobbies</li>
                 {/* <li onClick={manageBookmarks}>Manage Bookmarks</li> */}
-                {/* <li onClick={manageReviews}>Manage Reviews</li> */}
+                <li onClick={manageReviews}>Manage Reviews</li>
                 <li className="logout-button" onClick={logout}>Log Out</li>
               </ul>
             )}
