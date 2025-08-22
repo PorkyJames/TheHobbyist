@@ -24,9 +24,9 @@
 
 .signup-card {
     background: rgba(255, 255, 255, 0.9); 
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    padding: 32px 28px;
     width: 350px;
     max-width: 100%;
     margin: 0 auto; 
@@ -63,15 +63,16 @@
     padding: 15px;
     margin-bottom: 20px;
     border-radius: 8px;
-    border: 1px solid #ccc;
+    border: 1px solid #ddd;
+    transition: border-color .2s ease, box-shadow .2s ease;
     box-sizing: border-box; 
-    transition: border-color 0.3s;
     display: block;
 }
 
 .signup-form input:focus {
+    border-color: #219ebc;
+    box-shadow: 0 0 0 3px rgba(33,158,188,0.15);
     outline: none;
-    border-color: black;
 }
 
 .signup-form p {
@@ -82,22 +83,25 @@
 .signup-form button {
     padding: 15px;
     border: none;
-    border-radius: 8px;
     background-color: #8ECAE6; 
     color: white;
     font-size: 16px;
-    font-weight: bold;
     cursor: pointer;
     width: 50%; 
     margin: 20px auto; 
     display: block; 
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    border-radius: 8px;
+    background: linear-gradient(180deg, #8ecae6, #219ebc);
+    font-weight: 600;
+    letter-spacing: .3px;
+    transition: transform .1s ease, box-shadow .2s ease, filter .2s ease;
 }
 
 .signup-form button:hover {
     background-color: #219EBC; 
-    transform: translateY(-2px); 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+    filter: brightness(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 .button-container button {
     width: 50%; 
@@ -106,8 +110,8 @@
 }
 
 .error-message {
-    color: #dc3545;
-    font-size: 14px;
+    font-size: 13px;
+    color: #d61f1f;
     margin-bottom: 15px;
     text-align: center;
 }

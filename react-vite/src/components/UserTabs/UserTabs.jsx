@@ -10,12 +10,12 @@ function UserTabs({ activeTab, setActiveTab }) {
             >
                 Hobbies
             </button>
-            <button
+            {/* <button
                 onClick={() => setActiveTab('reviews')}
                 className={activeTab === 'reviews' ? 'active' : ''}
             >
                 Reviews
-            </button>
+            </button> */}
         </div>
     );
 }

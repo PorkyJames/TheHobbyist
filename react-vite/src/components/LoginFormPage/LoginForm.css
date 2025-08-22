@@ -14,6 +14,8 @@
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     width: 300px; 
     transition: background-color 0.5s, transform 0.3s, box-shadow 0.5s;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 .login-card:hover {
@@ -42,15 +44,15 @@
 .input-group input {
     width: 100%;
     padding: 12px 20px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
     box-sizing: border-box;
-    transition: border-color 0.3s, box-shadow 0.3s;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    transition: border-color .2s ease, box-shadow .2s ease;
 }
 
 .input-group input:focus {
-    border-color: #ff5e62;
-    box-shadow: 0 1px 3px rgba(255, 94, 98, 0.4);
+    border-color: #fb8500;
+    box-shadow: 0 0 0 3px rgba(251,133,0,0.15);
     outline: none;
 }
 
@@ -59,7 +61,8 @@
     width: 100%;
     padding: 10px 20px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+    transition: transform .1s ease, box-shadow .2s ease;
     font-size: 16px;
     font-weight: 500;
     cursor: pointer;
@@ -68,6 +71,12 @@
 .button-group button {
     background-color: #FB8500;
     color: white;
+}
+
+.button-group button:hover,
+.sign-up-button button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
 .button-group button:hover,
@@ -166,3 +175,5 @@
 .title-gradient:hover::after {
     transform: scaleX(1);
 }
+
+
