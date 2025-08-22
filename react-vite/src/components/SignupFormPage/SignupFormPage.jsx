@@ -54,9 +54,13 @@ function SignupFormPage() {
 
       <div className="signup-form-container">
 
-        <button className="title-button" onClick={titleButton}>
-          <h1>The Hobbyist</h1>
-        </button>
+        <div className="title-button">
+          <button type="button" onClick={titleButton}>
+            <h1>
+              <span className="title-gradient">The Hobbyist</span>
+            </h1>
+          </button>
+        </div>
 
         <div className="signup-card">
           <h1 className="signup-title">Sign Up</h1>

@@ -57,7 +57,9 @@ return (
     <>
 			<div className="title-button">
 				<button onClick={titleButton}>
-					<h1>The Hobbyist</h1>
+					<h1>
+						<span className="title-gradient">The Hobbyist</span>
+					</h1>
 				</button>
 			</div>
 
