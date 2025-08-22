@@ -40,12 +40,12 @@ function ProfileButton() {
 
   const closeMenu = () => setShowMenu(false);
 
-  const logout = (e) => {
-    e.preventDefault();
-    dispatch(thunkLogout());
-    closeMenu();
-    navigate("/");
-  };
+  const logout = async (e) => {
+  e.preventDefault();
+  await dispatch(thunkLogout());
+  closeMenu();
+  navigate("/", { replace: true });
+};
 
   const homeButton = () => {
     navigate("/main");
@@ -66,10 +66,10 @@ function ProfileButton() {
     setShowMenu(false);
   };
 
-  const manageBookmarks = () => {
-    navigate('/manage-bookmarks');
-    setShowMenu(false);
-  };
+  // const manageBookmarks = () => {
+  //   navigate('/manage-bookmarks');
+  //   setShowMenu(false);
+  // };
 
   const manageReviews = () => {
     navigate('/reviews/current');
