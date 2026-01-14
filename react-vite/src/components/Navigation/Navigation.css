@@ -1,3 +1,146 @@
+.navbar-container {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to right, #219EBC, #023047); 
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.create-button {
+  margin-right: 20px;
+}
+
+.create-button button {
+  background: none; 
+  border: none; 
+  color: white; 
+  font-weight: bold; 
+  cursor: pointer; 
+  padding: 10px 15px; 
+  border-radius: 5px; 
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.create-button button:hover {
+  background: rgba(255, 255, 255, 0.2); 
+}
+
+.logo {
+  font-size: 24px;
+  cursor: pointer;
+  color: whitesmoke;
+  font-weight: bold;
+}
+
+.profile-button {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  z-index: 10;
+}
+
 .profile-dropdown {
   position: absolute;
+  background: #023047; 
+  border-radius: 8px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  color: white;
+  list-style: none;
+  padding: 10px 0; 
+  margin: 0; 
+  position: absolute;
+  right: 0; 
+  top: 58px;
+  width: 200px; 
+  z-index: 100; 
+}
+
+.profile-dropdown li {
+  padding: 10px 20px; 
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.profile-dropdown li:last-child {
+  border-bottom: none;
+}
+
+.logout-button {
+  font-weight: bold;
+  color: whitesmoke; 
+}
+
+.profile-dropdown li {
+  color: white;
+  padding: 10px 20px;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-dropdown li:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.profile-dropdown {
+  padding-left: 0;
+}
+
+.profile-button {
+  color: white; 
+}
+
+.account-info {
+  display: flex;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #023047; 
+}
+
+.icon {
+  margin-right: 10px; 
+  color: white;
+  size: 15px;
+}
+
+.icon i {
+  font-size: 30px;
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.account-label {
+  display: block;
+  padding: 10px 20px;
+  background-color: #022c3d;
+  color: white;
+  font-weight: bold;
+}
+
+@keyframes dropdownFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.profile-dropdown {
+  animation: dropdownFadeIn 0.3s ease-out forwards;
 }

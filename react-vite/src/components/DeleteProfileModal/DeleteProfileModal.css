@@ -1,0 +1,85 @@
+.delete-profile-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.delete-profile-modal-content {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+}
+
+.delete-profile-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.delete-profile-modal-header h2 {
+    text-align: center;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.delete-profile-close-button {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 25px;
+    color: #023047;
+    cursor: pointer;
+}
+
+.delete-profile-modal-message {
+    color: #023047;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.delete-profile-modal-actions {
+    display: flex;
+    justify-content: space-around;
+}
+
+.delete-profile-modal-delete-button,
+.delete-profile-modal-cancel-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.delete-button {
+    background-color: #FB8500 !important; 
+    color: white;
+}
+
+.delete-button:hover {
+    background-color: #ff9f1a;
+}
+
+.cancel-button {
+    background-color: #023047 !important; 
+    color: white;
+}
+
+.cancel-button:hover {
+    background-color: #03506f; 
+}
