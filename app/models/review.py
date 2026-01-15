@@ -1,5 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
-from .db import db, environment, SCHEMA
+from .db import db, environment, SCHEMA, add_prefix_for_prod
 
 class Review(db.Model):
     __tablename__ = 'reviews'
@@ -14,8 +14,8 @@ class Review(db.Model):
     # updated_at = db.Column(db.DateTime)
 
     # Relationships
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    hobby_id = db.Column(db.Integer, db.ForeignKey('hobbies.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    hobby_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('hobbies.id')), nullable=False)
     hobby = db.relationship('Hobby', back_populates='reviews')
 
     def to_dict(self):

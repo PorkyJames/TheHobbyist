@@ -71,17 +71,24 @@ export const createHobby = (payload) => async (dispatch) => {
             "Content-Type": "application/json",
         },
         body: JSON.stringify(payload)
-    }
+    };
 
-    const res = await fetch(`/api/hobbies`, requestMethod)
+    try {
+        const res = await fetch(`/api/hobbies`, requestMethod);
 
-    if (res.ok) {
-        const newHobby = await res.json();
-        // console.log(newHobby)
-        dispatch(create(newHobby));
-        return newHobby
+        if (res.ok) {
+            const newHobby = await res.json();
+            dispatch(create(newHobby));
+            return newHobby;
+        } else {
+            const error = await res.json();
+            return { errors: error }; 
+        }
+    } catch (error) {
+        // Handle network errors or other unexpected errors
+        return { errors: { form: 'An unexpected error occurred.' } };
     }
-}
+};
 
 //! Update User Hobby
 
@@ -107,6 +114,9 @@ export const updateHobby = (hobbyId, payload) => async (dispatch) => {
         const updatedHobby = await res.json();
         dispatch(update(updatedHobby));
         return updatedHobby;
+    } else {
+        const error = await res.json();
+        return { error };
     }
 }
 
@@ -124,7 +134,7 @@ export const deleteHobby = (hobbyId) => async (dispatch) => {
         method: "DELETE",
     }
 
-    const res = await fetch (`/api/hobbies/${hobbyId}`, requestMethod)
+    const res = await fetch(`/api/hobbies/${hobbyId}`, requestMethod)
 
     if (res.ok) {
         const deletedHobby = await res.json();
@@ -144,7 +154,10 @@ const hobbyReducer = (state = initialState, action) => {
                 userHobbies: action.payload
             }
         case LOAD_ALL_HOBBIES:
-            return action.payload
+            return {
+                ...state,
+                allHobbies: action.payload,
+            };
         case LOAD_EACH_HOBBY:
             return {
                 ...state,

@@ -1,18 +1,19 @@
 import { useState } from "react";
 import { thunkLogin } from "../../redux/session";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import "./LoginForm.css";
 
 function LoginFormPage() {
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	const sessionUser = useSelector((state) => state.session.user);
+	// const sessionUser = useSelector((state) => state.session.user);
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [errors, setErrors] = useState([]);
 
-	if (sessionUser) return <Navigate to="/" replace={true} />;
+	// if (sessionUser) return <Navigate to="/" replace={true} />;
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
@@ -56,7 +57,9 @@ return (
     <>
 			<div className="title-button">
 				<button onClick={titleButton}>
-					<h1>The Hobbyist</h1>
+					<h1>
+						<span className="title-gradient">The Hobbyist</span>
+					</h1>
 				</button>
 			</div>
 
@@ -101,17 +104,15 @@ return (
 						</div>
 						
 						<div className="button-group">
-							<button type="submit">Log In</button>
+							<button type="button">Log In</button>
 						</div>
-
+						{/* <Link to="/signup" className="sign-up-link">Want to join us? Sign Up!</Link> */}
 						<div className="sign-up-button">
-							<button type="signup" onClick={handleSignUp}>Sign Up</button>
+							<button type="button" onClick={handleSignUp}>Sign Up</button>
 						</div>
-
 						<div className="demo-login">
-							<button type="demo" onClick={handleDemoLogin}>Demo-Login</button>
+							<button type="button" onClick={handleDemoLogin}>Demo-Login</button>
 						</div>
-
 					</form>
 				</div>
 			</div>

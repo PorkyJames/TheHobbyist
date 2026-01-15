@@ -9,7 +9,7 @@ const HobbyDetailsPage = () => {
     const { hobbyId } = useParams();
     const dispatch = useDispatch();
     const hobbyDetails = useSelector((state) => state.hobby[hobbyId]);
-    console.log(hobbyDetails, "<<<hobbyDetails")
+    // console.log(hobbyDetails, "<<<hobbyDetails")
 
     useEffect(() => {
         dispatch(getHobbyById(hobbyId));
@@ -21,20 +21,20 @@ const HobbyDetailsPage = () => {
 
     return (
         <div className="hobby-details-page">
-            <div className="left-column">
+            <div className="left-column-hobby-details">
                 <h1>{hobbyDetails.name}</h1>
             </div>
 
-            <div className="right-column">
-                <div className="section">
+            <div className="right-column-hobby-details">
+                <div className="section-hobby-details">
                     <h2>Details</h2>
                     <p>{hobbyDetails.description}</p>
                 </div>
-                <div className="section">
+                <div className="section-hobby-details">
                     <h2>Location</h2>
                     <p>{hobbyDetails.location}</p>
                 </div>
-                <div className="section">
+                <div className="section-hobby-details">
                     <h2>Thoughts</h2>
                     <p>{hobbyDetails.thoughts}</p>
                 </div>

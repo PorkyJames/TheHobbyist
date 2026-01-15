@@ -13,14 +13,24 @@ import ManageReviews from "../components/ManageReviews/ManageReviews";
 
 import Layout from './Layout';
 
+import { useSelector } from "react-redux";
+import { Navigate } from "react-router-dom";
+// ...
+
+function IndexRoute() {
+  const user = useSelector(s => s.session.user);
+  return user ? <Navigate to="/main" replace /> : <LoginFormPage />;
+}
+
 export const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
       {
-        path: "/",
+        path: "",
         element: <LoginFormPage />,
       },
+      { index: true, element: <LoginFormPage /> },    
       // {
       //   path: "main",
       //   element: <h1>Welcome!</h1>,
@@ -38,27 +48,27 @@ export const router = createBrowserRouter([
         element: <CreateHobbyForm />,
       },
       {
-        path: "/hobbies",
+        path: "hobbies",
         element: <AllHobbiesPage />,
       },
       {
-        path: "/hobbies/current",
+        path: "hobbies/current",
         element: <ManageHobbies />,
       },
       {
-        path: "/hobbies/:hobbyId",
+        path: "hobbies/:hobbyId",
         element: <HobbyDetailsPage />,
       },
       {
-        path: "/hobbies/:hobbyId/edit",
+        path: "hobbies/:hobbyId/edit",
         element: <UpdateHobbyForm />,
       },
       {
-        path: "/profiles/:profileId",
+        path: "profiles/:profileId",
         element: <UserProfilePage />,
       },
       {
-        path: "/reviews/current",
+        path: "reviews/current",
         element: <ManageReviews />,
       },
     ],

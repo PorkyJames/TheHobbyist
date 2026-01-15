@@ -71,13 +71,15 @@ export const updateProfile = (profileId, payload) => async (dispatch) => {
         if (res.ok) {
             const updatedProfile = await res.json();
             dispatch(setUserProfile(updatedProfile));
+            return updatedProfile; // Return the updated profile for further processing
         } else {
             const error = await res.json();
             console.error('Failed to update profile:', error);
+            return error; // Return the error for further processing
         }
     } catch (error) {
         console.error('Error updating user profile:', error);
-
+        return { errors: [error.toString()] }; // Return a structured error for consistency
     }
 };
 
